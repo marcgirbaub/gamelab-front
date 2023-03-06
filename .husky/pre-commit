@@ -1,0 +1,44 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+no_color='\033[0m'
+
+echo -e "\n${yellow}Executing pre-commit hook...${no_color}\n"
+
+FILES_PATTERN='\.(jsx?|tsx?)(\..+)?$'
+FORBIDDEN='console\.[clear|dir|log|info|warn|error]'
+
+#check for console. references in your code
+
+if git diff --cached --name-only | \
+    grep -E $FILES_PATTERN | \
+    xargs grep --with-filename -n $FORBIDDEN | \
+    grep -v '//';
+then
+    echo -e "\n${red}COMMIT REJECTED!  Found console. references. Please remove them before committing.\n${no_color}"
+    exit 1;
+fi
+
+FORBIDDEN='debugger'
+
+#check for console. references in your code
+
+if git diff --cached --name-only | \
+    grep -E $FILES_PATTERN | \
+    xargs grep --with-filename -n $FORBIDDEN | \
+    grep -v '//';
+then
+    echo -e "\n${red}COMMIT REJECTED!  Found debugger references. Please remove them before committing.\n${no_color}"
+    exit 1;
+fi
+
+echo -e "${green}No console. or debugger references found!${no_color}\n"
+echo -e "${green}Git pre-commit hook was successful!${no_color}\n"
+
+#execute lint-staged script
+exec >/dev/tty 2>&1
+
+npx lint-staged
