@@ -38,3 +38,7 @@ fi
 echo -e "${green}No console. or debugger references found!${no_color}\n"
 echo -e "${green}Git pre-commit hook was successful!${no_color}\n"
 
+#execute lint-staged script
+exec >/dev/tty 2>&1
+
+npx lint-staged
