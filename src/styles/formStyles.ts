@@ -47,6 +47,29 @@ const formStyles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
+  info: {
+    letterSpacing: 1,
+    color: colorStyles.secondary,
+    fontSize: 16,
+  },
+  buttonLinkContainer: {
+    display: "flex",
+    gap: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  linkContainer: {
+    display: "flex",
+    gap: 10,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  link: {
+    color: colorStyles.accent,
+    letterSpacing: 1,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });
 
 export default formStyles;

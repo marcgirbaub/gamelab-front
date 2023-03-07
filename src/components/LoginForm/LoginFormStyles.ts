@@ -10,6 +10,10 @@ const loginFormStyles = StyleSheet.create({
   input: formStyles.input,
   button: formStyles.button,
   buttonText: formStyles.buttonText,
+  buttonLinkContainer: formStyles.buttonLinkContainer,
+  linkContainer: formStyles.linkContainer,
+  link: formStyles.link,
+  info: formStyles.info,
 });
 
 export default loginFormStyles;
