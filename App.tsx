@@ -1,19 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
+import { Provider } from "react-redux";
+import { store } from "./src/store/store";
+import colorStyles from "./src/styles/colorStyles";
+import globalStyles from "./src/styles/globalStyles";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>gamelab</Text>
-    </View>
-  );
-}
+const App = (): JSX.Element => (
+  <Provider store={store}>
+    <SafeAreaView>
+      <View style={globalStyles.screen}>
+        <Text style={{ color: colorStyles.secondary }}>gamelab</Text>
+      </View>
+    </SafeAreaView>
+  </Provider>
+);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export default App;
