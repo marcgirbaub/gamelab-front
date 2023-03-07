@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import colorStyles from "../../styles/colorStyles";
 import formStyles from "../../styles/formStyles";
 
 const loginFormStyles = StyleSheet.create({
@@ -14,6 +13,7 @@ const loginFormStyles = StyleSheet.create({
   linkContainer: formStyles.linkContainer,
   link: formStyles.link,
   info: formStyles.info,
+  disabledButton: formStyles.disabledButton,
 });
 
 export default loginFormStyles;

@@ -35,6 +35,9 @@ const LoginForm = (): JSX.Element => {
     await loginUser(userToLogin);
   };
 
+  const isButtonDisabled =
+    userCredentials.username === "" || userCredentials.password === "";
+
   return (
     <KeyboardAvoidingView behavior="padding">
       <View style={loginFormStyles.container}>
@@ -71,14 +74,20 @@ const LoginForm = (): JSX.Element => {
         </View>
         <View style={loginFormStyles.buttonLinkContainer}>
           <TouchableOpacity
-            style={loginFormStyles.button}
+            activeOpacity={0.4}
+            disabled={isButtonDisabled}
+            style={
+              isButtonDisabled
+                ? loginFormStyles.disabledButton
+                : loginFormStyles.button
+            }
             onPress={onSubmitHandler}
           >
             <Text style={loginFormStyles.buttonText}>Log in</Text>
           </TouchableOpacity>
           <View style={loginFormStyles.linkContainer}>
             <Text style={loginFormStyles.info}>Not a member?</Text>
-            <TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.4}>
               <Text style={loginFormStyles.link}>Join now</Text>
             </TouchableOpacity>
           </View>

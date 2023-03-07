@@ -70,6 +70,14 @@ const formStyles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  disabledButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    backgroundColor: "#6e3134",
+    borderRadius: 30,
+    height: 52,
+  },
 });
 
 export default formStyles;
