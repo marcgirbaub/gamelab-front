@@ -7,6 +7,7 @@ const colorStyles = {
   error: "#ff9100",
   success: "#84e14d",
   cardLight: "#202020",
+  black: "#000000",
 };
 
 export default colorStyles;
