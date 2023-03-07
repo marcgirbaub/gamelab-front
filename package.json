@@ -7,9 +7,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --passWithNoTests",
-    "test:dev": "jest --watchAll --passWithNoTests",
-    "test:coverage": "jest --watchAll=false --collect-coverage --passWithNoTests",
+    "test": "jest",
+    "test:dev": "jest --watchAll",
+    "test:coverage": "jest --watchAll=false --collect-coverage",
     "prepare": "husky install"
   },
   "dependencies": {
