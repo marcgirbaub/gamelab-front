@@ -2,10 +2,14 @@ import { StyleSheet } from "react-native";
 import colorStyles from "./colorStyles";
 
 const globalStyles = StyleSheet.create({
-  screen: {
-    padding: 20,
+  safeArea: {
     backgroundColor: colorStyles.main,
     height: "100%",
+  },
+  screen: {
+    padding: 20,
+    justifyContent: "center",
+    flex: 1,
   },
 });
 
