@@ -19,6 +19,13 @@ module.exports = {
       files: ["src/**/types/**/*.d.ts"],
       rules: { "@typescript-eslint/naming-convention": "off" },
     },
+    {
+      files: ["src/**/*.test.ts"],
+      rules: {
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: "latest",
