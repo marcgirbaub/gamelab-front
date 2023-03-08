@@ -55,10 +55,11 @@ describe("Given a LoginForm component", () => {
 
       fireEvent.changeText(usernameInput, mockUserCredentials.username);
       fireEvent.changeText(passwordInput, mockUserCredentials.password);
-      fireEvent.press(submitButton);
 
       expect(usernameInput.props.value).toBe(mockUserCredentials.username);
       expect(passwordInput.props.value).toBe(mockUserCredentials.password);
+
+      fireEvent.press(submitButton);
 
       expect(mockedLoginUser).toHaveBeenCalledWith(mockUserCredentials);
     });

@@ -14,6 +14,7 @@ const loginFormStyles = StyleSheet.create({
   link: formStyles.link,
   info: formStyles.info,
   disabledButton: formStyles.disabledButton,
+  errorMessage: formStyles.errorMessage,
 });
 
 export default loginFormStyles;
