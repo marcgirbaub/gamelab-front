@@ -34,4 +34,5 @@ export const uiReducer = uiSlice.reducer;
 export const {
   setIsLoading: setIsLoadingActionCreator,
   unsetIsLoading: unsetIsLoadingActionCreator,
+  activateModal: activateModalActionCreator,
 } = uiSlice.actions;
