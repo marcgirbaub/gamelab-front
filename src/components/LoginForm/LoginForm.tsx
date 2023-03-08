@@ -35,6 +35,8 @@ const LoginForm = (): JSX.Element => {
     };
 
     await loginUser(userToLogin);
+
+    setUserCredentials({ ...initialUserCredentials });
   };
 
   const isButtonDisabled =
