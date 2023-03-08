@@ -78,6 +78,12 @@ const formStyles = StyleSheet.create({
     borderRadius: 30,
     height: 52,
   },
+  errorMessage: {
+    color: colorStyles.error,
+    fontSize: 16,
+    height: 16,
+    marginTop: 10,
+  },
 });
 
 export default formStyles;

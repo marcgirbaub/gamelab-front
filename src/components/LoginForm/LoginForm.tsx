@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { type UserCredentials } from "../../hooks/useUser/types";
 import useUser from "../../hooks/useUser/useUser";
+import formStyles from "../../styles/formStyles";
 import loginFormStyles from "./LoginFormStyles";
 
 const LoginForm = (): JSX.Element => {
@@ -24,11 +25,26 @@ const LoginForm = (): JSX.Element => {
     initialUserCredentials
   );
 
+  const [passwordError, setPasswordError] = useState("");
+
   const handleFieldChange = (introducedValue: string, field: string) => {
     setUserCredentials({ ...userCredentials, [field]: introducedValue });
+
+    if (userCredentials.password.length > 8) {
+      setPasswordError("");
+    }
   };
 
   const onSubmitHandler = async () => {
+    setPasswordError("");
+
+    if (userCredentials.password.length < 8) {
+      setPasswordError("The password must have at least 8 characters");
+      setUserCredentials({ ...userCredentials, password: "" });
+
+      return;
+    }
+
     const userToLogin: UserCredentials = {
       username: userCredentials.username,
       password: userCredentials.password,
@@ -83,6 +99,7 @@ const LoginForm = (): JSX.Element => {
                 }}
                 testID="password"
               />
+              <Text style={formStyles.errorMessage}>{passwordError}</Text>
             </View>
           </View>
           <View style={loginFormStyles.buttonLinkContainer}>

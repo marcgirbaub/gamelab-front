@@ -55,12 +55,39 @@ describe("Given a LoginForm component", () => {
 
       fireEvent.changeText(usernameInput, mockUserCredentials.username);
       fireEvent.changeText(passwordInput, mockUserCredentials.password);
-      fireEvent.press(submitButton);
 
       expect(usernameInput.props.value).toBe(mockUserCredentials.username);
       expect(passwordInput.props.value).toBe(mockUserCredentials.password);
 
+      fireEvent.press(submitButton);
+
       expect(mockedLoginUser).toHaveBeenCalledWith(mockUserCredentials);
+    });
+  });
+
+  describe("When rendered and the user enters their credentials `marc10` and `marc12`and clicks on the submit button", () => {
+    test("Then there should appear the error `The password must have at least 8 characters` on the screen", async () => {
+      const usernameId = "username";
+      const passwordId = "password";
+      const buttonId = "buttonSubmit";
+
+      const passwordShorterThanEight = "marc12";
+      const expectedErrorText = "The password must have at least 8 characters";
+
+      render(<LoginForm />);
+
+      const usernameInput = await screen.getByTestId(usernameId);
+      const passwordInput = await screen.getByTestId(passwordId);
+      const submitButton = await screen.getByTestId(buttonId);
+
+      fireEvent.changeText(usernameInput, mockUserCredentials.username);
+      fireEvent.changeText(passwordInput, passwordShorterThanEight);
+
+      fireEvent.press(submitButton);
+
+      const validationError = await screen.getByText(expectedErrorText);
+
+      expect(validationError).toBeDefined();
     });
   });
 });
