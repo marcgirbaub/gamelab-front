@@ -1,21 +1,15 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, View } from "react-native";
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
-import LoginScreen from "./src/screen/LoginScreen/LoginScreen";
 import { store } from "./src/store/store";
-import globalStyles from "./src/styles/globalStyles";
-import CustomModal from "./src/components/CustomModal/CustomModal";
+import StackNavigator from "./src/navigation/StackNavigator/StackNavigator";
 
 const App = (): JSX.Element => (
   <Provider store={store}>
-    <SafeAreaView style={globalStyles.safeArea}>
-      <View style={globalStyles.screen}>
-        <CustomModal />
-        <LoginScreen />
-      </View>
-      <StatusBar style="light" />
-    </SafeAreaView>
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
   </Provider>
 );
 export default App;

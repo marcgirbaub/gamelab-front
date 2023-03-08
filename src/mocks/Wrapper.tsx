@@ -1,4 +1,5 @@
 import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
 
@@ -7,7 +8,9 @@ interface WrapperProps {
 }
 
 const Wrapper = ({ children }: WrapperProps): JSX.Element => (
-  <Provider store={store}>{children}</Provider>
+  <Provider store={store}>
+    <NavigationContainer>{children}</NavigationContainer>
+  </Provider>
 );
 
 export default Wrapper;
