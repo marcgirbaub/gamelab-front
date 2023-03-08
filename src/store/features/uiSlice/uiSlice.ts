@@ -4,7 +4,7 @@ import { type ModalPayload, type UiState } from "./types";
 const initialUiState: UiState = {
   isLoading: false,
   modal: "",
-  isError: true,
+  isError: false,
 };
 
 const uiSlice = createSlice({
@@ -27,6 +27,11 @@ const uiSlice = createSlice({
       isError: action.payload.isError,
       modal: action.payload.modal,
     }),
+    closeModal: (currentUiState): UiState => ({
+      ...currentUiState,
+      modal: initialUiState.modal,
+      isError: initialUiState.isError,
+    }),
   },
 });
 
@@ -35,4 +40,5 @@ export const {
   setIsLoading: setIsLoadingActionCreator,
   unsetIsLoading: unsetIsLoadingActionCreator,
   activateModal: activateModalActionCreator,
+  closeModal: closeModalActionCreator,
 } = uiSlice.actions;
