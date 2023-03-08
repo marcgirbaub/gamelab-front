@@ -11,6 +11,7 @@ import {
 import { type User } from "../../store/features/userSlice/types";
 import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
 import {
+  activateModalActionCreator,
   setIsLoadingActionCreator,
   unsetIsLoadingActionCreator,
 } from "../../store/features/uiSlice/uiSlice";
@@ -49,7 +50,14 @@ const useUser = (): UseUserStructure => {
       dispatch(unsetIsLoadingActionCreator());
 
       await AsyncStorage.setItem("token", token);
-    } catch (error: unknown) {}
+    } catch (error: unknown) {
+      dispatch(
+        activateModalActionCreator({
+          isError: true,
+          modal: "Wrong credentials",
+        })
+      );
+    }
   };
 
   return { loginUser };

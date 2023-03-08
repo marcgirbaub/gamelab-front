@@ -1,7 +1,7 @@
 import React from "react";
 import { screen } from "@testing-library/react-native";
 import Loader from "./Loader";
-import renderWithProviders from "../../testUtilts/renderWithProviders";
+import renderWithProviders from "../../testUtils/renderWithProviders";
 
 describe("Given a Loader component", () => {
   describe("When rendered", () => {
