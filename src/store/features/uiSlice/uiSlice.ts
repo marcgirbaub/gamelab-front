@@ -1,8 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { type UiState } from "./types";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { type ModalPayload, type UiState } from "./types";
 
 const initialUiState: UiState = {
   isLoading: false,
+  modal: "",
+  isError: true,
 };
 
 const uiSlice = createSlice({
@@ -16,6 +18,14 @@ const uiSlice = createSlice({
     unsetIsLoading: (currentUiState): UiState => ({
       ...currentUiState,
       isLoading: false,
+    }),
+    activateModal: (
+      currentUiState,
+      action: PayloadAction<ModalPayload>
+    ): UiState => ({
+      ...currentUiState,
+      isError: action.payload.isError,
+      modal: action.payload.modal,
     }),
   },
 });
