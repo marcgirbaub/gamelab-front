@@ -1,5 +1,6 @@
-const routes = {
-  login: "Log in",
-};
+enum Routes {
+  login = "Log in",
+  welcome = "Welcome",
+}
 
-export default routes;
+export default Routes;
