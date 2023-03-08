@@ -1,6 +1,7 @@
 import { type ModalPayload, type UiState } from "./types";
 import {
   activateModalActionCreator,
+  closeModalActionCreator,
   setIsLoadingActionCreator,
   uiReducer,
   unsetIsLoadingActionCreator,
@@ -62,6 +63,27 @@ describe("Given a uiReducer reducer", () => {
 
       const activateModalAction = activateModalActionCreator(modalPayload);
       const newUiState = uiReducer(currentUiState, activateModalAction);
+
+      expect(newUiState).toStrictEqual(expectedUiState);
+    });
+  });
+
+  describe("When called with the action to close the modal", () => {
+    test("Then it should return a new state with isError set to false and a modal property empty", () => {
+      const currentUiState: UiState = {
+        isLoading: true,
+        isError: true,
+        modal: "There was a problem",
+      };
+
+      const expectedUiState: UiState = {
+        ...currentUiState,
+        isError: false,
+        modal: "",
+      };
+
+      const closeModalAction = closeModalActionCreator();
+      const newUiState = uiReducer(currentUiState, closeModalAction);
 
       expect(newUiState).toStrictEqual(expectedUiState);
     });
