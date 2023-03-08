@@ -20,7 +20,7 @@ module.exports = {
       rules: { "@typescript-eslint/naming-convention": "off" },
     },
     {
-      files: ["src/**/*.test.ts"],
+      files: ["src/**/*.test.ts", "src/**/*.test.tsx"],
       rules: {
         "@typescript-eslint/no-unsafe-call": "off",
         "@typescript-eslint/no-unsafe-assignment": "off",

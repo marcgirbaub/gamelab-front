@@ -4,7 +4,9 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
+  Keyboard,
 } from "react-native";
 import { type UserCredentials } from "../../hooks/useUser/types";
 import useUser from "../../hooks/useUser/useUser";
@@ -39,61 +41,72 @@ const LoginForm = (): JSX.Element => {
     userCredentials.username === "" || userCredentials.password === "";
 
   return (
-    <KeyboardAvoidingView behavior="padding">
-      <View style={loginFormStyles.container}>
-        <Text style={loginFormStyles.title}>Log in</Text>
-        <View style={loginFormStyles.formContainer}>
-          <View>
-            <Text style={loginFormStyles.label}>Username</Text>
-            <TextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              style={loginFormStyles.input}
-              maxLength={20}
-              value={userCredentials.username}
-              onChangeText={(inputValue) => {
-                handleFieldChange(inputValue, "username");
-              }}
-            />
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+    >
+      <KeyboardAvoidingView behavior="padding">
+        <View style={loginFormStyles.container}>
+          <Text style={loginFormStyles.title} testID="Log in">
+            Log in
+          </Text>
+          <View style={loginFormStyles.formContainer}>
+            <View>
+              <Text style={loginFormStyles.label}>Username</Text>
+              <TextInput
+                autoCapitalize="none"
+                autoCorrect={false}
+                style={loginFormStyles.input}
+                maxLength={20}
+                value={userCredentials.username}
+                onChangeText={(inputValue) => {
+                  handleFieldChange(inputValue, "username");
+                }}
+                testID="username"
+              />
+            </View>
+            <View>
+              <Text style={loginFormStyles.label}>Password</Text>
+              <TextInput
+                autoCapitalize="none"
+                autoCorrect={false}
+                secureTextEntry={true}
+                style={loginFormStyles.input}
+                textContentType="password"
+                maxLength={20}
+                value={userCredentials.password}
+                onChangeText={(inputValue) => {
+                  handleFieldChange(inputValue, "password");
+                }}
+                testID="password"
+              />
+            </View>
           </View>
-          <View>
-            <Text style={loginFormStyles.label}>Password</Text>
-            <TextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              secureTextEntry={true}
-              style={loginFormStyles.input}
-              textContentType="password"
-              maxLength={20}
-              value={userCredentials.password}
-              onChangeText={(inputValue) => {
-                handleFieldChange(inputValue, "password");
-              }}
-            />
-          </View>
-        </View>
-        <View style={loginFormStyles.buttonLinkContainer}>
-          <TouchableOpacity
-            activeOpacity={0.4}
-            disabled={isButtonDisabled}
-            style={
-              isButtonDisabled
-                ? loginFormStyles.disabledButton
-                : loginFormStyles.button
-            }
-            onPress={onSubmitHandler}
-          >
-            <Text style={loginFormStyles.buttonText}>Log in</Text>
-          </TouchableOpacity>
-          <View style={loginFormStyles.linkContainer}>
-            <Text style={loginFormStyles.info}>Not a member?</Text>
-            <TouchableOpacity activeOpacity={0.4}>
-              <Text style={loginFormStyles.link}>Join now</Text>
+          <View style={loginFormStyles.buttonLinkContainer}>
+            <TouchableOpacity
+              activeOpacity={0.4}
+              disabled={isButtonDisabled}
+              style={
+                isButtonDisabled
+                  ? loginFormStyles.disabledButton
+                  : loginFormStyles.button
+              }
+              onPress={onSubmitHandler}
+              testID="buttonSubmit"
+            >
+              <Text style={loginFormStyles.buttonText}>Log in</Text>
             </TouchableOpacity>
+            <View style={loginFormStyles.linkContainer}>
+              <Text style={loginFormStyles.info}>Not a member?</Text>
+              <TouchableOpacity activeOpacity={0.4}>
+                <Text style={loginFormStyles.link}>Join now</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
