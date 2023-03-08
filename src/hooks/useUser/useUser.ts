@@ -10,6 +10,10 @@ import {
 } from "./types";
 import { type User } from "../../store/features/userSlice/types";
 import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
+import {
+  setIsLoadingActionCreator,
+  unsetIsLoadingActionCreator,
+} from "../../store/features/uiSlice/uiSlice";
 
 const routes = {
   users: "users/",
@@ -25,6 +29,8 @@ const useUser = (): UseUserStructure => {
 
   const loginUser = async (userCredentials: UserCredentials) => {
     try {
+      dispatch(setIsLoadingActionCreator());
+
       const response = await axios.post<LoginResponse>(
         `${REACT_APP_URL_API}${routes.users}${routes.login}`,
         userCredentials
@@ -40,6 +46,7 @@ const useUser = (): UseUserStructure => {
       };
 
       dispatch(loginUserActionCreator(userToLogin));
+      dispatch(unsetIsLoadingActionCreator());
 
       await AsyncStorage.setItem("token", token);
     } catch (error: unknown) {}
