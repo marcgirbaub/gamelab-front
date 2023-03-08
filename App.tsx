@@ -5,6 +5,8 @@ import { Provider } from "react-redux";
 import LoginScreen from "./src/screen/LoginScreen/LoginScreen";
 import { store } from "./src/store/store";
 import globalStyles from "./src/styles/globalStyles";
+import Loader from "./src/components/Loader/Loader";
+import { useAppSelector } from "./src/store/hooks";
 
 const App = (): JSX.Element => (
   <Provider store={store}>
@@ -16,5 +18,4 @@ const App = (): JSX.Element => (
     </SafeAreaView>
   </Provider>
 );
-
 export default App;
