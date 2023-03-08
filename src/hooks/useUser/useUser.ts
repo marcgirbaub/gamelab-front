@@ -51,6 +51,8 @@ const useUser = (): UseUserStructure => {
 
       await AsyncStorage.setItem("token", token);
     } catch (error: unknown) {
+      dispatch(unsetIsLoadingActionCreator());
+
       dispatch(
         activateModalActionCreator({
           isError: true,

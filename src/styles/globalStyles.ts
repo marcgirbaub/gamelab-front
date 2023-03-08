@@ -10,6 +10,7 @@ const globalStyles = StyleSheet.create({
     padding: 20,
     justifyContent: "center",
     flex: 1,
+    backgroundColor: colorStyles.main,
   },
 });
 
