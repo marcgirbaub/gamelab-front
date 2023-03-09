@@ -8,6 +8,8 @@ import {
   View,
   Keyboard,
 } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigation } from "@react-navigation/native";
 import { type UserRegisterCredentials } from "../../hooks/useUser/types";
 import useUser from "../../hooks/useUser/useUser";
@@ -78,63 +80,76 @@ const RegisterForm = (): JSX.Element => {
     userCredentials.email === "";
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-      }}
-    >
-      <KeyboardAvoidingView behavior="padding">
-        <View style={registerFormStyles.container}>
-          <Text style={registerFormStyles.title} testID="Log in">
-            Sign up
-          </Text>
-          <View style={registerFormStyles.formContainer}>
-            <View>
-              <Text style={registerFormStyles.label}>Username</Text>
-              <TextInput
-                autoCapitalize="none"
-                autoCorrect={false}
-                style={registerFormStyles.input}
-                maxLength={20}
-                value={userCredentials.username}
-                onChangeText={(inputValue) => {
-                  handleFieldChange(inputValue, "username");
-                }}
-                testID="username"
-              />
-              <Text style={formStyles.errorMessage}></Text>
-            </View>
-            <View>
-              <Text style={registerFormStyles.label}>Email</Text>
-              <TextInput
-                autoCapitalize="none"
-                autoCorrect={false}
-                style={registerFormStyles.input}
-                maxLength={20}
-                value={userCredentials.email}
-                onChangeText={(inputValue) => {
-                  handleFieldChange(inputValue, "email");
-                }}
-                testID="email"
-              />
-              <Text style={formStyles.errorMessage}>{emailError}</Text>
-            </View>
-            <View>
-              <Text style={registerFormStyles.label}>Password</Text>
-              <TextInput
-                autoCapitalize="none"
-                autoCorrect={false}
-                secureTextEntry={true}
-                style={registerFormStyles.input}
-                textContentType="password"
-                maxLength={20}
-                value={userCredentials.password}
-                onChangeText={(inputValue) => {
-                  handleFieldChange(inputValue, "password");
-                }}
-                testID="password"
-              />
-              <Text style={formStyles.errorMessage}>{passwordError}</Text>
+    <View>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate(Routes.login);
+        }}
+      >
+        <FontAwesomeIcon
+          icon={faArrowLeft}
+          size={34}
+          style={registerFormStyles.backButton}
+        />
+      </TouchableOpacity>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <KeyboardAvoidingView behavior="padding">
+          <View style={registerFormStyles.container}>
+            <Text style={registerFormStyles.title} testID="Log in">
+              Sign up
+            </Text>
+            <View style={registerFormStyles.formContainer}>
+              <View>
+                <Text style={registerFormStyles.label}>Username</Text>
+                <TextInput
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  style={registerFormStyles.input}
+                  maxLength={30}
+                  value={userCredentials.username}
+                  onChangeText={(inputValue) => {
+                    handleFieldChange(inputValue, "username");
+                  }}
+                  testID="username"
+                />
+                <Text style={formStyles.errorMessage}></Text>
+              </View>
+              <View>
+                <Text style={registerFormStyles.label}>Email</Text>
+                <TextInput
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  style={registerFormStyles.input}
+                  maxLength={30}
+                  value={userCredentials.email}
+                  onChangeText={(inputValue) => {
+                    handleFieldChange(inputValue, "email");
+                  }}
+                  testID="email"
+                />
+                <Text style={formStyles.errorMessage}>{emailError}</Text>
+              </View>
+              <View>
+                <Text style={registerFormStyles.label}>Password</Text>
+                <TextInput
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  secureTextEntry={true}
+                  style={registerFormStyles.input}
+                  textContentType="password"
+                  maxLength={20}
+                  value={userCredentials.password}
+                  onChangeText={(inputValue) => {
+                    handleFieldChange(inputValue, "password");
+                  }}
+                  testID="password"
+                />
+                <Text style={formStyles.errorMessage}>{passwordError}</Text>
+              </View>
             </View>
           </View>
           <View style={registerFormStyles.buttonLinkContainer}>
@@ -164,9 +179,9 @@ const RegisterForm = (): JSX.Element => {
               </TouchableOpacity>
             </View>
           </View>
-        </View>
-      </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
+    </View>
   );
 };
 

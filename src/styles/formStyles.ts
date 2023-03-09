@@ -5,7 +5,7 @@ const formStyles = StyleSheet.create({
   container: {
     display: "flex",
     justifyContent: "center",
-    gap: 60,
+    gap: 50,
   },
   formContainer: {
     display: "flex",
@@ -30,7 +30,7 @@ const formStyles = StyleSheet.create({
     color: colorStyles.secondary,
     fontSize: 20,
     fontWeight: "700",
-    letterSpacing: 1,
+    letterSpacing: 1.5,
     marginBottom: 4,
   },
   button: {
