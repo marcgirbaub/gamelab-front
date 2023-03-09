@@ -1,6 +1,7 @@
 import React from "react";
-import { render, screen } from "@testing-library/react-native";
+import { screen } from "@testing-library/react-native";
 import LoginScreen from "./LoginScreen";
+import renderWithProviders from "../../testUtils/renderWithProviders";
 
 const mockedLoginUser = jest.fn();
 
@@ -15,7 +16,7 @@ describe("Given a LoginScreen component", () => {
       const usernameId = "username";
       const passwordId = "password";
 
-      render(<LoginScreen />);
+      renderWithProviders(<LoginScreen />);
 
       const title = await screen.getByTestId(titleText);
       const usernameInput = await screen.getByTestId(usernameId);
