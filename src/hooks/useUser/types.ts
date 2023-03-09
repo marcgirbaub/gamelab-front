@@ -5,6 +5,10 @@ export interface UserCredentials {
   password: string;
 }
 
+export interface UserRegisterCredentials extends UserCredentials {
+  email: string;
+}
+
 export interface LoginResponse {
   token: string;
 }
