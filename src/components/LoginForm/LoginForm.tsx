@@ -112,6 +112,7 @@ const LoginForm = (): JSX.Element => {
                   : loginFormStyles.button
               }
               onPress={onSubmitHandler}
+              accessibilityValue={{ text: "submit button" }}
               testID="buttonSubmit"
             >
               <Text style={loginFormStyles.buttonText}>Log in</Text>
