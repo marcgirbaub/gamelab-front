@@ -4,12 +4,24 @@ import { screen } from "@testing-library/react-native";
 import LoginForm from "./LoginForm";
 import { type UserCredentials } from "../../hooks/useUser/types";
 import renderWithProviders from "../../testUtils/renderWithProviders";
+import StackNavigator from "../../navigation/StackNavigator/StackNavigator";
+import Routes from "../../navigation/routes";
 
 const mockedLoginUser = jest.fn();
 
 jest.mock("../../hooks/useUser/useUser", () => () => ({
   loginUser: mockedLoginUser,
 }));
+
+const mockNavigation = jest.fn();
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+jest.mock("@react-navigation/native", () => ({
+  ...jest.requireActual("@react-navigation/native"),
+  useNavigation: () => ({ navigate: mockNavigation }),
+}));
+
+const registerRoute = Routes.register;
 
 const mockUserCredentials: UserCredentials = {
   username: "marc10",
@@ -63,6 +75,19 @@ describe("Given a LoginForm component", () => {
       fireEvent.press(submitButton);
 
       expect(mockedLoginUser).toHaveBeenCalledWith(mockUserCredentials);
+    });
+  });
+
+  describe("When the `Join now` button is pressed", () => {
+    test("Then it should call the useNavigation to redirect the user to the RegisterScreen", async () => {
+      const redirectButtonText = "Join now";
+
+      renderWithProviders(<StackNavigator />);
+      const redirectButton = await screen.getByText(redirectButtonText);
+
+      fireEvent.press(redirectButton);
+
+      expect(mockNavigation).toHaveBeenCalledWith(registerRoute);
     });
   });
 });
