@@ -32,7 +32,7 @@ const CustomModal = (): JSX.Element => {
           style={customModalStyles.closeButton}
           activeOpacity={0.5}
           onPress={closeModal}
-          testID={"closeButton"}
+          accessibilityRole="button"
         >
           <FontAwesomeIcon
             icon={faXmark}

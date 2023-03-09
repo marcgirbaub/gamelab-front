@@ -22,11 +22,9 @@ describe("Given a StackNavigator component", () => {
         text: accesibleButtonText,
       });
 
-      screen.debug();
-
       expect(userNameLabel).toBeDefined();
       expect(passwordLabel).toBeDefined();
-      expect(button).toBeDefined();
+      expect(button).toBeOnTheScreen();
     });
   });
 });

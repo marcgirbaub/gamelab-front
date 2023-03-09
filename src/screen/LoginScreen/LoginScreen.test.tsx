@@ -11,7 +11,7 @@ jest.mock("../../hooks/useUser/useUser", () => () => ({
 
 describe("Given a LoginScreen component", () => {
   describe("When rendered", () => {
-    test("Then it should show the LoginForm component with a title `Log in`, two inputs for the username and passwords and the submit button", async () => {
+    test("Then it should show the LoginForm component with a title `Log in`, two inputs for the username and password", async () => {
       const titleText = "Log in";
       const usernameId = "username";
       const passwordId = "password";

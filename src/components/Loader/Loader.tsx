@@ -9,8 +9,7 @@ const Loader = (): JSX.Element => (
       <ActivityIndicator
         size="large"
         color={`${colorStyles.accent}`}
-        testID="loader"
-        accessibilityValue={{ text: "loading" }}
+        accessibilityLabel="loading"
       />
     </View>
   </Modal>

@@ -99,14 +99,13 @@ const RegisterForm = (): JSX.Element => {
       >
         <KeyboardAvoidingView behavior="padding">
           <View style={registerFormStyles.container}>
-            <Text style={registerFormStyles.title} testID="Log in">
-              Sign up
-            </Text>
+            <Text style={registerFormStyles.title}>Sign up</Text>
             <View style={registerFormStyles.formContainer}>
               <View>
                 <Text style={registerFormStyles.label}>Username</Text>
                 <TextInput
                   autoCapitalize="none"
+                  accessibilityLabel="enter username"
                   autoCorrect={false}
                   style={registerFormStyles.input}
                   maxLength={30}
@@ -114,7 +113,6 @@ const RegisterForm = (): JSX.Element => {
                   onChangeText={(inputValue) => {
                     handleFieldChange(inputValue, "username");
                   }}
-                  testID="username"
                 />
                 <Text style={formStyles.errorMessage}></Text>
               </View>
@@ -122,6 +120,7 @@ const RegisterForm = (): JSX.Element => {
                 <Text style={registerFormStyles.label}>Email</Text>
                 <TextInput
                   autoCapitalize="none"
+                  accessibilityLabel="enter email"
                   autoCorrect={false}
                   style={registerFormStyles.input}
                   maxLength={30}
@@ -129,7 +128,6 @@ const RegisterForm = (): JSX.Element => {
                   onChangeText={(inputValue) => {
                     handleFieldChange(inputValue, "email");
                   }}
-                  testID="email"
                 />
                 <Text style={formStyles.errorMessage}>{emailError}</Text>
               </View>
@@ -137,6 +135,7 @@ const RegisterForm = (): JSX.Element => {
                 <Text style={registerFormStyles.label}>Password</Text>
                 <TextInput
                   autoCapitalize="none"
+                  accessibilityLabel="enter password"
                   autoCorrect={false}
                   secureTextEntry={true}
                   style={registerFormStyles.input}
@@ -146,7 +145,6 @@ const RegisterForm = (): JSX.Element => {
                   onChangeText={(inputValue) => {
                     handleFieldChange(inputValue, "password");
                   }}
-                  testID="password"
                 />
                 <Text style={formStyles.errorMessage}>{passwordError}</Text>
               </View>
@@ -154,6 +152,7 @@ const RegisterForm = (): JSX.Element => {
           </View>
           <View style={registerFormStyles.buttonLinkContainer}>
             <TouchableOpacity
+              accessibilityLabel="press to complete the registration"
               activeOpacity={0.4}
               disabled={isButtonDisabled}
               style={
@@ -163,7 +162,6 @@ const RegisterForm = (): JSX.Element => {
               }
               onPress={onSubmitHandler}
               accessibilityValue={{ text: "submit button" }}
-              testID="buttonSubmit"
             >
               <Text style={registerFormStyles.buttonText}>Sign up</Text>
             </TouchableOpacity>
