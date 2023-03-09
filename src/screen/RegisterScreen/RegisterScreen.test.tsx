@@ -5,7 +5,7 @@ import RegisterScreen from "./RegisterScreen";
 
 const mockedRegisterUser = jest.fn();
 
-beforeAll(() => {
+beforeEach(() => {
   jest.clearAllMocks();
 });
 
