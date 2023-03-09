@@ -1,4 +1,5 @@
 import "@testing-library/jest-dom";
+import "@testing-library/jest-native/extend-expect";
 import { handlers } from "./mocks/handlers";
 import { server } from "./mocks/server";
 

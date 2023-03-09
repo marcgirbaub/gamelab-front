@@ -10,6 +10,7 @@ const Loader = (): JSX.Element => (
         size="large"
         color={`${colorStyles.accent}`}
         testID="loader"
+        accessibilityValue={{ text: "loading" }}
       />
     </View>
   </Modal>
