@@ -11,7 +11,6 @@ import WelcomeScreen from "../../screen/WelcomeScreen/WelcomeScreen";
 import Routes from "../routes";
 
 const StackNavigator = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   const Stack = createNativeStackNavigator();
 
   const { modal, isLoading } = useAppSelector((state) => state.ui);
