@@ -82,6 +82,13 @@ const useUser = (): UseUserStructure => {
 
       dispatch(unsetIsLoadingActionCreator());
 
+      dispatch(
+        activateModalActionCreator({
+          isError: false,
+          modal: "Your user has been created",
+        })
+      );
+
       navigation.navigate(Routes.login);
     } catch {
       dispatch(unsetIsLoadingActionCreator());

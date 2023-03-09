@@ -1,10 +1,15 @@
 import { renderHook } from "@testing-library/react";
 import decodeToken from "jwt-decode";
 import Wrapper from "../../mocks/Wrapper";
+import { activateModalActionCreator } from "../../store/features/uiSlice/uiSlice";
 import { type User } from "../../store/features/userSlice/types";
 import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
 import { store } from "../../store/store";
-import { type CustomTokenPayload, type UserCredentials } from "./types";
+import {
+  type UserRegisterCredentials,
+  type CustomTokenPayload,
+  type UserCredentials,
+} from "./types";
 import useUser from "./useUser";
 
 jest.mock("@react-native-async-storage/async-storage", () => ({
@@ -15,7 +20,7 @@ jest.mock("jwt-decode", () => jest.fn());
 
 const spyDispatch = jest.spyOn(store, "dispatch");
 
-beforeAll(() => {
+afterEach(() => {
   jest.clearAllMocks();
 });
 
@@ -54,6 +59,32 @@ describe("Given a useUser custom hook", () => {
 
       expect(spyDispatch).toHaveBeenCalledWith(
         loginUserActionCreator(mockUserToLogin)
+      );
+    });
+  });
+
+  describe("When the registerUser function is called with a user with username `marc10`, email `marc@example.com` and password `marc12345`", () => {
+    test("Then the dispatch should be called with the action show a modal which indicates that the user has been successfully created", async () => {
+      const {
+        result: {
+          current: { registerUser },
+        },
+      } = renderHook(() => useUser(), { wrapper: Wrapper });
+      const expectedModal = {
+        isError: false,
+        modal: "Your user has been created",
+      };
+
+      const mockUserToRegister: UserRegisterCredentials = {
+        username: mockUserCredentials.username,
+        password: mockUserCredentials.password,
+        email: "marc@example.com",
+      };
+
+      await registerUser(mockUserToRegister);
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        activateModalActionCreator(expectedModal)
       );
     });
   });
