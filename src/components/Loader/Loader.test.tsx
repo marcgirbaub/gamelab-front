@@ -5,14 +5,16 @@ import renderWithProviders from "../../testUtils/renderWithProviders";
 
 describe("Given a Loader component", () => {
   describe("When rendered", () => {
-    test("Then it should show the loader animation", async () => {
-      const loaderId = "loader";
+    test("Then it should show a loader with an accessible name `loading`", async () => {
+      const accessibilityName = "loading";
 
       renderWithProviders(<Loader />);
 
-      const loader = await screen.getByTestId(loaderId);
+      const loader = await screen.getByAccessibilityValue({
+        text: accessibilityName,
+      });
 
-      expect(loader).toBeDefined();
+      expect(loader).toHaveAccessibilityValue({ text: accessibilityName });
     });
   });
 });
