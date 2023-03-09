@@ -51,7 +51,7 @@ const RegisterForm = (): JSX.Element => {
     setPasswordError("");
 
     if (!userCredentials.email.includes("@")) {
-      setEmailError("The email is not valid");
+      setEmailError("Invalid email");
 
       return;
     }
@@ -85,6 +85,7 @@ const RegisterForm = (): JSX.Element => {
         onPress={() => {
           navigation.navigate(Routes.login);
         }}
+        accessibilityLabel="go back"
       >
         <FontAwesomeIcon
           icon={faArrowLeft}
@@ -99,7 +100,9 @@ const RegisterForm = (): JSX.Element => {
       >
         <KeyboardAvoidingView behavior="padding">
           <View style={registerFormStyles.container}>
-            <Text style={registerFormStyles.title}>Sign up</Text>
+            <Text style={registerFormStyles.title} testID="Sign up">
+              Sign up
+            </Text>
             <View style={registerFormStyles.formContainer}>
               <View>
                 <Text style={registerFormStyles.label}>Username</Text>
@@ -161,7 +164,7 @@ const RegisterForm = (): JSX.Element => {
                   : registerFormStyles.button
               }
               onPress={onSubmitHandler}
-              accessibilityValue={{ text: "submit button" }}
+              accessibilityRole="button"
             >
               <Text style={registerFormStyles.buttonText}>Sign up</Text>
             </TouchableOpacity>
