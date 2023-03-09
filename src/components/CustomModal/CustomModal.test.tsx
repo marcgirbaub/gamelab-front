@@ -22,7 +22,7 @@ describe("Given a CustomModal component", () => {
 
   describe("When rendered and the user presses the button to close the modal", () => {
     test("Then the dispatch should be called with the action to close the modal", async () => {
-      const closeButtonId = "closeButton";
+      const closeButtonRole = "button";
 
       render(
         <Provider store={mockUiStore}>
@@ -30,7 +30,7 @@ describe("Given a CustomModal component", () => {
         </Provider>
       );
 
-      const closeButton = await screen.getByTestId(closeButtonId);
+      const closeButton = await screen.getByRole(closeButtonRole);
       fireEvent.press(closeButton);
 
       expect(dispatch).toHaveBeenCalled();

@@ -10,11 +10,9 @@ describe("Given a Loader component", () => {
 
       renderWithProviders(<Loader />);
 
-      const loader = await screen.getByAccessibilityValue({
-        text: accessibilityName,
-      });
+      const loader = await screen.getByLabelText(accessibilityName);
 
-      expect(loader).toHaveAccessibilityValue({ text: accessibilityName });
+      expect(loader).toBeOnTheScreen();
     });
   });
 });
