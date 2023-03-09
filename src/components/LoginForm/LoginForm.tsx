@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   Text,
@@ -12,9 +13,12 @@ import { type UserCredentials } from "../../hooks/useUser/types";
 import useUser from "../../hooks/useUser/useUser";
 import formStyles from "../../styles/formStyles";
 import loginFormStyles from "./LoginFormStyles";
+import { type LoginScreenNavigationProp } from "../../types/navigation.types";
+import Routes from "../../navigation/routes";
 
 const LoginForm = (): JSX.Element => {
   const { loginUser } = useUser();
+  const navigation = useNavigation<LoginScreenNavigationProp>();
 
   const initialUserCredentials: UserCredentials = {
     username: "",
@@ -119,7 +123,12 @@ const LoginForm = (): JSX.Element => {
             </TouchableOpacity>
             <View style={loginFormStyles.linkContainer}>
               <Text style={loginFormStyles.info}>Not a member?</Text>
-              <TouchableOpacity activeOpacity={0.4}>
+              <TouchableOpacity
+                activeOpacity={0.4}
+                onPress={() => {
+                  navigation.navigate(Routes.register);
+                }}
+              >
                 <Text style={loginFormStyles.link}>Join now</Text>
               </TouchableOpacity>
             </View>

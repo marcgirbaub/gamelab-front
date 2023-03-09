@@ -8,13 +8,17 @@ import {
   View,
   Keyboard,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { type UserRegisterCredentials } from "../../hooks/useUser/types";
 import useUser from "../../hooks/useUser/useUser";
 import formStyles from "../../styles/formStyles";
 import registerFormStyles from "./RegisterFormStyles";
+import { type RegisterScreenNavigationProp } from "../../types/navigation.types";
+import Routes from "../../navigation/routes";
 
 const RegisterForm = (): JSX.Element => {
   const { registerUser } = useUser();
+  const navigation = useNavigation<RegisterScreenNavigationProp>();
 
   const initialUserCredentials: UserRegisterCredentials = {
     username: "",
@@ -150,7 +154,12 @@ const RegisterForm = (): JSX.Element => {
             </TouchableOpacity>
             <View style={registerFormStyles.linkContainer}>
               <Text style={registerFormStyles.info}>Already a member?</Text>
-              <TouchableOpacity activeOpacity={0.4}>
+              <TouchableOpacity
+                activeOpacity={0.4}
+                onPress={() => {
+                  navigation.navigate(Routes.login);
+                }}
+              >
                 <Text style={registerFormStyles.link}>Log in</Text>
               </TouchableOpacity>
             </View>
