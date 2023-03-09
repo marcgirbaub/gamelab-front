@@ -9,7 +9,7 @@ const formStyles = StyleSheet.create({
   },
   formContainer: {
     display: "flex",
-    gap: 50,
+    gap: 30,
   },
   title: {
     color: colorStyles.secondary,
