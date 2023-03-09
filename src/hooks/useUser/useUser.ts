@@ -1,16 +1,13 @@
 import axios from "axios";
-import decodeToken from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { REACT_APP_URL_API } from "@env";
 import { useAppDispatch } from "../../store/hooks";
 import {
   type UserRegisterCredentials,
-  type CustomTokenPayload,
   type LoginResponse,
   type UserCredentials,
 } from "./types";
-import { type User } from "../../store/features/userSlice/types";
 import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
 import {
   activateModalActionCreator,
@@ -19,6 +16,7 @@ import {
 } from "../../store/features/uiSlice/uiSlice";
 import Routes from "../../navigation/routes";
 import { type LoginScreenNavigationProp } from "../../types/navigation.types";
+import decodeToken from "../../utils/decodeToken";
 
 const urlRoutes = {
   users: "users/",
@@ -45,13 +43,7 @@ const useUser = (): UseUserStructure => {
       );
 
       const { token } = response.data;
-      const { id, username }: CustomTokenPayload = decodeToken(token);
-
-      const userToLogin: User = {
-        id,
-        token,
-        username,
-      };
+      const userToLogin = decodeToken(token);
 
       dispatch(loginUserActionCreator(userToLogin));
       dispatch(unsetIsLoadingActionCreator());

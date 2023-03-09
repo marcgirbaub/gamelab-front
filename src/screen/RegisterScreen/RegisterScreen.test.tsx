@@ -1,6 +1,6 @@
 import React from "react";
 import { screen } from "@testing-library/react-native";
-import renderWithProviders from "../../testUtils/renderWithProviders";
+import renderWithProviders from "../../utils/renderWithProviders";
 import RegisterScreen from "./RegisterScreen";
 
 const mockedRegisterUser = jest.fn();

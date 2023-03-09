@@ -1,6 +1,6 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react-native";
-import renderWithProviders from "../../testUtils/renderWithProviders";
+import renderWithProviders from "../../utils/renderWithProviders";
 import CustomModal from "./CustomModal";
 import { mockUiState, mockUiStore } from "../../mocks/uiMocks";
 import { Provider } from "react-redux";
