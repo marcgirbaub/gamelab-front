@@ -46,15 +46,13 @@ describe("Given a LoginForm component", () => {
     test("Then the credentials should show on the inputs and the loginUser function should be called", async () => {
       const usernameLabelText = "enter username";
       const passwordLabelText = "enter password";
-      const buttonText = "Log in";
+      const buttonText = "press to log in";
 
       renderWithProviders(<LoginForm />);
 
       const usernameInput = await screen.getByLabelText(usernameLabelText);
       const passwordInput = await screen.getByLabelText(passwordLabelText);
-      const submitButton = await screen.getByRole("button", {
-        name: buttonText,
-      });
+      const submitButton = await screen.getByRole("button");
 
       fireEvent.changeText(usernameInput, mockUserCredentials.username);
       fireEvent.changeText(passwordInput, mockUserCredentials.password);

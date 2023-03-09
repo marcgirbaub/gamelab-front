@@ -99,6 +99,7 @@ const LoginForm = (): JSX.Element => {
                   : loginFormStyles.button
               }
               onPress={onSubmitHandler}
+              accessibilityLabel="press to log in"
               accessibilityRole="button"
             >
               <Text style={loginFormStyles.buttonText}>Log in</Text>
