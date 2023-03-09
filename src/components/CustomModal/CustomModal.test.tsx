@@ -1,19 +1,39 @@
 import React from "react";
-import { screen } from "@testing-library/react-native";
+import { fireEvent, render, screen } from "@testing-library/react-native";
 import renderWithProviders from "../../testUtils/renderWithProviders";
 import CustomModal from "./CustomModal";
-import { mockUiState } from "../../mocks/uiMocks";
+import { mockUiState, mockUiStore } from "../../mocks/uiMocks";
+import { Provider } from "react-redux";
+
+const dispatch = jest.spyOn(mockUiStore, "dispatch");
 
 describe("Given a CustomModal component", () => {
   describe("When rendered with the message `There was a problem`", () => {
-    test("Then it should show a text with this message", () => {
+    test("Then it should show a text with this message", async () => {
       const expectedErrorMessage = "There was a problem";
 
       renderWithProviders(<CustomModal />, { ui: mockUiState });
 
-      const modalText = screen.getByText(expectedErrorMessage);
+      const modalText = await screen.getByText(expectedErrorMessage);
 
       expect(modalText).toBeDefined();
+    });
+  });
+
+  describe("When rendered and the user presses the button to close the modal", () => {
+    test("Then the dispatch should be called with the action to close the modal", async () => {
+      const closeButtonId = "closeButton";
+
+      render(
+        <Provider store={mockUiStore}>
+          <CustomModal />
+        </Provider>
+      );
+
+      const closeButton = await screen.getByTestId(closeButtonId);
+      fireEvent.press(closeButton);
+
+      expect(dispatch).toHaveBeenCalled();
     });
   });
 });
