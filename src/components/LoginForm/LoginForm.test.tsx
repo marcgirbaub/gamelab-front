@@ -4,12 +4,24 @@ import { screen } from "@testing-library/react-native";
 import LoginForm from "./LoginForm";
 import { type UserCredentials } from "../../hooks/useUser/types";
 import renderWithProviders from "../../testUtils/renderWithProviders";
+import StackNavigator from "../../navigation/StackNavigator/StackNavigator";
+import Routes from "../../navigation/routes";
 
 const mockedLoginUser = jest.fn();
 
 jest.mock("../../hooks/useUser/useUser", () => () => ({
   loginUser: mockedLoginUser,
 }));
+
+const mockNavigation = jest.fn();
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+jest.mock("@react-navigation/native", () => ({
+  ...jest.requireActual("@react-navigation/native"),
+  useNavigation: () => ({ navigate: mockNavigation }),
+}));
+
+const registerRoute = Routes.register;
 
 const mockUserCredentials: UserCredentials = {
   username: "marc10",
@@ -25,34 +37,34 @@ describe("Given a LoginForm component", () => {
 
       const title = await screen.getByTestId(titleText);
 
-      expect(title).toBeDefined();
+      expect(title).toBeOnTheScreen();
     });
 
-    test("Then it shpuld show two inputs corresponding to username and password fields", async () => {
-      const usernameId = "username";
-      const passwordId = "password";
+    test("Then it should show two inputs corresponding to username and password fields", async () => {
+      const usernameLabelText = "enter username";
+      const passwordLabelText = "enter password";
 
       renderWithProviders(<LoginForm />);
 
-      const usernameInput = await screen.getByTestId(usernameId);
-      const passwordInput = await screen.getByTestId(passwordId);
+      const usernameInput = await screen.getByLabelText(usernameLabelText);
+      const passwordInput = await screen.getByLabelText(passwordLabelText);
 
-      expect(usernameInput).toBeDefined();
-      expect(passwordInput).toBeDefined();
+      expect(usernameInput).toBeOnTheScreen();
+      expect(passwordInput).toBeOnTheScreen();
     });
   });
 
   describe("When rendered and the user enters their credentials `marc10` and `marc12345`and clicks on the submit button", () => {
     test("Then the credentials should show on the inputs and the loginUser function should be called", async () => {
-      const usernameId = "username";
-      const passwordId = "password";
-      const buttonId = "buttonSubmit";
+      const usernameLabelText = "enter username";
+      const passwordLabelText = "enter password";
+      const buttonText = "press to log in";
 
       renderWithProviders(<LoginForm />);
 
-      const usernameInput = await screen.getByTestId(usernameId);
-      const passwordInput = await screen.getByTestId(passwordId);
-      const submitButton = await screen.getByTestId(buttonId);
+      const usernameInput = await screen.getByLabelText(usernameLabelText);
+      const passwordInput = await screen.getByLabelText(passwordLabelText);
+      const submitButton = await screen.getByRole("button");
 
       fireEvent.changeText(usernameInput, mockUserCredentials.username);
       fireEvent.changeText(passwordInput, mockUserCredentials.password);
@@ -63,6 +75,19 @@ describe("Given a LoginForm component", () => {
       fireEvent.press(submitButton);
 
       expect(mockedLoginUser).toHaveBeenCalledWith(mockUserCredentials);
+    });
+  });
+
+  describe("When the `Join now` button is pressed", () => {
+    test("Then it should call the useNavigation to redirect the user to the RegisterScreen", async () => {
+      const redirectButtonText = "Join now";
+
+      renderWithProviders(<StackNavigator />);
+      const redirectButton = await screen.getByText(redirectButtonText);
+
+      fireEvent.press(redirectButton);
+
+      expect(mockNavigation).toHaveBeenCalledWith(registerRoute);
     });
   });
 });

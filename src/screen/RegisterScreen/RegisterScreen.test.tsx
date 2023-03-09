@@ -3,14 +3,14 @@ import { screen } from "@testing-library/react-native";
 import renderWithProviders from "../../testUtils/renderWithProviders";
 import RegisterScreen from "./RegisterScreen";
 
-const mockedLoginUser = jest.fn();
+const mockedRegisterUser = jest.fn();
 
 beforeAll(() => {
   jest.clearAllMocks();
 });
 
 jest.mock("../../hooks/useUser/useUser", () => () => ({
-  loginUser: mockedLoginUser,
+  registerUser: mockedRegisterUser,
 }));
 
 describe("Given a RegisterScreen component", () => {

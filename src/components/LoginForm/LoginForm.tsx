@@ -62,6 +62,7 @@ const LoginForm = (): JSX.Element => {
               <Text style={loginFormStyles.label}>Username</Text>
               <TextInput
                 autoCapitalize="none"
+                accessibilityLabel="enter username"
                 autoCorrect={false}
                 style={loginFormStyles.input}
                 maxLength={20}
@@ -69,13 +70,13 @@ const LoginForm = (): JSX.Element => {
                 onChangeText={(inputValue) => {
                   handleFieldChange(inputValue, "username");
                 }}
-                testID="username"
               />
             </View>
             <View>
               <Text style={loginFormStyles.label}>Password</Text>
               <TextInput
                 autoCapitalize="none"
+                accessibilityLabel="enter password"
                 autoCorrect={false}
                 secureTextEntry={true}
                 style={loginFormStyles.input}
@@ -85,7 +86,6 @@ const LoginForm = (): JSX.Element => {
                 onChangeText={(inputValue) => {
                   handleFieldChange(inputValue, "password");
                 }}
-                testID="password"
               />
             </View>
           </View>
@@ -99,8 +99,8 @@ const LoginForm = (): JSX.Element => {
                   : loginFormStyles.button
               }
               onPress={onSubmitHandler}
-              accessibilityValue={{ text: "submit button" }}
-              testID="buttonSubmit"
+              accessibilityLabel="press to log in"
+              accessibilityRole="button"
             >
               <Text style={loginFormStyles.buttonText}>Log in</Text>
             </TouchableOpacity>
