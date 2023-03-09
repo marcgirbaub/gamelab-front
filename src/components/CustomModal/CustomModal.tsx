@@ -23,7 +23,6 @@ const CustomModal = (): JSX.Element => {
     <Modal
       isVisible={true}
       swipeDirection={["down", "right"]}
-      useNativeDriverForBackdrop
       animationIn="slideInUp"
       animationOut="slideOutDown"
       onSwipeComplete={closeModal}
