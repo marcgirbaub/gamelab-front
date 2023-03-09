@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { REACT_APP_URL_API } from "@env";
 import { useAppDispatch } from "../../store/hooks";
 import {
+  type UserRegisterCredentials,
   type CustomTokenPayload,
   type LoginResponse,
   type UserCredentials,
@@ -22,10 +23,12 @@ import { type LoginScreenNavigationProp } from "../../types/navigation.types";
 const urlRoutes = {
   users: "users/",
   login: "login/",
+  register: "register/",
 };
 
 interface UseUserStructure {
   loginUser: (userCredentials: UserCredentials) => Promise<void>;
+  registerUser: (registerCredentials: UserRegisterCredentials) => Promise<void>;
 }
 
 const useUser = (): UseUserStructure => {
@@ -56,7 +59,7 @@ const useUser = (): UseUserStructure => {
       await AsyncStorage.setItem("token", token);
 
       navigation.navigate(Routes.welcome);
-    } catch (error: unknown) {
+    } catch {
       dispatch(unsetIsLoadingActionCreator());
 
       dispatch(
@@ -68,7 +71,38 @@ const useUser = (): UseUserStructure => {
     }
   };
 
-  return { loginUser };
+  const registerUser = async (registerCredentials: UserRegisterCredentials) => {
+    try {
+      dispatch(setIsLoadingActionCreator());
+
+      await axios.post(
+        `${REACT_APP_URL_API}${urlRoutes.users}${urlRoutes.register}`,
+        registerCredentials
+      );
+
+      dispatch(unsetIsLoadingActionCreator());
+
+      dispatch(
+        activateModalActionCreator({
+          isError: false,
+          modal: "Your user has been created",
+        })
+      );
+
+      navigation.navigate(Routes.login);
+    } catch {
+      dispatch(unsetIsLoadingActionCreator());
+
+      dispatch(
+        activateModalActionCreator({
+          isError: true,
+          modal: "Something went wrong, please try again",
+        })
+      );
+    }
+  };
+
+  return { loginUser, registerUser };
 };
 
 export default useUser;
