@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react-native";
 import React from "react";
-import renderWithProviders from "../../testUtils/renderWithProviders";
+import renderWithProviders from "../../utils/renderWithProviders";
 import StackNavigator from "./StackNavigator";
 import { mockUiState } from "../../mocks/uiMocks";
 import CustomModal from "../../components/CustomModal/CustomModal";

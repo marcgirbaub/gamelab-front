@@ -3,7 +3,7 @@ import { fireEvent } from "@testing-library/react-native";
 import { screen } from "@testing-library/react-native";
 import LoginForm from "./LoginForm";
 import { type UserCredentials } from "../../hooks/useUser/types";
-import renderWithProviders from "../../testUtils/renderWithProviders";
+import renderWithProviders from "../../utils/renderWithProviders";
 import StackNavigator from "../../navigation/StackNavigator/StackNavigator";
 import Routes from "../../navigation/routes";
 
