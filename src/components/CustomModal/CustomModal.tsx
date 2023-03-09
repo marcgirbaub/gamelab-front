@@ -23,7 +23,6 @@ const CustomModal = (): JSX.Element => {
     <Modal
       isVisible={true}
       swipeDirection={["down", "right"]}
-      useNativeDriverForBackdrop
       animationIn="slideInUp"
       animationOut="slideOutDown"
       onSwipeComplete={closeModal}
@@ -33,6 +32,7 @@ const CustomModal = (): JSX.Element => {
           style={customModalStyles.closeButton}
           activeOpacity={0.5}
           onPress={closeModal}
+          testID={"closeButton"}
         >
           <FontAwesomeIcon
             icon={faXmark}
