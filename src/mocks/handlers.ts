@@ -18,3 +18,14 @@ export const handlers = [
     async (req, res, ctx) => res(ctx.status(201))
   ),
 ];
+
+export const errorHandlers = [
+  rest.post(
+    `${REACT_APP_URL_API}${routes.users}${routes.login}`,
+    async (req, res, ctx) => res(ctx.status(400))
+  ),
+  rest.post(
+    `${REACT_APP_URL_API}${routes.users}${routes.register}`,
+    async (req, res, ctx) => res(ctx.status(400))
+  ),
+];
