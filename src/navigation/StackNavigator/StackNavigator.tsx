@@ -9,6 +9,7 @@ import CustomModal from "../../components/CustomModal/CustomModal";
 import globalStyles from "../../styles/globalStyles";
 import WelcomeScreen from "../../screen/WelcomeScreen/WelcomeScreen";
 import Routes from "../routes";
+import RegisterScreen from "../../screen/RegisterScreen/RegisterScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -25,7 +26,11 @@ const StackNavigator = () => {
           name={Routes.login}
           options={{ headerShown: false }}
         />
-
+        <Stack.Screen
+          component={RegisterScreen}
+          name={Routes.register}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen component={WelcomeScreen} name={Routes.welcome} />
       </Stack.Navigator>
       <StatusBar style="light" />
