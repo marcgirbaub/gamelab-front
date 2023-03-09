@@ -25,34 +25,36 @@ describe("Given a LoginForm component", () => {
 
       const title = await screen.getByTestId(titleText);
 
-      expect(title).toBeDefined();
+      expect(title).toBeOnTheScreen();
     });
 
-    test("Then it shpuld show two inputs corresponding to username and password fields", async () => {
-      const usernameId = "username";
-      const passwordId = "password";
+    test("Then it should show two inputs corresponding to username and password fields", async () => {
+      const usernameLabelText = "enter username";
+      const passwordLabelText = "enter password";
 
       renderWithProviders(<LoginForm />);
 
-      const usernameInput = await screen.getByTestId(usernameId);
-      const passwordInput = await screen.getByTestId(passwordId);
+      const usernameInput = await screen.getByLabelText(usernameLabelText);
+      const passwordInput = await screen.getByLabelText(passwordLabelText);
 
-      expect(usernameInput).toBeDefined();
-      expect(passwordInput).toBeDefined();
+      expect(usernameInput).toBeOnTheScreen();
+      expect(passwordInput).toBeOnTheScreen();
     });
   });
 
   describe("When rendered and the user enters their credentials `marc10` and `marc12345`and clicks on the submit button", () => {
     test("Then the credentials should show on the inputs and the loginUser function should be called", async () => {
-      const usernameId = "username";
-      const passwordId = "password";
-      const buttonId = "buttonSubmit";
+      const usernameLabelText = "enter username";
+      const passwordLabelText = "enter password";
+      const buttonText = "Log in";
 
       renderWithProviders(<LoginForm />);
 
-      const usernameInput = await screen.getByTestId(usernameId);
-      const passwordInput = await screen.getByTestId(passwordId);
-      const submitButton = await screen.getByTestId(buttonId);
+      const usernameInput = await screen.getByLabelText(usernameLabelText);
+      const passwordInput = await screen.getByLabelText(passwordLabelText);
+      const submitButton = await screen.getByRole("button", {
+        name: buttonText,
+      });
 
       fireEvent.changeText(usernameInput, mockUserCredentials.username);
       fireEvent.changeText(passwordInput, mockUserCredentials.password);
