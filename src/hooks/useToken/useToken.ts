@@ -5,8 +5,8 @@ import decodeToken from "../../utils/decodeToken";
 import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
 
 interface UseTokenStructure {
-  getToken: () => void;
-  removeToken: () => void;
+  getToken: () => Promise<void>;
+  removeToken: () => Promise<void>;
 }
 
 const useToken = (): UseTokenStructure => {
