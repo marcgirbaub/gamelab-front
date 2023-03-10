@@ -1,0 +1,21 @@
+import { StyleSheet } from "react-native";
+import colorStyles from "../../styles/colorStyles";
+
+const headerStyles = StyleSheet.create({
+  headerContainer: { flexDirection: "row", justifyContent: "space-between" },
+  logoContainer: { flexDirection: "row" },
+  logoGame: {
+    color: colorStyles.secondary,
+    fontSize: 34,
+    letterSpacing: 8,
+    fontWeight: "bold",
+  },
+  logoLab: {
+    color: colorStyles.accent,
+    fontSize: 34,
+    letterSpacing: 8,
+    fontWeight: "bold",
+  },
+});
+
+export default headerStyles;
