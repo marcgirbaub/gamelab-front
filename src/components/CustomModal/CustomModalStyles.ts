@@ -14,7 +14,7 @@ const customModalStyles = StyleSheet.create({
   closeIcon: {
     color: colorStyles.secondary,
   },
-  closeButton: { position: "absolute", top: 14, right: 14 },
+  closeButton: { position: "absolute", top: 14, left: 14 },
   successIcon: {
     color: colorStyles.success,
   },
