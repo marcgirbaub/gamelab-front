@@ -20,7 +20,6 @@ jest.mock("../../hooks/useUser/useUser", () => () => ({
 
 const mockNavigation = jest.fn();
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock("@react-navigation/native", () => ({
   ...jest.requireActual("@react-navigation/native"),
   useNavigation: () => ({ navigate: mockNavigation }),
