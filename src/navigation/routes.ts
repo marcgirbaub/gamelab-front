@@ -1,7 +1,9 @@
 enum Routes {
   login = "Log in",
-  welcome = "Welcome",
+  explore = "Explore",
   register = "Sign up",
+  home = "Home",
+  logout = "Log out",
 }
 
 export default Routes;

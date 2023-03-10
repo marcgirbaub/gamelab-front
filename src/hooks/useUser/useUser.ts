@@ -50,7 +50,7 @@ const useUser = (): UseUserStructure => {
 
       await AsyncStorage.setItem("token", token);
 
-      navigation.navigate(Routes.welcome);
+      navigation.navigate(Routes.home);
     } catch {
       dispatch(unsetIsLoadingActionCreator());
 
