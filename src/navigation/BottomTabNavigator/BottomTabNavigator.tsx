@@ -6,7 +6,6 @@ import {
   faGamepad,
   faBookmark,
   faCirclePlus,
-  faHouse,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigation } from "@react-navigation/native";
 import Routes from "../routes";
@@ -17,18 +16,14 @@ import bottomTabNavigatorStyles from "./BottomTabNavigatorStyles";
 import { useAppDispatch } from "../../store/hooks";
 import { logoutUserActionCreator } from "../../store/features/userSlice/userSlice";
 import { type LoginScreenNavigationProp } from "../../types/navigation.types";
-import useToken from "../../hooks/useToken/useToken";
 
 const BottomTabNavigator = (): JSX.Element => {
   const Tab = createBottomTabNavigator();
   const dispatch = useAppDispatch();
 
   const navigation = useNavigation<LoginScreenNavigationProp>();
-  const { removeToken } = useToken();
 
   const logoutHandler = async () => {
-    await removeToken();
-
     dispatch(logoutUserActionCreator());
 
     navigation.navigate(Routes.login);
