@@ -5,14 +5,27 @@ import {
   faArrowRightFromBracket,
   faGamepad,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigation } from "@react-navigation/native";
 import Routes from "../routes";
 import ExploreScreen from "../../screen/ExploreScreen/ExploreScreen";
 import globalStyles from "../../styles/globalStyles";
 import colorStyles from "../../styles/colorStyles";
 import bottomTabNavigatorStyles from "./BottomTabNavigatorStyles";
+import { useAppDispatch } from "../../store/hooks";
+import { logoutUserActionCreator } from "../../store/features/userSlice/userSlice";
+import { type LoginScreenNavigationProp } from "../../types/navigation.types";
 
 const BottomTabNavigator = (): JSX.Element => {
   const Tab = createBottomTabNavigator();
+  const dispatch = useAppDispatch();
+
+  const navigation = useNavigation<LoginScreenNavigationProp>();
+
+  const logoutHandler = () => {
+    dispatch(logoutUserActionCreator());
+
+    navigation.navigate(Routes.login);
+  };
 
   return (
     <Tab.Navigator
@@ -38,6 +51,7 @@ const BottomTabNavigator = (): JSX.Element => {
       <Tab.Screen
         name={Routes.logout}
         component={ExploreScreen}
+        listeners={{ tabPress: logoutHandler }}
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon
