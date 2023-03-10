@@ -1,9 +1,10 @@
 import React from "react";
-import { Text, SafeAreaView } from "react-native/";
+import { SafeAreaView } from "react-native/";
+import Header from "../../components/Header/Header";
 
 const ExploreScreen = () => (
   <SafeAreaView>
-    <Text>Welcome to gamelab</Text>
+    <Header />
   </SafeAreaView>
 );
 

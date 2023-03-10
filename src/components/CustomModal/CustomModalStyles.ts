@@ -3,7 +3,7 @@ import colorStyles from "../../styles/colorStyles";
 
 const customModalStyles = StyleSheet.create({
   container: {
-    flex: 0.5,
+    flex: 0.4,
     justifyContent: "center",
     alignItems: "center",
     gap: 20,
@@ -14,7 +14,7 @@ const customModalStyles = StyleSheet.create({
   closeIcon: {
     color: colorStyles.secondary,
   },
-  closeButton: { position: "absolute", top: 14, left: 14 },
+  closeButton: { position: "absolute", top: 16, right: 16 },
   successIcon: {
     color: colorStyles.success,
   },
@@ -23,11 +23,13 @@ const customModalStyles = StyleSheet.create({
     color: colorStyles.success,
     fontSize: 30,
     letterSpacing: 1,
+    textAlign: "center",
   },
   infoError: {
     color: colorStyles.error,
     fontSize: 30,
     letterSpacing: 1,
+    textAlign: "center",
   },
 });
 

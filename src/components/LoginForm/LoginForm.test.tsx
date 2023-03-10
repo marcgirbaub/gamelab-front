@@ -7,6 +7,11 @@ import renderWithProviders from "../../utils/renderWithProviders";
 import StackNavigator from "../../navigation/StackNavigator/StackNavigator";
 import Routes from "../../navigation/routes";
 
+jest.mock("@react-native-async-storage/async-storage", () => ({
+  getItem: jest.fn(),
+  removeItem: jest.fn(),
+}));
+
 const mockedLoginUser = jest.fn();
 
 jest.mock("../../hooks/useUser/useUser", () => () => ({
@@ -15,7 +20,6 @@ jest.mock("../../hooks/useUser/useUser", () => () => ({
 
 const mockNavigation = jest.fn();
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock("@react-navigation/native", () => ({
   ...jest.requireActual("@react-navigation/native"),
   useNavigation: () => ({ navigate: mockNavigation }),

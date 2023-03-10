@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faArrowRightFromBracket,
   faGamepad,
+  faBookmark,
+  faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigation } from "@react-navigation/native";
 import Routes from "../routes";
@@ -21,7 +23,7 @@ const BottomTabNavigator = (): JSX.Element => {
 
   const navigation = useNavigation<LoginScreenNavigationProp>();
 
-  const logoutHandler = () => {
+  const logoutHandler = async () => {
     dispatch(logoutUserActionCreator());
 
     navigation.navigate(Routes.login);
@@ -45,6 +47,24 @@ const BottomTabNavigator = (): JSX.Element => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={faGamepad} size={size} color={color} />
+          ),
+        }}
+      ></Tab.Screen>
+      <Tab.Screen
+        name={Routes.create}
+        component={ExploreScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faCirclePlus} size={size} color={color} />
+          ),
+        }}
+      ></Tab.Screen>
+      <Tab.Screen
+        name={Routes.myLibrary}
+        component={ExploreScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faBookmark} size={size} color={color} />
           ),
         }}
       ></Tab.Screen>

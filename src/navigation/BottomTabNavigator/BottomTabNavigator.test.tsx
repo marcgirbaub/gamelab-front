@@ -4,6 +4,11 @@ import renderWithProviders from "../../utils/renderWithProviders";
 import Routes from "../routes";
 import BottomTabNavigator from "./BottomTabNavigator";
 
+jest.mock("@react-native-async-storage/async-storage", () => ({
+  getItem: jest.fn(),
+  removeItem: jest.fn(),
+}));
+
 const mockNavigation = jest.fn();
 
 jest.mock("@react-navigation/native", () => ({

@@ -4,6 +4,8 @@ enum Routes {
   register = "Sign up",
   home = "Home",
   logout = "Log out",
+  create = "Create",
+  myLibrary = "My Library",
 }
 
 export default Routes;

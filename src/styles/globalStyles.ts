@@ -7,7 +7,7 @@ const globalStyles = StyleSheet.create({
     height: "100%",
   },
   screen: {
-    padding: 20,
+    paddingHorizontal: 20,
     justifyContent: "center",
     flex: 1,
     backgroundColor: colorStyles.main,
