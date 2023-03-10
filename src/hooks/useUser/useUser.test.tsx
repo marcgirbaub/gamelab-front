@@ -2,17 +2,18 @@ import { renderHook } from "@testing-library/react";
 import decodeToken from "jwt-decode";
 import { errorHandlers } from "../../mocks/handlers";
 import { server } from "../../mocks/server";
+import {
+  mockToken,
+  mockTokenPayload,
+  mockUserCredentials,
+  mockUserToRegister,
+} from "../../mocks/userMocks";
 import Wrapper from "../../mocks/Wrapper";
 import { type ModalPayload } from "../../store/features/uiSlice/types";
 import { activateModalActionCreator } from "../../store/features/uiSlice/uiSlice";
 import { type User } from "../../store/features/userSlice/types";
 import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
 import { store } from "../../store/store";
-import {
-  type UserRegisterCredentials,
-  type CustomTokenPayload,
-  type UserCredentials,
-} from "./types";
 import useUser from "./useUser";
 
 jest.mock("@react-native-async-storage/async-storage", () => ({
@@ -26,24 +27,6 @@ const spyDispatch = jest.spyOn(store, "dispatch");
 afterEach(() => {
   jest.clearAllMocks();
 });
-
-const mockUserCredentials: UserCredentials = {
-  username: "marc10",
-  password: "marc12345",
-};
-
-const mockToken = "asdjfh3425kjlhsafkdh3k2h32";
-
-const mockTokenPayload: CustomTokenPayload = {
-  id: "34523463456",
-  username: "marc10",
-};
-
-const mockUserToRegister: UserRegisterCredentials = {
-  username: mockUserCredentials.username,
-  password: mockUserCredentials.password,
-  email: "marc@example.com",
-};
 
 describe("Given a useUser custom hook", () => {
   describe("When the loginUser function is called with a user with username `marc10` and password `marc12345`", () => {
