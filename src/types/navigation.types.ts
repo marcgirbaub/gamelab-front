@@ -3,8 +3,9 @@ import type Routes from "../navigation/routes";
 
 export interface RootStackParamList {
   [Routes.login]: undefined;
-  [Routes.welcome]: undefined;
+  [Routes.explore]: undefined;
   [Routes.register]: undefined;
+  [Routes.home]: undefined;
 }
 
 export type LoginScreenNavigationProp = NativeStackNavigationProp<

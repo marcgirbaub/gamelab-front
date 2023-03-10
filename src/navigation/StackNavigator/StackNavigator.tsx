@@ -7,9 +7,9 @@ import { useAppSelector } from "../../store/hooks";
 import Loader from "../../components/Loader/Loader";
 import CustomModal from "../../components/CustomModal/CustomModal";
 import globalStyles from "../../styles/globalStyles";
-import WelcomeScreen from "../../screen/WelcomeScreen/WelcomeScreen";
 import Routes from "../routes";
 import RegisterScreen from "../../screen/RegisterScreen/RegisterScreen";
+import BottomTabNavigator from "../BottomTabNavigator/BottomTabNavigator";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -31,7 +31,11 @@ const StackNavigator = () => {
           name={Routes.register}
           options={{ headerShown: false }}
         />
-        <Stack.Screen component={WelcomeScreen} name={Routes.welcome} />
+        <Stack.Screen
+          component={BottomTabNavigator}
+          name={Routes.home}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
       <StatusBar style="light" />
     </SafeAreaView>
