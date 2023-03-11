@@ -9,6 +9,7 @@ const bottomTabNavigatorStyles = StyleSheet.create({
   },
   tabLabel: {
     fontSize: 12,
+    fontWeight: "bold",
   },
 });
 
