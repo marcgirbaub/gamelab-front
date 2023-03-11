@@ -65,6 +65,7 @@ describe("Given a useUser custom hook", () => {
           current: { loginUser },
         },
       } = renderHook(() => useUser(), { wrapper: Wrapper });
+
       const actionPayload: ModalPayload = {
         isError: true,
         modal: "Wrong credentials",
