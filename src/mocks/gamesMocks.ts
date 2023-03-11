@@ -1,7 +1,7 @@
 import { type Game, type Games } from "../store/features/gamesSlice/types";
 
 export const mockWitcherGame: Game = {
-  id: "123123",
+  id: "123dsfds123",
   name: "The Witcher",
   about: "This is an adventure game",
   ageRating: "17 +",

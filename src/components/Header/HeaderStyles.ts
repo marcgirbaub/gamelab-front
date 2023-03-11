@@ -2,7 +2,11 @@ import { StyleSheet } from "react-native";
 import colorStyles from "../../styles/colorStyles";
 
 const headerStyles = StyleSheet.create({
-  headerContainer: { flexDirection: "row", justifyContent: "space-between" },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: 60,
+  },
   logoContainer: { flexDirection: "row" },
   logoGame: {
     color: colorStyles.secondary,

@@ -9,15 +9,15 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faN } from "@fortawesome/free-solid-svg-icons";
 import gameCardStyles from "./GameCardStyles";
+import { type Game } from "../../store/features/gamesSlice/types";
 
 interface GameCardProps {
-  name: string;
-  categories: string[];
-  platforms: string[];
-  image: string;
+  game: Game;
 }
 
-const GameCard = ({ categories, image, name, platforms }: GameCardProps) => {
+const GameCard = ({
+  game: { backupImage, name, categories, platforms },
+}: GameCardProps) => {
   const getIcon = (text: string) => {
     let icon;
 
@@ -48,7 +48,7 @@ const GameCard = ({ categories, image, name, platforms }: GameCardProps) => {
     <View style={gameCardStyles.container}>
       <View style={gameCardStyles.imageContainer}>
         <Image
-          source={{ uri: image }}
+          source={{ uri: backupImage }}
           accessibilityLabel={name}
           style={gameCardStyles.image}
           resizeMode="stretch"
@@ -71,7 +71,7 @@ const GameCard = ({ categories, image, name, platforms }: GameCardProps) => {
         <Text style={gameCardStyles.name}>{name}</Text>
         <View style={gameCardStyles.categories}>
           {categories.map((category) => (
-            <Text key={category} style={gameCardStyles.category}>
+            <Text key={`${name}${category}`} style={gameCardStyles.category}>
               {category}
             </Text>
           ))}
