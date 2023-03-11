@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FlatList, View } from "react-native";
-import useGames from "../../hooks/useGames/useGames";
 import { type Games } from "../../store/features/gamesSlice/types";
 import GameCard from "../GameCard/GameCard";
 import gamesListStyles from "./GamesListStyles";
