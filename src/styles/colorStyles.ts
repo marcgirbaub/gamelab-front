@@ -1,5 +1,5 @@
 const colorStyles = {
-  main: "#0f0f0f",
+  main: "#000000",
   primaryLight: "#3f3f3f",
   accent: "#ff6d74",
   secondary: "#ffffff",
