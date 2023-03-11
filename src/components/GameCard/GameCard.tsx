@@ -49,12 +49,16 @@ const GameCard = ({ categories, image, name, platforms }: GameCardProps) => {
       <View style={gameCardStyles.imageContainer}>
         <Image
           source={{ uri: image }}
+          accessibilityLabel={name}
           style={gameCardStyles.image}
           resizeMode="stretch"
         />
       </View>
       <View style={gameCardStyles.infoContainer}>
-        <View style={gameCardStyles.platforms}>
+        <View
+          style={gameCardStyles.platforms}
+          accessibilityLabel="platform icon"
+        >
           {platforms.map((platform) => (
             <FontAwesomeIcon
               icon={getIcon(platform)}
