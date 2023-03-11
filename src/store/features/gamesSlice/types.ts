@@ -1,4 +1,5 @@
 export interface Game {
+  id: string;
   name: string;
   backupImage: string;
   about: string;
@@ -11,3 +12,8 @@ export interface Game {
 }
 
 export type Games = Game[];
+
+export interface GamesState {
+  games: Games;
+  selectedGame: Game;
+}
