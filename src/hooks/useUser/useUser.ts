@@ -17,12 +17,9 @@ import {
 import Routes from "../../navigation/routes";
 import { type LoginScreenNavigationProp } from "../../types/navigation.types";
 import decodeToken from "../../utils/decodeToken";
+import urlRoutes from "../routes";
 
-const urlRoutes = {
-  users: "users/",
-  login: "login/",
-  register: "register/",
-};
+const { users } = urlRoutes;
 
 interface UseUserStructure {
   loginUser: (userCredentials: UserCredentials) => Promise<void>;
@@ -38,7 +35,7 @@ const useUser = (): UseUserStructure => {
       dispatch(setIsLoadingActionCreator());
 
       const response = await axios.post<LoginResponse>(
-        `${REACT_APP_URL_API}${urlRoutes.users}${urlRoutes.login}`,
+        `${REACT_APP_URL_API}${users.users}${users.login}`,
         userCredentials
       );
 
@@ -68,7 +65,7 @@ const useUser = (): UseUserStructure => {
       dispatch(setIsLoadingActionCreator());
 
       await axios.post(
-        `${REACT_APP_URL_API}${urlRoutes.users}${urlRoutes.register}`,
+        `${REACT_APP_URL_API}${users.users}${users.register}`,
         registerCredentials
       );
 
