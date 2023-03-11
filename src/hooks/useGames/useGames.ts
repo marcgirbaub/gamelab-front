@@ -14,7 +14,7 @@ import { type GamesResponse } from "./types";
 const { games } = urlRoutes;
 
 interface UseGamesStructure {
-  getAllGames: () => Promise<void>;
+  getAllGames: (page?: number) => Promise<void>;
 }
 
 const useGames = (): UseGamesStructure => {
