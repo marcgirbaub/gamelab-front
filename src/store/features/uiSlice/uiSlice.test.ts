@@ -3,6 +3,7 @@ import { type ModalPayload, type UiState } from "./types";
 import {
   activateModalActionCreator,
   closeModalActionCreator,
+  nextPageActionCreator,
   setIsLoadingActionCreator,
   uiReducer,
   unsetIsLoadingActionCreator,
@@ -67,6 +68,23 @@ describe("Given a uiReducer reducer", () => {
 
       const closeModalAction = closeModalActionCreator();
       const newUiState = uiReducer(mockUiState, closeModalAction);
+
+      expect(newUiState).toStrictEqual(expectedUiState);
+    });
+  });
+
+  describe("When called with the action to advance to next page", () => {
+    test("Then it should return a new state with the current page equal to the previous page + 1", () => {
+      const expectedUiState: UiState = {
+        ...mockUiState,
+        pagination: {
+          ...mockUiState.pagination,
+          current: mockUiState.pagination.current + 1,
+        },
+      };
+
+      const nextPageAction = nextPageActionCreator();
+      const newUiState = uiReducer(mockUiState, nextPageAction);
 
       expect(newUiState).toStrictEqual(expectedUiState);
     });
