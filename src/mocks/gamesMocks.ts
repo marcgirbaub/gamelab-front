@@ -29,7 +29,7 @@ export const mockWitcherGame: Game = {
   categories: ["Adventure", "Action"],
   developer: "EA games",
   gameplayTime: 60,
-  platforms: ["Playstation"],
+  platforms: ["Playstation", "Apple", "Xbox", "Windows", "Nintendo"],
   releaseYear: 2015,
 };
 
@@ -58,5 +58,18 @@ export const mockValorantGame: Game = {
   developer: "Riot",
   gameplayTime: 200,
   platforms: ["Windows"],
+  releaseYear: 2017,
+};
+
+export const mockEmptyPlatformGame: Game = {
+  id: "1231sdfsadf23",
+  name: "Valorant",
+  about: "This is a 5 vs 5 games",
+  ageRating: "17 +",
+  backupImage: "lol.jpg",
+  categories: ["RPG", "Action"],
+  developer: "Riot",
+  gameplayTime: 200,
+  platforms: ["Nintedo64"],
   releaseYear: 2017,
 };
