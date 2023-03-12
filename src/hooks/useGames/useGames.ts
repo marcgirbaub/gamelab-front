@@ -1,7 +1,10 @@
 import { REACT_APP_URL_API } from "@env";
 import axios from "axios";
 import { useCallback } from "react";
-import { loadAllGamesActionCreator } from "../../store/features/gamesSlice/gamesSlice";
+import {
+  loadAllGamesActionCreator,
+  loadMoreGamesActionCreator,
+} from "../../store/features/gamesSlice/gamesSlice";
 import {
   activateModalActionCreator,
   setIsLoadingActionCreator,
@@ -32,7 +35,13 @@ const useGames = (): UseGamesStructure => {
 
         const { games: gamesToLoad } = response.data;
 
-        dispatch(loadAllGamesActionCreator(gamesToLoad));
+        if (!page) {
+          dispatch(loadAllGamesActionCreator(gamesToLoad));
+        }
+
+        if (page) {
+          dispatch(loadMoreGamesActionCreator(gamesToLoad));
+        }
 
         dispatch(unsetIsLoadingActionCreator());
       } catch {
