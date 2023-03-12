@@ -6,6 +6,7 @@ export interface UiState {
     current: number;
     total: number;
   };
+  filter: string;
 }
 
 export interface ModalPayload {

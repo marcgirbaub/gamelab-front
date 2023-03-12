@@ -6,6 +6,7 @@ export const initialUiState: UiState = {
   modal: "",
   isError: false,
   pagination: { current: 0, total: 0 },
+  filter: "",
 };
 
 const uiSlice = createSlice({
@@ -40,13 +41,18 @@ const uiSlice = createSlice({
         current: currentUiState.pagination.current + 1,
       },
     }),
-    resetToInitialState: (currentUiState): UiState => ({ ...initialUiState }),
+    resetToInitialState: (): UiState => ({ ...initialUiState }),
     loadTotalNumberPages: (
       currenUiState,
       action: PayloadAction<number>
     ): UiState => ({
       ...currenUiState,
       pagination: { ...currenUiState.pagination, total: action.payload },
+    }),
+    addFilter: (currentUiState, action: PayloadAction<string>): UiState => ({
+      ...currentUiState,
+      filter: action.payload,
+      pagination: { ...currentUiState.pagination, current: 0 },
     }),
   },
 });
@@ -60,4 +66,5 @@ export const {
   nextPage: nextPageActionCreator,
   resetToInitialState: resetToInitialStateActionCreator,
   loadTotalNumberPages: loadTotalNumberPagesActionCreator,
+  addFilter: addFilterActionCreator,
 } = uiSlice.actions;
