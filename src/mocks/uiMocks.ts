@@ -6,6 +6,7 @@ export const mockUiState: UiState = {
   modal: "There was a problem",
   isError: true,
   pagination: { current: 0, total: 10 },
+  filter: "",
 };
 
 export const mockUiStateNotLoading: UiState = {
@@ -13,6 +14,7 @@ export const mockUiStateNotLoading: UiState = {
   modal: "",
   isError: false,
   pagination: { current: 0, total: 10 },
+  filter: "",
 };
 
 export const mockUiStore = setupStore({ ui: mockUiState });
