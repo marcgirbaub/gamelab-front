@@ -3,7 +3,9 @@ import { type ModalPayload, type UiState } from "./types";
 import {
   activateModalActionCreator,
   closeModalActionCreator,
+  initialUiState,
   nextPageActionCreator,
+  resetToInitialStateActionCreator,
   setIsLoadingActionCreator,
   uiReducer,
   unsetIsLoadingActionCreator,
@@ -87,6 +89,15 @@ describe("Given a uiReducer reducer", () => {
       const newUiState = uiReducer(mockUiState, nextPageAction);
 
       expect(newUiState).toStrictEqual(expectedUiState);
+    });
+  });
+
+  describe("When called with the action to reset the state to the initial state", () => {
+    test("Then it should return a new state equal to the initial state", () => {
+      const resetAction = resetToInitialStateActionCreator();
+      const newUiState = uiReducer(mockUiState, resetAction);
+
+      expect(newUiState).toStrictEqual(initialUiState);
     });
   });
 });
