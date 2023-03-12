@@ -5,6 +5,7 @@ const initialUiState: UiState = {
   isLoading: false,
   modal: "",
   isError: false,
+  pagination: { current: 0, total: 0 },
 };
 
 const uiSlice = createSlice({
@@ -32,6 +33,13 @@ const uiSlice = createSlice({
       modal: initialUiState.modal,
       isError: initialUiState.isError,
     }),
+    nextPage: (currentUiState): UiState => ({
+      ...currentUiState,
+      pagination: {
+        ...currentUiState.pagination,
+        current: currentUiState.pagination.current + 1,
+      },
+    }),
   },
 });
 
@@ -41,4 +49,5 @@ export const {
   unsetIsLoading: unsetIsLoadingActionCreator,
   activateModal: activateModalActionCreator,
   closeModal: closeModalActionCreator,
+  nextPage: nextPageActionCreator,
 } = uiSlice.actions;
