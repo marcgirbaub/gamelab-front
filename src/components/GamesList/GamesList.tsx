@@ -8,16 +8,20 @@ interface GamesListProps {
   games: Games;
 }
 
-const GamesList = ({ games }: GamesListProps): JSX.Element => (
-  <View>
-    <FlatList
-      data={games}
-      renderItem={({ item }) => <GameCard game={item} />}
-      showsVerticalScrollIndicator={false}
-      keyExtractor={(item) => item.id}
-      ItemSeparatorComponent={() => <View style={gamesListStyles.gap} />}
-    />
-  </View>
-);
+const GamesList = ({ games }: GamesListProps): JSX.Element => {
+  const gapItem = (): JSX.Element => <View style={gamesListStyles.gap} />;
+
+  return (
+    <View>
+      <FlatList
+        data={games}
+        renderItem={({ item }) => <GameCard game={item} />}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item) => item.id}
+        ItemSeparatorComponent={gapItem}
+      />
+    </View>
+  );
+};
 
 export default GamesList;
