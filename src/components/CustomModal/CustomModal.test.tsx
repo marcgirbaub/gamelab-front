@@ -31,6 +31,7 @@ describe("Given a CustomModal component", () => {
       );
 
       const closeButton = await screen.getByRole(closeButtonRole);
+
       fireEvent.press(closeButton);
 
       expect(dispatch).toHaveBeenCalled();

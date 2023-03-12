@@ -39,6 +39,20 @@ describe("Given the useToken custom hook", () => {
       expect(AsyncStorage.getItem).toHaveBeenCalledWith("token");
     });
 
+    test("Then the dispatch should not be called when there is not token storaged", async () => {
+      const {
+        result: {
+          current: { getToken },
+        },
+      } = renderHook(() => useToken(), { wrapper: Wrapper });
+
+      AsyncStorage.getItem = jest.fn().mockReturnValue(null);
+
+      await getToken();
+
+      expect(spyDispatch).not.toHaveBeenCalled();
+    });
+
     test("Then the dispatch should be called with the action to log in the user", async () => {
       const {
         result: {
