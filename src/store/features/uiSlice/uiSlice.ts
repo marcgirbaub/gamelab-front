@@ -40,6 +40,7 @@ const uiSlice = createSlice({
         current: currentUiState.pagination.current + 1,
       },
     }),
+    resetToInitialState: (currentUiState): UiState => ({ ...initialUiState }),
   },
 });
 
@@ -50,4 +51,5 @@ export const {
   activateModal: activateModalActionCreator,
   closeModal: closeModalActionCreator,
   nextPage: nextPageActionCreator,
+  resetToInitialState: resetToInitialStateActionCreator,
 } = uiSlice.actions;
