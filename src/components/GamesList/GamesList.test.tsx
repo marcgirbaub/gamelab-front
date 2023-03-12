@@ -2,6 +2,8 @@ import { render, screen } from "@testing-library/react-native";
 import React from "react";
 import { mockListOfGames } from "../../mocks/gamesMocks";
 import GamesList from "./GamesList";
+import { store } from "../../store/store";
+import renderWithProviders from "../../utils/renderWithProviders";
 
 beforeEach(() => jest.clearAllMocks());
 
@@ -11,7 +13,7 @@ describe("Given a GamesList component", () => {
       const witcherGameName = "The Witcher";
       const leagueGameName = "League of Legends";
 
-      render(<GamesList games={mockListOfGames} />);
+      renderWithProviders(<GamesList games={mockListOfGames} />, { store });
 
       const witcherCardTitle = screen.getByText(witcherGameName);
       const leagueCardTitle = screen.getByText(leagueGameName);

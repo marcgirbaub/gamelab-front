@@ -2,6 +2,7 @@ import React from "react";
 import { FlatList, View } from "react-native";
 import { type Games } from "../../store/features/gamesSlice/types";
 import GameCard from "../GameCard/GameCard";
+import LoadMore from "../LoadMore/LoadMore";
 import gamesListStyles from "./GamesListStyles";
 
 interface GamesListProps {
@@ -19,6 +20,7 @@ const GamesList = ({ games }: GamesListProps): JSX.Element => {
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={gapItem}
+        ListFooterComponent={<LoadMore />}
       />
     </View>
   );
