@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const exploreScreenStyles = StyleSheet.create({
-  container: { marginBottom: 120 },
+  container: { marginBottom: 270 },
 });
 
 export default exploreScreenStyles;

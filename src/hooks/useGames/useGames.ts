@@ -18,20 +18,20 @@ import { type GamesResponse } from "./types";
 const { games } = urlRoutes;
 
 interface UseGamesStructure {
-  getAllGames: (page?: number) => Promise<void>;
+  getAllGames: (page?: number, filter?: string) => Promise<void>;
 }
 
 const useGames = (): UseGamesStructure => {
   const dispatch = useAppDispatch();
 
   const getAllGames = useCallback(
-    async (page = 0) => {
+    async (page = 0, filter?: string) => {
       try {
         dispatch(setIsLoadingActionCreator());
 
         const response = await axios.get<GamesResponse>(
           `${REACT_APP_URL_API}${games.games}`,
-          { params: { page } }
+          { params: { page, filter } }
         );
 
         const { games: gamesToLoad, totalNumberPages } = response.data;
