@@ -25,8 +25,18 @@ const gamesSlice = createSlice({
       currentGamesState,
       action: PayloadAction<Games>
     ): GamesState => ({ ...currentGamesState, games: [...action.payload] }),
+    loadMoreGames: (
+      currentGamesState: GamesState,
+      action: PayloadAction<Games>
+    ): GamesState => ({
+      ...currentGamesState,
+      games: [...currentGamesState.games, ...action.payload],
+    }),
   },
 });
 
 export const gamesReducer = gamesSlice.reducer;
-export const { loadAllGames: loadAllGamesActionCreator } = gamesSlice.actions;
+export const {
+  loadAllGames: loadAllGamesActionCreator,
+  loadMoreGames: loadMoreGamesActionCreator,
+} = gamesSlice.actions;

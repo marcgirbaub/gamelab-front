@@ -9,7 +9,6 @@ import exploreScreenStyles from "./ExploreScreenStyles";
 
 const ExploreScreen = () => {
   const { getAllGames } = useGames();
-
   const { current } = useAppSelector((state) => state.ui.pagination);
 
   useEffect(() => {
