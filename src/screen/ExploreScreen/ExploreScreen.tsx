@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useEffect } from "react";
-import { SafeAreaView } from "react-native/";
+import { SafeAreaView, View } from "react-native";
 import GamesList from "../../components/GamesList/GamesList";
 import Header from "../../components/Header/Header";
 import useGames from "../../hooks/useGames/useGames";
 import { useAppSelector } from "../../store/hooks";
+import exploreScreenStyles from "./ExploreScreenStyles";
 
 const ExploreScreen = () => {
   const { getAllGames } = useGames();
@@ -18,7 +19,9 @@ const ExploreScreen = () => {
   return (
     <SafeAreaView>
       <Header />
-      <GamesList games={games} />
+      <View style={exploreScreenStyles.container}>
+        <GamesList games={games} />
+      </View>
     </SafeAreaView>
   );
 };

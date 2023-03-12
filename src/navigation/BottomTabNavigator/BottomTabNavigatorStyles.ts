@@ -6,6 +6,7 @@ const bottomTabNavigatorStyles = StyleSheet.create({
     backgroundColor: colorStyles.main,
     height: 60,
     borderTopColor: colorStyles.primaryLight,
+    paddingTop: 6,
   },
   tabLabel: {
     fontSize: 12,
