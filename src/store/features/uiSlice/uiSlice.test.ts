@@ -2,6 +2,7 @@ import { mockUiState, mockUiStateNotLoading } from "../../../mocks/uiMocks";
 import { type ModalPayload, type UiState } from "./types";
 import {
   activateModalActionCreator,
+  addFilterActionCreator,
   closeModalActionCreator,
   initialUiState,
   loadTotalNumberPagesActionCreator,
@@ -113,6 +114,22 @@ describe("Given a uiReducer reducer", () => {
       const loadNumberPagesAction =
         loadTotalNumberPagesActionCreator(totalPages);
       const newUiState = uiReducer(mockUiState, loadNumberPagesAction);
+
+      expect(newUiState).toStrictEqual(expectedUiState);
+    });
+  });
+
+  describe("When called with the action to add the filter `Action`", () => {
+    test("Then it should return a new state with the filter set to `Action`", () => {
+      const categoryFilter = "Action";
+      const expectedUiState: UiState = {
+        ...mockUiState,
+        pagination: { ...mockUiState.pagination, current: 0 },
+        filter: categoryFilter,
+      };
+
+      const addFilterAction = addFilterActionCreator(categoryFilter);
+      const newUiState = uiReducer(mockUiState, addFilterAction);
 
       expect(newUiState).toStrictEqual(expectedUiState);
     });
