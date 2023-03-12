@@ -3,7 +3,10 @@ import { mockListOfGames } from "../../mocks/gamesMocks";
 import { server } from "../../mocks/server";
 import { errorHandlers } from "../../mocks/handlers";
 import Wrapper from "../../mocks/Wrapper";
-import { loadAllGamesActionCreator } from "../../store/features/gamesSlice/gamesSlice";
+import {
+  loadAllGamesActionCreator,
+  loadMoreGamesActionCreator,
+} from "../../store/features/gamesSlice/gamesSlice";
 import { store } from "../../store/store";
 import useGames from "./useGames";
 import { type ModalPayload } from "../../store/features/uiSlice/types";
@@ -28,6 +31,22 @@ describe("Given useGames hook", () => {
 
       expect(spyDispatch).toHaveBeenCalledWith(
         loadAllGamesActionCreator(mockListOfGames)
+      );
+    });
+  });
+
+  describe("When the getAllGames function is called", () => {
+    test("Then the dispatch should be called with the action to loadMoreGames when the passed page is 1", async () => {
+      const {
+        result: {
+          current: { getAllGames },
+        },
+      } = renderHook(() => useGames(), { wrapper: Wrapper });
+
+      await getAllGames(1);
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        loadMoreGamesActionCreator(mockListOfGames)
       );
     });
   });

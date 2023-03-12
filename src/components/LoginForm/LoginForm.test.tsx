@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent } from "@testing-library/react-native";
+import { fireEvent, waitFor } from "@testing-library/react-native";
 import { screen } from "@testing-library/react-native";
 import LoginForm from "./LoginForm";
 import { type UserCredentials } from "../../hooks/useUser/types";
@@ -70,13 +70,17 @@ describe("Given a LoginForm component", () => {
       const passwordInput = await screen.getByLabelText(passwordLabelText);
       const submitButton = await screen.getByRole("button");
 
-      fireEvent.changeText(usernameInput, mockUserCredentials.username);
-      fireEvent.changeText(passwordInput, mockUserCredentials.password);
+      await waitFor(async () => {
+        fireEvent.changeText(usernameInput, mockUserCredentials.username);
+        fireEvent.changeText(passwordInput, mockUserCredentials.password);
+      });
 
       expect(usernameInput.props.value).toBe(mockUserCredentials.username);
       expect(passwordInput.props.value).toBe(mockUserCredentials.password);
 
-      fireEvent.press(submitButton);
+      await waitFor(async () => {
+        fireEvent.press(submitButton);
+      });
 
       expect(mockedLoginUser).toHaveBeenCalledWith(mockUserCredentials);
     });

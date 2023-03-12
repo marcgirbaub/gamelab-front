@@ -1,4 +1,4 @@
-import { screen, fireEvent } from "@testing-library/react-native";
+import { screen, fireEvent, waitFor } from "@testing-library/react-native";
 import React from "react";
 import renderWithProviders from "../../utils/renderWithProviders";
 import Routes from "../routes";
@@ -38,7 +38,10 @@ describe("Given a BottomTabNavigator component", () => {
 
       renderWithProviders(<BottomTabNavigator />);
       const logoutTab = await screen.getByText(logoutTabText);
-      fireEvent.press(logoutTab);
+
+      await waitFor(async () => {
+        fireEvent.press(logoutTab);
+      });
 
       expect(mockNavigation).toHaveBeenCalledWith(Routes.login);
     });
