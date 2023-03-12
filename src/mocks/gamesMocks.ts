@@ -1,4 +1,24 @@
-import { type Game, type Games } from "../store/features/gamesSlice/types";
+import {
+  type GamesState,
+  type Game,
+  type Games,
+} from "../store/features/gamesSlice/types";
+
+export const initialGamesStateMock: GamesState = {
+  games: [],
+  selectedGame: {
+    about: "",
+    ageRating: "",
+    backupImage: "",
+    categories: [],
+    developer: "",
+    gameplayTime: 0,
+    id: "",
+    name: "",
+    platforms: [],
+    releaseYear: 0,
+  },
+};
 
 export const mockWitcherGame: Game = {
   id: "123dsfds123",
@@ -27,3 +47,16 @@ export const mockLeagueGame: Game = {
 };
 
 export const mockListOfGames: Games = [mockWitcherGame, mockLeagueGame];
+
+export const mockValorantGame: Game = {
+  id: "1231sdfsadf23",
+  name: "Valorant",
+  about: "This is a 5 vs 5 games",
+  ageRating: "17 +",
+  backupImage: "lol.jpg",
+  categories: ["RPG", "Action"],
+  developer: "Riot",
+  gameplayTime: 200,
+  platforms: ["Windows"],
+  releaseYear: 2017,
+};
