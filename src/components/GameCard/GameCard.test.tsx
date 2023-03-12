@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react-native";
 import GameCard from "./GameCard";
-import { mockWitcherGame } from "../../mocks/gamesMocks";
+import { mockEmptyPlatformGame, mockWitcherGame } from "../../mocks/gamesMocks";
 import { type Game } from "../../store/features/gamesSlice/types";
 
 describe("Given a GameCard component", () => {
@@ -25,14 +25,11 @@ describe("Given a GameCard component", () => {
     });
   });
 
-  describe("When rendered with the game `The Witcher` without any platform", () => {
+  describe("When rendered with the game `Valorant` without any platform", () => {
     test("Then it should show an icon with the label `platform icon`", () => {
-      const mockGameWithoutPlatform: Game = {
-        ...mockWitcherGame,
-        platforms: [],
-      };
+      const mockGameWithoutExistingPlatform: Game = mockEmptyPlatformGame;
 
-      render(<GameCard game={mockGameWithoutPlatform} />);
+      render(<GameCard game={mockGameWithoutExistingPlatform} />);
 
       const expectedIcon = screen.getByLabelText("platform icon");
 
