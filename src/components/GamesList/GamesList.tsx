@@ -1,6 +1,7 @@
 import React from "react";
 import { FlatList, View } from "react-native";
 import { type Games } from "../../store/features/gamesSlice/types";
+import { useAppSelector } from "../../store/hooks";
 import GameCard from "../GameCard/GameCard";
 import LoadMore from "../LoadMore/LoadMore";
 import gamesListStyles from "./GamesListStyles";
@@ -10,6 +11,15 @@ interface GamesListProps {
 }
 
 const GamesList = ({ games }: GamesListProps): JSX.Element => {
+  const { current, total } = useAppSelector((state) => state.ui.pagination);
+
+  const renderLoadMore = () =>
+    current + 1 === total ? (
+      <View style={{ marginBottom: 24 }} />
+    ) : (
+      <LoadMore />
+    );
+
   const gapItem = (): JSX.Element => <View style={gamesListStyles.gap} />;
 
   return (
@@ -20,7 +30,7 @@ const GamesList = ({ games }: GamesListProps): JSX.Element => {
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={gapItem}
-        ListFooterComponent={<LoadMore />}
+        ListFooterComponent={renderLoadMore}
       />
     </View>
   );
