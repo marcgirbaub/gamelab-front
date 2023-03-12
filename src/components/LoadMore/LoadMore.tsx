@@ -17,6 +17,7 @@ const LoadMore = (): JSX.Element => {
         style={loadMoreStyles.container}
         activeOpacity={0.5}
         onPress={onClick}
+        accessibilityLabel="loadmore"
       >
         <Text style={loadMoreStyles.text}>Load more</Text>
       </TouchableOpacity>
