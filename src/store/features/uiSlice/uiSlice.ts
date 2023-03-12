@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { type ModalPayload, type UiState } from "./types";
 
-const initialUiState: UiState = {
+export const initialUiState: UiState = {
   isLoading: false,
   modal: "",
   isError: false,

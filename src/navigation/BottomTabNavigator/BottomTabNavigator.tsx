@@ -16,6 +16,7 @@ import bottomTabNavigatorStyles from "./BottomTabNavigatorStyles";
 import { useAppDispatch } from "../../store/hooks";
 import { logoutUserActionCreator } from "../../store/features/userSlice/userSlice";
 import { type LoginScreenNavigationProp } from "../../types/navigation.types";
+import { resetToInitialStateActionCreator } from "../../store/features/uiSlice/uiSlice";
 
 const BottomTabNavigator = (): JSX.Element => {
   const Tab = createBottomTabNavigator();
@@ -24,6 +25,7 @@ const BottomTabNavigator = (): JSX.Element => {
   const navigation = useNavigation<LoginScreenNavigationProp>();
 
   const logoutHandler = async () => {
+    dispatch(resetToInitialStateActionCreator());
     dispatch(logoutUserActionCreator());
 
     navigation.navigate(Routes.login);
