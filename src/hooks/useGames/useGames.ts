@@ -7,6 +7,7 @@ import {
 } from "../../store/features/gamesSlice/gamesSlice";
 import {
   activateModalActionCreator,
+  loadTotalNumberPagesActionCreator,
   setIsLoadingActionCreator,
   unsetIsLoadingActionCreator,
 } from "../../store/features/uiSlice/uiSlice";
@@ -33,10 +34,11 @@ const useGames = (): UseGamesStructure => {
           { params: { page } }
         );
 
-        const { games: gamesToLoad } = response.data;
+        const { games: gamesToLoad, totalNumberPages } = response.data;
 
         if (!page) {
           dispatch(loadAllGamesActionCreator(gamesToLoad));
+          dispatch(loadTotalNumberPagesActionCreator(totalNumberPages));
         }
 
         if (page) {

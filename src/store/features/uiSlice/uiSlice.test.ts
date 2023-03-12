@@ -4,6 +4,7 @@ import {
   activateModalActionCreator,
   closeModalActionCreator,
   initialUiState,
+  loadTotalNumberPagesActionCreator,
   nextPageActionCreator,
   resetToInitialStateActionCreator,
   setIsLoadingActionCreator,
@@ -98,6 +99,22 @@ describe("Given a uiReducer reducer", () => {
       const newUiState = uiReducer(mockUiState, resetAction);
 
       expect(newUiState).toStrictEqual(initialUiState);
+    });
+  });
+
+  describe("When called with the action to load the total number of pages with number 4", () => {
+    test("Then it should return a new state with the total number of pages set to 4", () => {
+      const totalPages = 4;
+      const expectedUiState: UiState = {
+        ...mockUiState,
+        pagination: { ...mockUiState.pagination, total: totalPages },
+      };
+
+      const loadNumberPagesAction =
+        loadTotalNumberPagesActionCreator(totalPages);
+      const newUiState = uiReducer(mockUiState, loadNumberPagesAction);
+
+      expect(newUiState).toStrictEqual(expectedUiState);
     });
   });
 });

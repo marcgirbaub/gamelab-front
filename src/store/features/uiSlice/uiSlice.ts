@@ -41,6 +41,13 @@ const uiSlice = createSlice({
       },
     }),
     resetToInitialState: (currentUiState): UiState => ({ ...initialUiState }),
+    loadTotalNumberPages: (
+      currenUiState,
+      action: PayloadAction<number>
+    ): UiState => ({
+      ...currenUiState,
+      pagination: { ...currenUiState.pagination, total: action.payload },
+    }),
   },
 });
 
@@ -52,4 +59,5 @@ export const {
   closeModal: closeModalActionCreator,
   nextPage: nextPageActionCreator,
   resetToInitialState: resetToInitialStateActionCreator,
+  loadTotalNumberPages: loadTotalNumberPagesActionCreator,
 } = uiSlice.actions;
