@@ -21,6 +21,9 @@ const Filter = (): JSX.Element => {
   ];
 
   const gapItem = (): JSX.Element => <View style={filterStyles.gap} />;
+  const horizontalViews = (): JSX.Element => (
+    <View style={filterStyles.horizontal} />
+  );
 
   const handleOnClickFilter = (filterSelected: string) => {
     if (filterSelected === filter) {
@@ -40,8 +43,8 @@ const Filter = (): JSX.Element => {
         horizontal
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={gapItem}
-        ListFooterComponent={() => <View style={filterStyles.horizontal} />}
-        ListHeaderComponent={() => <View style={filterStyles.horizontal} />}
+        ListFooterComponent={horizontalViews}
+        ListHeaderComponent={horizontalViews}
         renderItem={({ item }) => (
           <TouchableOpacity
             activeOpacity={1}

@@ -34,6 +34,7 @@ const BottomSheetModal = ({
           activeOpacity={0.5}
           accessibilityRole="button"
           onPress={actionToClose}
+          accessibilityLabel="close the modal"
         >
           <FontAwesomeIcon
             icon={faXmark}
@@ -45,6 +46,7 @@ const BottomSheetModal = ({
         <TouchableOpacity
           onPress={mainAction}
           style={bottomSheetModalStyles.button}
+          accessibilityLabel={buttontext}
         >
           <Text style={bottomSheetModalStyles.buttonText}>{buttontext}</Text>
         </TouchableOpacity>
