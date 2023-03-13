@@ -13,6 +13,7 @@ const ExploreScreen = () => {
   const {
     pagination: { current },
     filter,
+    isLoading,
   } = useAppSelector((state) => state.ui);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const ExploreScreen = () => {
       <Header />
       <View style={exploreScreenStyles.container}>
         <Filter />
-        {games.length === 0 ? (
+        {games.length === 0 && !isLoading ? (
           <Text style={exploreScreenStyles.notFoundText}>No games found</Text>
         ) : (
           <GamesList games={games} />

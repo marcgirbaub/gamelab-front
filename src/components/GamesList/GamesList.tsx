@@ -2,6 +2,7 @@ import React from "react";
 import { FlatList, View } from "react-native";
 import { type Games } from "../../redux/features/games/types";
 import { useAppSelector } from "../../redux/hooks";
+import isTablet from "../../utils/isTablet";
 import GameCard from "../GameCard/GameCard";
 import LoadMore from "../LoadMore/LoadMore";
 import gamesListStyles from "./GamesListStyles";
@@ -22,16 +23,31 @@ const GamesList = ({ games }: GamesListProps): JSX.Element => {
 
   const gapItem = (): JSX.Element => <View style={gamesListStyles.gap} />;
 
+  const getNumberOfColumns = () => (isTablet ? 2 : 1);
   return (
     <View>
-      <FlatList
-        data={games}
-        renderItem={({ item }) => <GameCard game={item} />}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => item.id}
-        ItemSeparatorComponent={gapItem}
-        ListFooterComponent={renderLoadMore}
-      />
+      {isTablet ? (
+        <FlatList
+          data={games}
+          renderItem={({ item }) => <GameCard game={item} />}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+          ItemSeparatorComponent={gapItem}
+          ListFooterComponent={renderLoadMore}
+          numColumns={getNumberOfColumns()}
+          columnWrapperStyle={{ justifyContent: "space-around" }}
+        />
+      ) : (
+        <FlatList
+          data={games}
+          renderItem={({ item }) => <GameCard game={item} />}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+          ItemSeparatorComponent={gapItem}
+          ListFooterComponent={renderLoadMore}
+          numColumns={getNumberOfColumns()}
+        />
+      )}
     </View>
   );
 };

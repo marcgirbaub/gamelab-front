@@ -1,11 +1,14 @@
 import { StyleSheet } from "react-native";
 import colorStyles from "../theme/colors";
+import isTablet from "../utils/isTablet";
 
 const formStyles = StyleSheet.create({
   container: {
     display: "flex",
     justifyContent: "center",
+    alignSelf: "center",
     gap: 50,
+    width: isTablet ? 350 : "100%",
   },
   formContainer: {
     display: "flex",
@@ -36,7 +39,7 @@ const formStyles = StyleSheet.create({
   button: {
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
+    width: isTablet ? 350 : "100%",
     backgroundColor: colorStyles.accent,
     borderRadius: 30,
     height: 52,
@@ -73,7 +76,7 @@ const formStyles = StyleSheet.create({
   disabledButton: {
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
+    width: isTablet ? 350 : "100%",
     backgroundColor: "#6e3134",
     borderRadius: 30,
     height: 52,

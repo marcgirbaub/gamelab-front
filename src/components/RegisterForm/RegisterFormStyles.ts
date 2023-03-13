@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import colorStyles from "../../theme/colors";
 import formStyles from "../../styles/formStyles";
+import isTablet from "../../utils/isTablet";
 
 const registerFormStyles = StyleSheet.create({
   container: formStyles.container,
@@ -20,6 +21,7 @@ const registerFormStyles = StyleSheet.create({
     color: colorStyles.secondary,
     position: "absolute",
     top: -70,
+    display: isTablet ? "none" : "flex",
   },
 });
 

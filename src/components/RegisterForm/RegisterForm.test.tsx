@@ -3,12 +3,11 @@ import { fireEvent } from "@testing-library/react-native";
 import { screen } from "@testing-library/react-native";
 import { type UserRegisterCredentials } from "../../hooks/useUser/types";
 import renderWithProviders from "../../utils/renderWithProviders";
-import StackNavigator from "../../routes/StackNavigator/StackNavigator";
 import Routes from "../../routes/routes";
 import RegisterForm from "./RegisterForm";
 import RegisterScreen from "../../views/RegisterScreen/RegisterScreen";
 
-beforeEach(() => {
+afterEach(() => {
   jest.clearAllMocks();
 });
 
@@ -23,6 +22,11 @@ const mockNavigation = jest.fn();
 jest.mock("@react-navigation/native", () => ({
   ...jest.requireActual("@react-navigation/native"),
   useNavigation: () => ({ navigate: mockNavigation }),
+}));
+
+jest.mock("react-native/Libraries/Utilities/Dimensions", () => ({
+  ...jest.requireActual("react-native/Libraries/Utilities/Dimensions"),
+  get: jest.fn().mockReturnValue({ width: 1000, height: 1000 }),
 }));
 
 const loginRoute = Routes.login;
