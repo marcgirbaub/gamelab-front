@@ -26,6 +26,7 @@ const CustomModal = (): JSX.Element => {
       animationIn="slideInUp"
       animationOut="slideOutDown"
       onSwipeComplete={closeModal}
+      propagateSwipe={true}
     >
       <View style={customModalStyles.container}>
         <TouchableOpacity
