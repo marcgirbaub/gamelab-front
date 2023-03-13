@@ -5,6 +5,7 @@ const filterStyles = StyleSheet.create({
   container: {
     height: 50,
     marginRight: -40,
+    marginLeft: -22,
     paddingRight: 20,
     marginBottom: 4,
   },
@@ -28,6 +29,9 @@ const filterStyles = StyleSheet.create({
     color: colorStyles.primaryLight,
     fontSize: 16,
     fontWeight: "bold",
+  },
+  horizontal: {
+    width: 20,
   },
 });
 

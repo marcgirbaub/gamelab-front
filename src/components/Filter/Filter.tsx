@@ -40,6 +40,8 @@ const Filter = (): JSX.Element => {
         horizontal
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={gapItem}
+        ListFooterComponent={() => <View style={filterStyles.horizontal} />}
+        ListHeaderComponent={() => <View style={filterStyles.horizontal} />}
         renderItem={({ item }) => (
           <TouchableOpacity
             activeOpacity={1}
