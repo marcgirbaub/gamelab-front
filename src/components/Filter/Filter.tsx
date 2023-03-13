@@ -51,6 +51,7 @@ const Filter = (): JSX.Element => {
             onPress={() => {
               handleOnClickFilter(item);
             }}
+            accessibilityLabel={item}
           >
             <Text
               style={
