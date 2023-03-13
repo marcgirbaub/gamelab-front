@@ -6,6 +6,7 @@ import {
   faGamepad,
   faBookmark,
   faCirclePlus,
+  type IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigation } from "@react-navigation/native";
 import Routes from "../routes";
@@ -31,6 +32,12 @@ const BottomTabNavigator = (): JSX.Element => {
     navigation.navigate(Routes.login);
   };
 
+  const renderFontAesomeIcon = (
+    icon: IconDefinition,
+    size: number,
+    color: string
+  ): JSX.Element => <FontAwesomeIcon icon={icon} color={color} size={size} />;
+
   return (
     <Tab.Navigator
       initialRouteName={Routes.explore}
@@ -47,27 +54,24 @@ const BottomTabNavigator = (): JSX.Element => {
         name={Routes.explore}
         component={ExploreScreen}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faGamepad} size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) =>
+            renderFontAesomeIcon(faGamepad, size, color),
         }}
       ></Tab.Screen>
       <Tab.Screen
         name={Routes.create}
         component={ExploreScreen}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faCirclePlus} size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) =>
+            renderFontAesomeIcon(faCirclePlus, size, color),
         }}
       ></Tab.Screen>
       <Tab.Screen
         name={Routes.myLibrary}
         component={ExploreScreen}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faBookmark} size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) =>
+            renderFontAesomeIcon(faBookmark, size, color),
         }}
       ></Tab.Screen>
       <Tab.Screen
@@ -75,13 +79,8 @@ const BottomTabNavigator = (): JSX.Element => {
         component={ExploreScreen}
         listeners={{ tabPress: logoutHandler }}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon
-              icon={faArrowRightFromBracket}
-              size={size}
-              color={color}
-            />
-          ),
+          tabBarIcon: ({ color, size }) =>
+            renderFontAesomeIcon(faArrowRightFromBracket, size, color),
         }}
       ></Tab.Screen>
     </Tab.Navigator>
