@@ -1,8 +1,13 @@
 import { StyleSheet } from "react-native";
 import colorStyles from "../../theme/colors";
+import isTablet from "../../utils/isTablet";
 
 const gameCardStyles = StyleSheet.create({
-  container: { backgroundColor: colorStyles.cardLight, borderRadius: 20 },
+  container: {
+    backgroundColor: colorStyles.cardLight,
+    borderRadius: 20,
+    width: isTablet ? 350 : "100%",
+  },
   infoContainer: {
     padding: 14,
     margin: 0,
