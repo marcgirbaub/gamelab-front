@@ -3,7 +3,7 @@ import { type PreloadedState } from "@reduxjs/toolkit";
 import { render } from "@testing-library/react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
-import { type RootState, setupStore, store } from "../store/store";
+import { type RootState, setupStore, store } from "../redux/store";
 
 const renderWithProviders = (
   ui: React.ReactElement,

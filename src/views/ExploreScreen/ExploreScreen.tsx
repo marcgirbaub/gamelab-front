@@ -5,7 +5,7 @@ import Filter from "../../components/Filter/Filter";
 import GamesList from "../../components/GamesList/GamesList";
 import Header from "../../components/Header/Header";
 import useGames from "../../hooks/useGames/useGames";
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import exploreScreenStyles from "./ExploreScreenStyles";
 
 const ExploreScreen = () => {

@@ -9,14 +9,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigation } from "@react-navigation/native";
 import Routes from "../routes";
-import ExploreScreen from "../../screen/ExploreScreen/ExploreScreen";
+import ExploreScreen from "../../views/ExploreScreen/ExploreScreen";
 import globalStyles from "../../styles/globalStyles";
-import colorStyles from "../../styles/colorStyles";
+import colorStyles from "../../theme/colors";
 import bottomTabNavigatorStyles from "./BottomTabNavigatorStyles";
-import { useAppDispatch } from "../../store/hooks";
-import { logoutUserActionCreator } from "../../store/features/userSlice/userSlice";
+import { useAppDispatch } from "../../redux/hooks";
+import { logoutUserActionCreator } from "../../redux/features/user/userSlice";
 import { type LoginScreenNavigationProp } from "../../types/navigation.types";
-import { resetToInitialStateActionCreator } from "../../store/features/uiSlice/uiSlice";
+import { resetToInitialStateActionCreator } from "../../redux/features/ui/uiSlice";
 
 const BottomTabNavigator = (): JSX.Element => {
   const Tab = createBottomTabNavigator();

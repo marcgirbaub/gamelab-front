@@ -9,11 +9,11 @@ import {
   mockUserToRegister,
 } from "../../mocks/userMocks";
 import Wrapper from "../../mocks/Wrapper";
-import { type ModalPayload } from "../../store/features/uiSlice/types";
-import { activateModalActionCreator } from "../../store/features/uiSlice/uiSlice";
-import { type User } from "../../store/features/userSlice/types";
-import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
-import { store } from "../../store/store";
+import { type ModalPayload } from "../../redux/features/ui/types";
+import { activateModalActionCreator } from "../../redux/features/ui/uiSlice";
+import { type User } from "../../redux/features/user/types";
+import { loginUserActionCreator } from "../../redux/features/user/userSlice";
+import { store } from "../../redux/store";
 import useUser from "./useUser";
 
 jest.mock("@react-native-async-storage/async-storage", () => ({

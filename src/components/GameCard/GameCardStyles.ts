@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import colorStyles from "../../styles/colorStyles";
+import colorStyles from "../../theme/colors";
 
 const gameCardStyles = StyleSheet.create({
   container: { backgroundColor: colorStyles.cardLight, borderRadius: 20 },

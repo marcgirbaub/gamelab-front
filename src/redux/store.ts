@@ -5,9 +5,9 @@ import {
   combineReducers,
   type PreloadedState,
 } from "@reduxjs/toolkit";
-import { gamesReducer } from "./features/gamesSlice/gamesSlice";
-import { uiReducer } from "./features/uiSlice/uiSlice";
-import { userReducer } from "./features/userSlice/userSlice";
+import { gamesReducer } from "./features/games/gamesSlice";
+import { uiReducer } from "./features/ui/uiSlice";
+import { userReducer } from "./features/user/userSlice";
 
 const rootReducer = combineReducers({
   user: userReducer,

@@ -1,8 +1,8 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { addFilterActionCreator } from "../../store/features/uiSlice/uiSlice";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { addFilterActionCreator } from "../../redux/features/ui/uiSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import filterStyles from "./FilterStyles";
 
 const Filter = (): JSX.Element => {

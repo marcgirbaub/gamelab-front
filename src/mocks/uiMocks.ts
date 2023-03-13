@@ -1,5 +1,5 @@
-import { type UiState } from "../store/features/uiSlice/types";
-import { setupStore } from "../store/store";
+import { type UiState } from "../redux/features/ui/types";
+import { setupStore } from "../redux/store";
 
 export const mockUiState: UiState = {
   isLoading: true,

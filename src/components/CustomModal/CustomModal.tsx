@@ -7,9 +7,9 @@ import {
   faCircleCheck,
   faCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import customModalStyles from "./CustomModalStyles";
-import { closeModalActionCreator } from "../../store/features/uiSlice/uiSlice";
+import { closeModalActionCreator } from "../../redux/features/ui/uiSlice";
 
 const CustomModal = (): JSX.Element => {
   const { isError, modal } = useAppSelector((state) => state.ui);

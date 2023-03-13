@@ -2,7 +2,7 @@ import {
   type GamesState,
   type Game,
   type Games,
-} from "../store/features/gamesSlice/types";
+} from "../redux/features/games/types";
 
 export const initialGamesStateMock: GamesState = {
   games: [],

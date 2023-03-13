@@ -1,4 +1,4 @@
-import { type Games } from "../../store/features/gamesSlice/types";
+import { type Games } from "../../redux/features/games/types";
 
 export interface GamesResponse {
   games: Games;

@@ -4,14 +4,14 @@ import { useCallback } from "react";
 import {
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
-} from "../../store/features/gamesSlice/gamesSlice";
+} from "../../redux/features/games/gamesSlice";
 import {
   activateModalActionCreator,
   loadTotalNumberPagesActionCreator,
   setIsLoadingActionCreator,
   unsetIsLoadingActionCreator,
-} from "../../store/features/uiSlice/uiSlice";
-import { useAppDispatch } from "../../store/hooks";
+} from "../../redux/features/ui/uiSlice";
+import { useAppDispatch } from "../../redux/hooks";
 import urlRoutes from "../routes";
 import { type GamesResponse } from "./types";
 

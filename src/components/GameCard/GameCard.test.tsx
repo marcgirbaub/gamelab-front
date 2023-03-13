@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react-native";
 import GameCard from "./GameCard";
 import { mockEmptyPlatformGame, mockWitcherGame } from "../../mocks/gamesMocks";
-import { type Game } from "../../store/features/gamesSlice/types";
+import { type Game } from "../../redux/features/games/types";
 
 describe("Given a GameCard component", () => {
   describe("When rendered with the game `The Witcher`", () => {
