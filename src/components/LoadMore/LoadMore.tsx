@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { nextPageActionCreator } from "../../store/features/uiSlice/uiSlice";
-import { useAppDispatch } from "../../store/hooks";
+import { nextPageActionCreator } from "../../redux/features/ui/uiSlice";
+import { useAppDispatch } from "../../redux/hooks";
 import loadMoreStyles from "./LoadMoreStyles";
 
 const LoadMore = (): JSX.Element => {

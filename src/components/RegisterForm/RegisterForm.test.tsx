@@ -3,10 +3,10 @@ import { fireEvent } from "@testing-library/react-native";
 import { screen } from "@testing-library/react-native";
 import { type UserRegisterCredentials } from "../../hooks/useUser/types";
 import renderWithProviders from "../../utils/renderWithProviders";
-import StackNavigator from "../../navigation/StackNavigator/StackNavigator";
-import Routes from "../../navigation/routes";
+import StackNavigator from "../../routes/StackNavigator/StackNavigator";
+import Routes from "../../routes/routes";
 import RegisterForm from "./RegisterForm";
-import RegisterScreen from "../../screen/RegisterScreen/RegisterScreen";
+import RegisterScreen from "../../views/RegisterScreen/RegisterScreen";
 
 beforeEach(() => {
   jest.clearAllMocks();

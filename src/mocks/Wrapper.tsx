@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
-import { store } from "../store/store";
+import { store } from "../redux/store";
 
 interface WrapperProps {
   children: JSX.Element | JSX.Element[];

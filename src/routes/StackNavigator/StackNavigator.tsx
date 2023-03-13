@@ -2,13 +2,13 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native/";
-import LoginScreen from "../../screen/LoginScreen/LoginScreen";
-import { useAppSelector } from "../../store/hooks";
+import LoginScreen from "../../views/LoginScreen/LoginScreen";
+import { useAppSelector } from "../../redux/hooks";
 import Loader from "../../components/Loader/Loader";
 import CustomModal from "../../components/CustomModal/CustomModal";
 import globalStyles from "../../styles/globalStyles";
 import Routes from "../routes";
-import RegisterScreen from "../../screen/RegisterScreen/RegisterScreen";
+import RegisterScreen from "../../views/RegisterScreen/RegisterScreen";
 import BottomTabNavigator from "../BottomTabNavigator/BottomTabNavigator";
 
 const StackNavigator = () => {

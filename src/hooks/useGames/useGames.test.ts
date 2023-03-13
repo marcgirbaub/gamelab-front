@@ -6,11 +6,11 @@ import Wrapper from "../../mocks/Wrapper";
 import {
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
-} from "../../store/features/gamesSlice/gamesSlice";
-import { store } from "../../store/store";
+} from "../../redux/features/games/gamesSlice";
+import { store } from "../../redux/store";
 import useGames from "./useGames";
-import { type ModalPayload } from "../../store/features/uiSlice/types";
-import { activateModalActionCreator } from "../../store/features/uiSlice/uiSlice";
+import { type ModalPayload } from "../../redux/features/ui/types";
+import { activateModalActionCreator } from "../../redux/features/ui/uiSlice";
 
 afterEach(() => {
   jest.clearAllMocks();

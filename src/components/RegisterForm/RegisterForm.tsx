@@ -16,7 +16,7 @@ import useUser from "../../hooks/useUser/useUser";
 import formStyles from "../../styles/formStyles";
 import registerFormStyles from "./RegisterFormStyles";
 import { type RegisterScreenNavigationProp } from "../../types/navigation.types";
-import Routes from "../../navigation/routes";
+import Routes from "../../routes/routes";
 
 const RegisterForm = (): JSX.Element => {
   const { registerUser } = useUser();

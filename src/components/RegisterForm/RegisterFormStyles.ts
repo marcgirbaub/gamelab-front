@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import colorStyles from "../../styles/colorStyles";
+import colorStyles from "../../theme/colors";
 import formStyles from "../../styles/formStyles";
 
 const registerFormStyles = StyleSheet.create({

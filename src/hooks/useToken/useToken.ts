@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import decodeToken from "../../utils/decodeToken";
-import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
+import { loginUserActionCreator } from "../../redux/features/user/userSlice";
 
 interface UseTokenStructure {
   getToken: () => Promise<void>;

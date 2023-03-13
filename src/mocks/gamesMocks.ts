@@ -2,7 +2,8 @@ import {
   type GamesState,
   type Game,
   type Games,
-} from "../store/features/gamesSlice/types";
+} from "../redux/features/games/types";
+import { setupStore } from "../redux/store";
 
 export const initialGamesStateMock: GamesState = {
   games: [],
@@ -39,7 +40,7 @@ export const mockLeagueGame: Game = {
   about: "This is a 5 vs 5 games",
   ageRating: "17 +",
   backupImage: "lol.jpg",
-  categories: ["Adventure", "Action"],
+  categories: ["Strategy"],
   developer: "Riot",
   gameplayTime: 100,
   platforms: ["Windows"],
@@ -47,6 +48,13 @@ export const mockLeagueGame: Game = {
 };
 
 export const mockListOfGames: Games = [mockWitcherGame, mockLeagueGame];
+
+export const gamesMockState: GamesState = {
+  games: mockListOfGames,
+  selectedGame: mockLeagueGame,
+};
+
+export const mockGamesStore = setupStore({ games: gamesMockState });
 
 export const mockValorantGame: Game = {
   id: "1231sdfsadf23",

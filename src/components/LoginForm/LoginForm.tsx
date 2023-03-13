@@ -13,7 +13,7 @@ import { type UserCredentials } from "../../hooks/useUser/types";
 import useUser from "../../hooks/useUser/useUser";
 import loginFormStyles from "./LoginFormStyles";
 import { type LoginScreenNavigationProp } from "../../types/navigation.types";
-import Routes from "../../navigation/routes";
+import Routes from "../../routes/routes";
 
 const LoginForm = (): JSX.Element => {
   const { loginUser } = useUser();

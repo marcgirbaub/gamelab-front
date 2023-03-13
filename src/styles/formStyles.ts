@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import colorStyles from "./colorStyles";
+import colorStyles from "../theme/colors";
 
 const formStyles = StyleSheet.create({
   container: {

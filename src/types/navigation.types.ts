@@ -1,5 +1,5 @@
 import { type NativeStackNavigationProp } from "@react-navigation/native-stack";
-import type Routes from "../navigation/routes";
+import type Routes from "../routes/routes";
 
 export interface RootStackParamList {
   [Routes.login]: undefined;

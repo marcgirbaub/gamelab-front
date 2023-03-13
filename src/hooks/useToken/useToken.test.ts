@@ -2,8 +2,8 @@ import { renderHook } from "@testing-library/react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Wrapper from "../../mocks/Wrapper";
 import useToken from "./useToken";
-import { store } from "../../store/store";
-import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
+import { store } from "../../redux/store";
+import { loginUserActionCreator } from "../../redux/features/user/userSlice";
 import {
   mockToken,
   mockTokenPayload,

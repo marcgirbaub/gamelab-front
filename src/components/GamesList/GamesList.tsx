@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList, View } from "react-native";
-import { type Games } from "../../store/features/gamesSlice/types";
-import { useAppSelector } from "../../store/hooks";
+import { type Games } from "../../redux/features/games/types";
+import { useAppSelector } from "../../redux/hooks";
 import GameCard from "../GameCard/GameCard";
 import LoadMore from "../LoadMore/LoadMore";
 import gamesListStyles from "./GamesListStyles";

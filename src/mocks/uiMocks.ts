@@ -1,12 +1,12 @@
-import { type UiState } from "../store/features/uiSlice/types";
-import { setupStore } from "../store/store";
+import { type UiState } from "../redux/features/ui/types";
+import { setupStore } from "../redux/store";
 
 export const mockUiState: UiState = {
   isLoading: true,
   modal: "There was a problem",
   isError: true,
   pagination: { current: 0, total: 10 },
-  filter: "",
+  filter: "Strategy",
 };
 
 export const mockUiStateNotLoading: UiState = {

@@ -4,8 +4,8 @@ import { screen } from "@testing-library/react-native";
 import LoginForm from "./LoginForm";
 import { type UserCredentials } from "../../hooks/useUser/types";
 import renderWithProviders from "../../utils/renderWithProviders";
-import StackNavigator from "../../navigation/StackNavigator/StackNavigator";
-import Routes from "../../navigation/routes";
+import StackNavigator from "../../routes/StackNavigator/StackNavigator";
+import Routes from "../../routes/routes";
 
 jest.mock("@react-native-async-storage/async-storage", () => ({
   getItem: jest.fn(),

@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faN } from "@fortawesome/free-solid-svg-icons";
 import gameCardStyles from "./GameCardStyles";
-import { type Game } from "../../store/features/gamesSlice/types";
+import { type Game } from "../../redux/features/games/types";
 
 interface GameCardProps {
   game: Game;
