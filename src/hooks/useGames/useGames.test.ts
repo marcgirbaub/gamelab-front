@@ -1,18 +1,23 @@
 import { renderHook } from "@testing-library/react";
-import { mockListOfGames } from "../../mocks/gamesMocks";
+import {
+  formDataGameToCreate,
+  mockGameToCreate,
+  mockListOfGames,
+} from "../../mocks/gamesMocks";
 import { server } from "../../mocks/server";
 import { errorHandlers } from "../../mocks/handlers";
 import Wrapper from "../../mocks/Wrapper";
 import {
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
+  loadOneGameActionCreator,
 } from "../../redux/features/games/gamesSlice";
 import { store } from "../../redux/store";
 import useGames from "./useGames";
 import { type ModalPayload } from "../../redux/features/ui/types";
 import { activateModalActionCreator } from "../../redux/features/ui/uiSlice";
 
-afterEach(() => {
+beforeEach(() => {
   jest.clearAllMocks();
 });
 
@@ -55,6 +60,7 @@ describe("Given useGames hook", () => {
     beforeEach(() => {
       server.resetHandlers(...errorHandlers);
     });
+
     test("Then the dispatch should be called with the action to show an error modal with the text `Unable to load games`", async () => {
       const {
         result: {
@@ -68,6 +74,68 @@ describe("Given useGames hook", () => {
       };
 
       await getAllGames();
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        activateModalActionCreator(actionPayload)
+      );
+    });
+  });
+
+  describe("When the addGame function is called", () => {
+    test("Then the dispatch should be called with the action to loadOneGame", async () => {
+      const {
+        result: {
+          current: { addGame },
+        },
+      } = renderHook(() => useGames(), { wrapper: Wrapper });
+
+      await addGame(formDataGameToCreate);
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        loadOneGameActionCreator(mockGameToCreate)
+      );
+    });
+  });
+
+  describe("When the addGame function is called", () => {
+    test("Then the dispatch should be called with the action to activate modal with a success message", async () => {
+      const {
+        result: {
+          current: { addGame },
+        },
+      } = renderHook(() => useGames(), { wrapper: Wrapper });
+
+      const actionPayload: ModalPayload = {
+        isError: false,
+        modal: "Game created",
+      };
+
+      await addGame(formDataGameToCreate);
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        activateModalActionCreator(actionPayload)
+      );
+    });
+  });
+
+  describe("When the addGame function is called and the response from the request is failed", () => {
+    beforeEach(() => {
+      server.resetHandlers(...errorHandlers);
+    });
+
+    test("Then the dispatch should be called with the action to activate modal with an error message", async () => {
+      const {
+        result: {
+          current: { addGame },
+        },
+      } = renderHook(() => useGames(), { wrapper: Wrapper });
+
+      const actionPayload: ModalPayload = {
+        isError: true,
+        modal: "There was a problem creating your game",
+      };
+
+      await addGame(formDataGameToCreate);
 
       expect(spyDispatch).toHaveBeenCalledWith(
         activateModalActionCreator(actionPayload)

@@ -4,7 +4,9 @@ import { useCallback } from "react";
 import {
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
+  loadOneGameActionCreator,
 } from "../../redux/features/games/gamesSlice";
+import { type GameStrucutre } from "../../redux/features/games/types";
 import {
   activateModalActionCreator,
   loadTotalNumberPagesActionCreator,
@@ -13,12 +15,13 @@ import {
 } from "../../redux/features/ui/uiSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import urlRoutes from "../routes";
-import { type GamesResponse } from "./types";
+import { type GameFormData, type GamesResponse } from "./types";
 
 const { games } = urlRoutes;
 
 interface UseGamesStructure {
   getAllGames: (page?: number, filter?: string) => Promise<void>;
+  addGame: (game: GameFormData) => Promise<void>;
 }
 
 const useGames = (): UseGamesStructure => {
@@ -60,7 +63,35 @@ const useGames = (): UseGamesStructure => {
     [dispatch]
   );
 
-  return { getAllGames };
+  const addGame = async (game: GameFormData) => {
+    dispatch(setIsLoadingActionCreator());
+
+    try {
+      const response = await axios.post<GameStrucutre>(
+        `${REACT_APP_URL_API}${games.games}${games.create}`,
+        game,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      dispatch(loadOneGameActionCreator(response.data));
+
+      dispatch(unsetIsLoadingActionCreator());
+      dispatch(
+        activateModalActionCreator({ isError: false, modal: "Game created" })
+      );
+    } catch {
+      dispatch(unsetIsLoadingActionCreator());
+
+      dispatch(
+        activateModalActionCreator({
+          isError: true,
+          modal: "There was a problem creating your game",
+        })
+      );
+    }
+  };
+
+  return { getAllGames, addGame };
 };
 
 export default useGames;

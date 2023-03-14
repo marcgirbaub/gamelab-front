@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import { REACT_APP_URL_API } from "@env";
 import urlRoutes from "../hooks/routes";
-import { mockListOfGames } from "./gamesMocks";
+import { mockListOfGames, mockGameToCreate } from "./gamesMocks";
 
 const { games, users } = urlRoutes;
 
@@ -18,6 +18,15 @@ export const handlers = [
   rest.get(`${REACT_APP_URL_API}${games.games}`, async (req, res, ctx) =>
     res(ctx.status(200), ctx.json({ games: mockListOfGames }))
   ),
+
+  rest.post(
+    `${REACT_APP_URL_API}${games.games}${games.create}`,
+    async (req, res, ctx) =>
+      res(
+        ctx.status(201),
+        ctx.json({ ...mockGameToCreate, id: "1231sdfsadf23" })
+      )
+  ),
 ];
 
 export const errorHandlers = [
@@ -31,5 +40,9 @@ export const errorHandlers = [
   ),
   rest.get(`${REACT_APP_URL_API}${games.games}`, async (req, res, ctx) =>
     res(ctx.status(500))
+  ),
+  rest.post(
+    `${REACT_APP_URL_API}${games.games}${games.create}`,
+    async (req, res, ctx) => res(ctx.status(400))
   ),
 ];
