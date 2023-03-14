@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
-  Keyboard,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -38,10 +37,6 @@ const RegisterForm = (): JSX.Element => {
   const handleFieldChange = (introducedValue: string, field: string) => {
     setUserCredentials({ ...userCredentials, [field]: introducedValue });
 
-    if (userCredentials.password.length > 8) {
-      setPasswordError("");
-    }
-
     if (userCredentials.email.includes("@")) {
       setEmailError("");
     }
@@ -58,7 +53,6 @@ const RegisterForm = (): JSX.Element => {
 
     if (userCredentials.password.length < 8) {
       setPasswordError("The password must have at least 8 characters");
-      setUserCredentials({ ...userCredentials, password: "" });
 
       return;
     }
@@ -93,11 +87,7 @@ const RegisterForm = (): JSX.Element => {
           style={registerFormStyles.backButton}
         />
       </TouchableOpacity>
-      <TouchableWithoutFeedback
-        onPress={() => {
-          Keyboard.dismiss();
-        }}
-      >
+      <TouchableWithoutFeedback>
         <KeyboardAvoidingView behavior="padding">
           <View style={registerFormStyles.container}>
             <Text style={registerFormStyles.title} testID="Sign up">
