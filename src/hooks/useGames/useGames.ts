@@ -1,6 +1,7 @@
 import { REACT_APP_URL_API } from "@env";
 import axios from "axios";
 import { useCallback } from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
@@ -13,16 +14,20 @@ import {
 } from "../../redux/features/ui/uiSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import urlRoutes from "../routes";
-import { type GamesResponse } from "./types";
+import { type GameFormData, type GamesResponse } from "./types";
+import { type LoginScreenNavigationProp } from "../../types/navigation.types";
+import Routes from "../../routes/routes";
 
 const { games } = urlRoutes;
 
 interface UseGamesStructure {
   getAllGames: (page?: number, filter?: string) => Promise<void>;
+  addGame: (game: GameFormData) => Promise<void>;
 }
 
 const useGames = (): UseGamesStructure => {
   const dispatch = useAppDispatch();
+  const navigation = useNavigation<LoginScreenNavigationProp>();
 
   const getAllGames = useCallback(
     async (page = 0, filter?: string) => {
@@ -60,7 +65,35 @@ const useGames = (): UseGamesStructure => {
     [dispatch]
   );
 
-  return { getAllGames };
+  const addGame = async (game: GameFormData) => {
+    dispatch(setIsLoadingActionCreator());
+
+    try {
+      const response = await axios.post(
+        `${REACT_APP_URL_API}${games.games}${games.create}`,
+        game,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      dispatch(unsetIsLoadingActionCreator());
+      dispatch(
+        activateModalActionCreator({ isError: false, modal: "Game created" })
+      );
+
+      navigation.navigate(Routes.explore);
+    } catch {
+      dispatch(unsetIsLoadingActionCreator());
+
+      dispatch(
+        activateModalActionCreator({
+          isError: true,
+          modal: "There was a problem creating your game",
+        })
+      );
+    }
+  };
+
+  return { getAllGames, addGame };
 };
 
 export default useGames;

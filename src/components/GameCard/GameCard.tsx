@@ -51,7 +51,7 @@ const GameCard = ({
           source={{ uri: backupImage }}
           accessibilityLabel={name}
           style={gameCardStyles.image}
-          resizeMode="stretch"
+          resizeMode="cover"
         />
       </View>
       <View style={gameCardStyles.infoContainer}>

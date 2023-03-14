@@ -1,6 +1,7 @@
 export interface Game {
   id: string;
   name: string;
+  image: string;
   backupImage: string;
   about: string;
   platforms: string[];

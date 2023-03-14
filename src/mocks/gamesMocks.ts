@@ -9,6 +9,7 @@ export const initialGamesStateMock: GamesState = {
   games: [],
   selectedGame: {
     about: "",
+    image: "",
     ageRating: "",
     backupImage: "",
     categories: [],
@@ -32,6 +33,7 @@ export const mockWitcherGame: Game = {
   gameplayTime: 60,
   platforms: ["Playstation", "Apple", "Xbox", "Windows", "Nintendo"],
   releaseYear: 2015,
+  image: "witcher.jpg",
 };
 
 export const mockLeagueGame: Game = {
@@ -45,6 +47,7 @@ export const mockLeagueGame: Game = {
   gameplayTime: 100,
   platforms: ["Windows"],
   releaseYear: 2010,
+  image: "lol.jpg",
 };
 
 export const mockListOfGames: Games = [mockWitcherGame, mockLeagueGame];
@@ -67,6 +70,7 @@ export const mockValorantGame: Game = {
   gameplayTime: 200,
   platforms: ["Windows"],
   releaseYear: 2017,
+  image: "valorant.jpg",
 };
 
 export const mockEmptyPlatformGame: Game = {
@@ -80,4 +84,5 @@ export const mockEmptyPlatformGame: Game = {
   gameplayTime: 200,
   platforms: ["Nintedo64"],
   releaseYear: 2017,
+  image: "valorant.jpg",
 };

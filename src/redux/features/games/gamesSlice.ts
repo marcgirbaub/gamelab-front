@@ -6,6 +6,7 @@ const initialGamesState: GamesState = {
   selectedGame: {
     about: "",
     ageRating: "",
+    image: "",
     backupImage: "",
     categories: [],
     developer: "",
