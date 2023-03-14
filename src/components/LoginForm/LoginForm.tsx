@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
-  Keyboard,
 } from "react-native";
 import { type UserCredentials } from "../../hooks/useUser/types";
 import useUser from "../../hooks/useUser/useUser";
@@ -47,11 +46,7 @@ const LoginForm = (): JSX.Element => {
     userCredentials.username === "" || userCredentials.password === "";
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-      }}
-    >
+    <TouchableWithoutFeedback>
       <KeyboardAvoidingView behavior="padding">
         <View style={loginFormStyles.container}>
           <Text style={loginFormStyles.title} testID="Log in">
