@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { type GamesState, type Games } from "./types";
+import { type GamesState, type Games, type Game } from "./types";
 
 const initialGamesState: GamesState = {
   games: [],
@@ -33,6 +33,10 @@ const gamesSlice = createSlice({
       ...currentGamesState,
       games: [...currentGamesState.games, ...action.payload],
     }),
+    loadOneGame: (
+      currenGameState: GamesState,
+      action: PayloadAction<Game>
+    ): GamesState => ({ ...currenGameState, selectedGame: action.payload }),
   },
 });
 
@@ -40,4 +44,5 @@ export const gamesReducer = gamesSlice.reducer;
 export const {
   loadAllGames: loadAllGamesActionCreator,
   loadMoreGames: loadMoreGamesActionCreator,
+  loadOneGame: loadOneGameActionCreator,
 } = gamesSlice.actions;

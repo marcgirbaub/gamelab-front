@@ -1,7 +1,6 @@
 import { REACT_APP_URL_API } from "@env";
 import axios from "axios";
 import { useCallback } from "react";
-import { useNavigation } from "@react-navigation/native";
 import {
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
@@ -15,8 +14,6 @@ import {
 import { useAppDispatch } from "../../redux/hooks";
 import urlRoutes from "../routes";
 import { type GameFormData, type GamesResponse } from "./types";
-import { type LoginScreenNavigationProp } from "../../types/navigation.types";
-import Routes from "../../routes/routes";
 
 const { games } = urlRoutes;
 
@@ -27,7 +24,6 @@ interface UseGamesStructure {
 
 const useGames = (): UseGamesStructure => {
   const dispatch = useAppDispatch();
-  const navigation = useNavigation<LoginScreenNavigationProp>();
 
   const getAllGames = useCallback(
     async (page = 0, filter?: string) => {
@@ -79,8 +75,6 @@ const useGames = (): UseGamesStructure => {
       dispatch(
         activateModalActionCreator({ isError: false, modal: "Game created" })
       );
-
-      navigation.navigate(Routes.explore);
     } catch {
       dispatch(unsetIsLoadingActionCreator());
 
