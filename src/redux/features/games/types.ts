@@ -1,5 +1,5 @@
-export interface Game {
-  id: string;
+export interface GameStrucutre {
+  id?: string;
   name: string;
   image: string;
   backupImage: string;
@@ -12,9 +12,9 @@ export interface Game {
   ageRating: string;
 }
 
-export type Games = Game[];
+export type GamesStructure = GameStrucutre[];
 
 export interface GamesState {
-  games: Games;
-  selectedGame: Game;
+  games: GamesStructure;
+  selectedGame: GameStrucutre;
 }

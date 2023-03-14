@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, View } from "react-native";
-import { type Games } from "../../redux/features/games/types";
+import { type GamesStructure } from "../../redux/features/games/types";
 import { useAppSelector } from "../../redux/hooks";
 import isTablet from "../../utils/isTablet";
 import GameCard from "../GameCard/GameCard";
@@ -8,7 +8,7 @@ import LoadMore from "../LoadMore/LoadMore";
 import gamesListStyles from "./GamesListStyles";
 
 interface GamesListProps {
-  games: Games;
+  games: GamesStructure;
 }
 
 const GamesList = ({ games }: GamesListProps): JSX.Element => {

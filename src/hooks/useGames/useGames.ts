@@ -4,7 +4,9 @@ import { useCallback } from "react";
 import {
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
+  loadOneGameActionCreator,
 } from "../../redux/features/games/gamesSlice";
+import { type GameStrucutre } from "../../redux/features/games/types";
 import {
   activateModalActionCreator,
   loadTotalNumberPagesActionCreator,
@@ -65,11 +67,13 @@ const useGames = (): UseGamesStructure => {
     dispatch(setIsLoadingActionCreator());
 
     try {
-      const response = await axios.post(
+      const response = await axios.post<GameStrucutre>(
         `${REACT_APP_URL_API}${games.games}${games.create}`,
         game,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
+
+      dispatch(loadOneGameActionCreator(response.data));
 
       dispatch(unsetIsLoadingActionCreator());
       dispatch(

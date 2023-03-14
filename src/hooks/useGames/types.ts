@@ -1,7 +1,7 @@
-import { type Games } from "../../redux/features/games/types";
+import { type GamesStructure } from "../../redux/features/games/types";
 
 export interface GamesResponse {
-  games: Games;
+  games: GamesStructure;
   totalNumberPages: number;
 }
 
