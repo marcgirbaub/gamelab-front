@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 import * as ImagePicker from "expo-image-picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
@@ -99,6 +98,8 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
     }
   };
 
+  const isThereImage = image !== "";
+
   const onSubmitHandler = async () => {
     const newGame = new FormData();
     newGame.append("name", formData.name);
@@ -107,7 +108,11 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
     newGame.append("developer", formData.developer);
     newGame.append("releaseYear", formData.releaseYear);
     newGame.append("gameplayTime", formData.gameplayTime);
-    newGame.append("image", { type: imageType, uri: image, name: imageName });
+    newGame.append("image", {
+      type: imageType,
+      uri: image,
+      name: imageName,
+    });
 
     const platforms = [playstation, xbox, apple, windows, nintendo];
     const categories = [
@@ -181,6 +186,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="playstation-checkbox"
               onPress={() => {
                 if (playstation) {
                   setPlaystation("");
@@ -197,6 +203,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="xbox-checkbox"
               onPress={() => {
                 if (xbox) {
                   setXbox("");
@@ -213,6 +220,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="windows-checkbox"
               onPress={() => {
                 if (windows) {
                   setWindows("");
@@ -229,6 +237,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="apple-checkbox"
               onPress={() => {
                 if (apple) {
                   setApple("");
@@ -245,6 +254,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="nintendo-checkbox"
               onPress={() => {
                 if (nintendo) {
                   setNintendo("");
@@ -264,6 +274,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="arcade-checkbox"
               onPress={() => {
                 if (arcade) {
                   setArcade("");
@@ -280,6 +291,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="action-checkbox"
               onPress={() => {
                 if (action) {
                   setAction("");
@@ -296,6 +308,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="adventure-checkbox"
               onPress={() => {
                 if (adventure) {
                   setAdventure("");
@@ -312,6 +325,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="rpg-checkbox"
               onPress={() => {
                 if (rpg) {
                   setRpg("");
@@ -328,6 +342,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="strategy-checkbox"
               onPress={() => {
                 if (strategy) {
                   setStrategy("");
@@ -344,6 +359,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="shooter-checkbox"
               onPress={() => {
                 if (shooter) {
                   setShooter("");
@@ -360,6 +376,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="platformer-checkbox"
               onPress={() => {
                 if (platformer) {
                   setPlatformer("");
@@ -376,6 +393,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
               size={35}
               innerIconStyle={createFormStyles.checkboxInnerIconStyle}
               iconStyle={createFormStyles.checkboxIconStyle}
+              testID="boardgames-checkbox"
               onPress={() => {
                 if (boardgames) {
                   setBoardgames("");
@@ -437,6 +455,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
             <TouchableOpacity
               onPress={chooseFile}
               style={createFormStyles.imagePicker}
+              testID="pick an image"
             >
               <Text style={createFormStyles.imagePickerText}>
                 Choose from gallery
@@ -447,7 +466,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
                 style={createFormStyles.imagePickerIcon}
               />
             </TouchableOpacity>
-            {image && (
+            {isThereImage && (
               <Image
                 source={{ uri: image }}
                 style={createFormStyles.imagePickerImage}
