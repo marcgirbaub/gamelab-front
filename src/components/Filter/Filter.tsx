@@ -12,8 +12,8 @@ const Filter = (): JSX.Element => {
   const categories: string[] = [
     "Arcade",
     "Action",
-    "Adventure",
     "RPG",
+    "Adventure",
     "Strategy",
     "Shooter",
     "Platformer",
