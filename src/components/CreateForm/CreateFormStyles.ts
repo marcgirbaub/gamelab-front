@@ -4,7 +4,7 @@ import colorStyles from "../../theme/colors";
 
 const createFormStyles = StyleSheet.create({
   container: { ...formStyles.container, gap: 30 },
-  title: { ...formStyles.title },
+  title: { ...formStyles.title, marginTop: 4 },
   formContainer: { ...formStyles.formContainer },
   label: { ...formStyles.label },
   input: { ...formStyles.input },
@@ -26,7 +26,7 @@ const createFormStyles = StyleSheet.create({
     padding: 10,
   },
   buttonText: { ...formStyles.buttonText },
-  button: { ...formStyles.button },
+  button: { ...formStyles.button, marginBottom: 30 },
   checkboxText: {
     fontSize: 18,
     color: colorStyles.secondary,
