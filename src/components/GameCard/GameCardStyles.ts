@@ -22,7 +22,7 @@ const gameCardStyles = StyleSheet.create({
   image: {
     width: "100%",
     height: 197,
-    resizeMode: "contain",
+    resizeMode: "cover",
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
   },
