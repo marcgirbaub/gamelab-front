@@ -19,6 +19,7 @@ import { logoutUserActionCreator } from "../../redux/features/user/userSlice";
 import { type LoginScreenNavigationProp } from "../../types/navigation.types";
 import { resetToInitialStateActionCreator } from "../../redux/features/ui/uiSlice";
 import BottomSheetModal from "../../components/BottomSheetModal/BottomSheetModal";
+import CreateScreen from "../../views/CreateScreen/CreateScreen";
 
 const BottomTabNavigator = (): JSX.Element => {
   const Tab = createBottomTabNavigator();
@@ -64,7 +65,7 @@ const BottomTabNavigator = (): JSX.Element => {
         ></Tab.Screen>
         <Tab.Screen
           name={Routes.create}
-          component={ExploreScreen}
+          component={CreateScreen}
           options={{
             tabBarIcon: ({ color, size }) =>
               renderFontAesomeIcon(faCirclePlus, size, color),
