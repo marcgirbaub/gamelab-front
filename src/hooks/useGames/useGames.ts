@@ -6,6 +6,7 @@ import {
   loadMoreGamesActionCreator,
   loadOneGameActionCreator,
 } from "../../redux/features/games/gamesSlice";
+import { useNavigation } from "@react-navigation/native";
 import { type GameStrucutre } from "../../redux/features/games/types";
 import {
   activateModalActionCreator,
@@ -13,9 +14,11 @@ import {
   setIsLoadingActionCreator,
   unsetIsLoadingActionCreator,
 } from "../../redux/features/ui/uiSlice";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import urlRoutes from "../routes";
 import { type GameFormData, type GamesResponse } from "./types";
+import { type LoginScreenNavigationProp } from "../../types/navigation.types";
+import Routes from "../../routes/routes";
 
 const { games } = urlRoutes;
 
@@ -26,6 +29,8 @@ interface UseGamesStructure {
 
 const useGames = (): UseGamesStructure => {
   const dispatch = useAppDispatch();
+  const navigation = useNavigation<LoginScreenNavigationProp>();
+  const token = useAppSelector((state) => state.user.token);
 
   const getAllGames = useCallback(
     async (page = 0, filter?: string) => {
@@ -39,16 +44,16 @@ const useGames = (): UseGamesStructure => {
 
         const { games: gamesToLoad, totalNumberPages } = response.data;
 
+        dispatch(unsetIsLoadingActionCreator());
         if (!page) {
           dispatch(loadAllGamesActionCreator(gamesToLoad));
-          dispatch(loadTotalNumberPagesActionCreator(totalNumberPages));
         }
 
         if (page) {
           dispatch(loadMoreGamesActionCreator(gamesToLoad));
         }
 
-        dispatch(unsetIsLoadingActionCreator());
+        dispatch(loadTotalNumberPagesActionCreator(totalNumberPages));
       } catch {
         dispatch(unsetIsLoadingActionCreator());
 
@@ -70,15 +75,23 @@ const useGames = (): UseGamesStructure => {
       const response = await axios.post<GameStrucutre>(
         `${REACT_APP_URL_API}${games.games}${games.create}`,
         game,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-
-      dispatch(loadOneGameActionCreator(response.data));
 
       dispatch(unsetIsLoadingActionCreator());
       dispatch(
         activateModalActionCreator({ isError: false, modal: "Game created" })
       );
+
+      dispatch(loadOneGameActionCreator(response.data));
+
+      dispatch(unsetIsLoadingActionCreator());
+      navigation.navigate(Routes.explore);
     } catch {
       dispatch(unsetIsLoadingActionCreator());
 

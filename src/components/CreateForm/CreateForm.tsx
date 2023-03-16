@@ -100,8 +100,9 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
 
   const isThereImage = image !== "";
 
+  let newGame = new FormData();
+
   const onSubmitHandler = async () => {
-    const newGame = new FormData();
     newGame.append("name", formData.name);
     newGame.append("about", formData.about);
     newGame.append("ageRating", valueAgeRating);
@@ -139,6 +140,8 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
     });
 
     await addGame(newGame);
+    setFormData(initialFormData);
+    newGame = new FormData();
   };
 
   return (

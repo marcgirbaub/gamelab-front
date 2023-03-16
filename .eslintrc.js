@@ -16,7 +16,7 @@ module.exports = {
       files: ["*.ts", "*.tsx"],
     },
     {
-      files: ["src/**/types/**/*.d.ts"],
+      files: ["src/**/types/**/*.d.ts", "src/**/hooks/**/*.ts"],
       rules: { "@typescript-eslint/naming-convention": "off" },
     },
     {

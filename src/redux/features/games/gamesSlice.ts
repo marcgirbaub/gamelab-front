@@ -41,6 +41,15 @@ const gamesSlice = createSlice({
       currenGameState: GamesState,
       action: PayloadAction<GameStrucutre>
     ): GamesState => ({ ...currenGameState, selectedGame: action.payload }),
+    deleteGame: (
+      currentGameState,
+      action: PayloadAction<string>
+    ): GamesState => ({
+      ...currentGameState,
+      games: currentGameState.games.filter(
+        (game) => game.id !== action.payload
+      ),
+    }),
   },
 });
 
@@ -49,4 +58,5 @@ export const {
   loadAllGames: loadAllGamesActionCreator,
   loadMoreGames: loadMoreGamesActionCreator,
   loadOneGame: loadOneGameActionCreator,
+  deleteGame: deleteGameActionCreator,
 } = gamesSlice.actions;
