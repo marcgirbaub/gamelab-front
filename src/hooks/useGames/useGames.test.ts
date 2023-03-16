@@ -2,12 +2,14 @@ import { renderHook } from "@testing-library/react";
 import {
   formDataGameToCreate,
   mockGameToCreate,
+  mockGameToDelete,
   mockListOfGames,
 } from "../../mocks/gamesMocks";
 import { server } from "../../mocks/server";
 import { errorHandlers } from "../../mocks/handlers";
 import Wrapper from "../../mocks/Wrapper";
 import {
+  deleteGameActionCreator,
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
   loadOneGameActionCreator,
@@ -136,6 +138,51 @@ describe("Given useGames hook", () => {
       };
 
       await addGame(formDataGameToCreate);
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        activateModalActionCreator(actionPayload)
+      );
+    });
+  });
+
+  describe("When the deleteGame function is called with a game to delete", () => {
+    test("Then the dispatch should be called with the action to delete that game", async () => {
+      const {
+        result: {
+          current: { deleteGame },
+        },
+      } = renderHook(() => useGames(), { wrapper: Wrapper });
+
+      const gameToDelete = mockGameToDelete;
+
+      await deleteGame(gameToDelete.id!);
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        deleteGameActionCreator(gameToDelete.id!)
+      );
+    });
+  });
+
+  describe("When the deleteGame function is called with a game to delete but the request is failed", () => {
+    beforeEach(() => {
+      server.resetHandlers(...errorHandlers);
+    });
+
+    test("Then the dispatch should be called with the action activate a modal with an error message", async () => {
+      const {
+        result: {
+          current: { deleteGame },
+        },
+      } = renderHook(() => useGames(), { wrapper: Wrapper });
+
+      const gameToDelete = mockGameToDelete;
+
+      const actionPayload: ModalPayload = {
+        isError: true,
+        modal: "There was a problem deleting the game",
+      };
+
+      await deleteGame(gameToDelete.id!);
 
       expect(spyDispatch).toHaveBeenCalledWith(
         activateModalActionCreator(actionPayload)
