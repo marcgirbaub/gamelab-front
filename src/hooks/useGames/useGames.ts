@@ -2,6 +2,7 @@ import { REACT_APP_URL_API } from "@env";
 import axios from "axios";
 import { useCallback } from "react";
 import {
+  deleteGameActionCreator,
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
   loadOneGameActionCreator,
@@ -25,6 +26,7 @@ const { games } = urlRoutes;
 interface UseGamesStructure {
   getAllGames: (page?: number, filter?: string) => Promise<void>;
   addGame: (game: GameFormData) => Promise<void>;
+  deleteGame: (gameId: string) => Promise<void>;
 }
 
 const useGames = (): UseGamesStructure => {
@@ -104,7 +106,39 @@ const useGames = (): UseGamesStructure => {
     }
   };
 
-  return { getAllGames, addGame };
+  const deleteGame = async (gameId: string) => {
+    try {
+      dispatch(setIsLoadingActionCreator());
+
+      await axios.delete<GameStrucutre>(
+        `${REACT_APP_URL_API}${games.games}${games.delete}/${gameId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      dispatch(unsetIsLoadingActionCreator());
+
+      dispatch(
+        activateModalActionCreator({ isError: false, modal: "Game deleted" })
+      );
+
+      dispatch(deleteGameActionCreator(gameId));
+    } catch (error) {
+      dispatch(unsetIsLoadingActionCreator());
+
+      dispatch(
+        activateModalActionCreator({
+          isError: true,
+          modal: "There was a problem deleting the game",
+        })
+      );
+    }
+  };
+
+  return { getAllGames, addGame, deleteGame };
 };
 
 export default useGames;

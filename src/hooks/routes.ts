@@ -4,7 +4,7 @@ const urlRoutes = {
     login: "login/",
     register: "register/",
   },
-  games: { games: "games/", create: "create/" },
+  games: { games: "games/", create: "create/", delete: "delete/" },
 };
 
 export default urlRoutes;
