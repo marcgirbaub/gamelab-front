@@ -10,6 +10,7 @@ export interface GameStrucutre {
   releaseYear: number;
   developer: string;
   ageRating: string;
+  createdBy?: string;
 }
 
 export type GamesStructure = GameStrucutre[];
