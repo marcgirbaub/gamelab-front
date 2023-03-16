@@ -16,6 +16,7 @@ import { type GameStrucutre } from "../../redux/features/games/types";
 import createFormStyles from "./CreateFormStyles";
 import colorStyles from "../../theme/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { useAppSelector } from "../../redux/hooks";
 
 interface CreateFormProps {
   selectedGame?: GameStrucutre;
@@ -23,7 +24,7 @@ interface CreateFormProps {
 }
 
 const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
-  const { addGame } = useGames();
+  const { addGame, getAllGames } = useGames();
 
   const ageRatingOptions = [
     { label: "Everyone", value: "Everyone" },
@@ -100,8 +101,9 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
 
   const isThereImage = image !== "";
 
+  let newGame = new FormData();
+
   const onSubmitHandler = async () => {
-    const newGame = new FormData();
     newGame.append("name", formData.name);
     newGame.append("about", formData.about);
     newGame.append("ageRating", valueAgeRating);
@@ -139,6 +141,8 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
     });
 
     await addGame(newGame);
+    setFormData(initialFormData);
+    newGame = new FormData();
   };
 
   return (

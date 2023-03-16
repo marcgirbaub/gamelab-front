@@ -18,10 +18,10 @@ const gameCardStyles = StyleSheet.create({
     paddingBottom: 24,
   },
   name: { color: colorStyles.secondary, fontSize: 28, fontWeight: "bold" },
-  imageContainer: { heigth: 197, width: "100%" },
+  imageContainer: { heigth: 200, width: "100%" },
   image: {
     width: "100%",
-    height: 197,
+    height: 200,
     resizeMode: "cover",
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
