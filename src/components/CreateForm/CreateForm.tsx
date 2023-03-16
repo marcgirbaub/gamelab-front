@@ -16,7 +16,6 @@ import { type GameStrucutre } from "../../redux/features/games/types";
 import createFormStyles from "./CreateFormStyles";
 import colorStyles from "../../theme/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useAppSelector } from "../../redux/hooks";
 
 interface CreateFormProps {
   selectedGame?: GameStrucutre;
@@ -24,7 +23,7 @@ interface CreateFormProps {
 }
 
 const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
-  const { addGame, getAllGames } = useGames();
+  const { addGame } = useGames();
 
   const ageRatingOptions = [
     { label: "Everyone", value: "Everyone" },

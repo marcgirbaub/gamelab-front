@@ -1,10 +1,13 @@
 import { getAllByAltText } from "@testing-library/react";
 import {
+  gamesMockState,
   initialGamesStateMock,
   mockListOfGames,
   mockValorantGame,
+  mockWitcherGame,
 } from "../../../mocks/gamesMocks";
 import {
+  deleteGameActionCreator,
   gamesReducer,
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
@@ -50,6 +53,22 @@ describe("Given a gamesReducer reducer", () => {
 
       const loadOneGameAction = loadOneGameActionCreator(mockValorantGame);
       const newState = gamesReducer(initialGamesStateMock, loadOneGameAction);
+
+      expect(newState).toStrictEqual(expectedNewState);
+    });
+  });
+
+  describe("When it receives the action to delete one game", () => {
+    test("Then it should return a new state with the games property without the deleted game", () => {
+      const expectedNewState: GamesState = {
+        ...gamesMockState,
+        games: gamesMockState.games.filter(
+          (game) => game.id !== mockWitcherGame.id
+        ),
+      };
+
+      const deleteGameAction = deleteGameActionCreator(mockWitcherGame.id!);
+      const newState = gamesReducer(gamesMockState, deleteGameAction);
 
       expect(newState).toStrictEqual(expectedNewState);
     });
