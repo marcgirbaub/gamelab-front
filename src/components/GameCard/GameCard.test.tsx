@@ -3,11 +3,12 @@ import { render, screen } from "@testing-library/react-native";
 import GameCard from "./GameCard";
 import { mockEmptyPlatformGame, mockWitcherGame } from "../../mocks/gamesMocks";
 import { type GameStrucutre } from "../../redux/features/games/types";
+import renderWithProviders from "../../utils/renderWithProviders";
 
 describe("Given a GameCard component", () => {
   describe("When rendered with the game `The Witcher`", () => {
     test("Then it should show the title `The Witcher` and the categories `Action`, `Adventure`, and its image", () => {
-      render(<GameCard game={mockWitcherGame} />);
+      renderWithProviders(<GameCard game={mockWitcherGame} />);
 
       const expectedName = screen.getByText(mockWitcherGame.name);
       const expectedActionCategory = screen.getByText(
@@ -30,7 +31,7 @@ describe("Given a GameCard component", () => {
       const mockGameWithoutExistingPlatform: GameStrucutre =
         mockEmptyPlatformGame;
 
-      render(<GameCard game={mockGameWithoutExistingPlatform} />);
+      renderWithProviders(<GameCard game={mockGameWithoutExistingPlatform} />);
 
       const expectedIcon = screen.getByLabelText("platform icon");
 

@@ -32,7 +32,7 @@ export const handlers = [
       )
   ),
   rest.delete(
-    `${REACT_APP_URL_API}${games.games}${games.delete}/${mockGameToDelete.id!}`,
+    `${REACT_APP_URL_API}${games.games}${games.delete}${mockGameToDelete.id!}`,
     async (req, res, ctx) =>
       res(ctx.status(200), ctx.json({ ...mockGameToDelete }))
   ),
@@ -55,7 +55,7 @@ export const errorHandlers = [
     async (req, res, ctx) => res(ctx.status(400))
   ),
   rest.delete(
-    `${REACT_APP_URL_API}${games.games}${games.delete}/${mockGameToDelete.id!}`,
+    `${REACT_APP_URL_API}${games.games}${games.delete}${mockGameToDelete.id!}`,
     async (req, res, ctx) => res(ctx.status(500))
   ),
 ];

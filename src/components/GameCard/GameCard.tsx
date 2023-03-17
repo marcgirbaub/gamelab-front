@@ -7,17 +7,23 @@ import {
   faApple,
   faXbox,
 } from "@fortawesome/free-brands-svg-icons";
-import { faN } from "@fortawesome/free-solid-svg-icons";
+import { faN, faTrash } from "@fortawesome/free-solid-svg-icons";
 import gameCardStyles from "./GameCardStyles";
 import { type GameStrucutre } from "../../redux/features/games/types";
+import { useAppSelector } from "../../redux/hooks";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import useGames from "../../hooks/useGames/useGames";
 
 interface GameCardProps {
   game: GameStrucutre;
 }
 
 const GameCard = ({
-  game: { backupImage, name, categories, platforms },
+  game: { backupImage, name, categories, platforms, createdBy, id },
 }: GameCardProps) => {
+  const { id: userId } = useAppSelector((state) => state.user);
+  const { deleteGame } = useGames();
+
   const getIcon = (text: string) => {
     let icon;
 
@@ -55,6 +61,21 @@ const GameCard = ({
         />
       </View>
       <View style={gameCardStyles.infoContainer}>
+        {createdBy === userId && (
+          <View style={gameCardStyles.deleteButton}>
+            <TouchableOpacity
+              onPress={async () => {
+                await deleteGame(id!);
+              }}
+            >
+              <FontAwesomeIcon
+                size={34}
+                icon={faTrash}
+                style={gameCardStyles.deleteIcon}
+              />
+            </TouchableOpacity>
+          </View>
+        )}
         <View
           style={gameCardStyles.platforms}
           accessibilityLabel="platform icon"
