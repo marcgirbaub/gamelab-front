@@ -35,6 +35,7 @@ export const mockWitcherGame: GameStrucutre = {
   platforms: ["Playstation", "Apple", "Xbox", "Windows", "Nintendo"],
   releaseYear: 2015,
   image: "witcher.jpg",
+  createdBy: "123456asda",
 };
 
 export const mockLeagueGame: GameStrucutre = {

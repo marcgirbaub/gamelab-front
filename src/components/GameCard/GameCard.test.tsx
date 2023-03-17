@@ -1,13 +1,23 @@
 import React from "react";
-import { render, screen } from "@testing-library/react-native";
+import { fireEvent, render, screen } from "@testing-library/react-native";
 import GameCard from "./GameCard";
 import { mockEmptyPlatformGame, mockWitcherGame } from "../../mocks/gamesMocks";
 import { type GameStrucutre } from "../../redux/features/games/types";
+import renderWithProviders from "../../utils/renderWithProviders";
+import { mockUserState } from "../../mocks/userMocks";
+
+beforeEach(() => jest.clearAllMocks());
+
+const mockDeleteGame = jest.fn();
+
+jest.mock("../../hooks/useGames/useGames", () => () => ({
+  deleteGame: mockDeleteGame,
+}));
 
 describe("Given a GameCard component", () => {
   describe("When rendered with the game `The Witcher`", () => {
     test("Then it should show the title `The Witcher` and the categories `Action`, `Adventure`, and its image", () => {
-      render(<GameCard game={mockWitcherGame} />);
+      renderWithProviders(<GameCard game={mockWitcherGame} />);
 
       const expectedName = screen.getByText(mockWitcherGame.name);
       const expectedActionCategory = screen.getByText(
@@ -30,11 +40,29 @@ describe("Given a GameCard component", () => {
       const mockGameWithoutExistingPlatform: GameStrucutre =
         mockEmptyPlatformGame;
 
-      render(<GameCard game={mockGameWithoutExistingPlatform} />);
+      renderWithProviders(<GameCard game={mockGameWithoutExistingPlatform} />);
 
       const expectedIcon = screen.getByLabelText("platform icon");
 
       expect(expectedIcon).toBeOnTheScreen();
+    });
+  });
+
+  describe("When rendered with the game `Valorant` and the user that created the game presses on the delete button", () => {
+    test("Then it deleteGame function should be called with the game's id", () => {
+      const deleteButtonAccessibilityLabel = "delete";
+
+      renderWithProviders(<GameCard game={mockWitcherGame} />, {
+        user: mockUserState,
+      });
+
+      const deleteButton = screen.getByLabelText(
+        deleteButtonAccessibilityLabel
+      );
+
+      fireEvent.press(deleteButton);
+
+      expect(mockDeleteGame).toHaveBeenCalledWith(mockWitcherGame.id);
     });
   });
 });

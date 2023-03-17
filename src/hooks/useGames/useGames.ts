@@ -111,7 +111,7 @@ const useGames = (): UseGamesStructure => {
       dispatch(setIsLoadingActionCreator());
 
       await axios.delete<GameStrucutre>(
-        `${REACT_APP_URL_API}${games.games}${games.delete}/${gameId}`,
+        `${REACT_APP_URL_API}${games.games}${games.delete}${gameId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

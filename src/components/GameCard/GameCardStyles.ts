@@ -30,6 +30,15 @@ const gameCardStyles = StyleSheet.create({
   platforms: { flexDirection: "row", gap: 14 },
   platform: { color: colorStyles.secondary },
   category: { color: colorStyles.secondary, fontSize: 16, fontWeight: "bold" },
+  deleteButton: {
+    position: "absolute",
+    bottom: 30,
+    right: 30,
+    width: 30,
+    height: 30,
+    zIndex: 999,
+  },
+  deleteIcon: { color: colorStyles.secondary },
 });
 
 export default gameCardStyles;
