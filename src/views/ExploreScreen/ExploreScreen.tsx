@@ -15,12 +15,11 @@ const ExploreScreen = () => {
     filter,
     isLoading,
   } = useAppSelector((state) => state.ui);
+  const { games } = useAppSelector((state) => state.games);
 
   useEffect(() => {
     getAllGames(current, filter);
   }, [getAllGames, current, filter]);
-
-  const games = useAppSelector((state) => state.games.games);
 
   return (
     <SafeAreaView>

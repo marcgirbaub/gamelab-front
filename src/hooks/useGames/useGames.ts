@@ -27,6 +27,7 @@ interface UseGamesStructure {
   getAllGames: (page?: number, filter?: string) => Promise<void>;
   addGame: (game: GameFormData) => Promise<void>;
   deleteGame: (gameId: string) => Promise<void>;
+  getOneGame: (gameId: string) => Promise<void>;
 }
 
 const useGames = (): UseGamesStructure => {
@@ -138,7 +139,36 @@ const useGames = (): UseGamesStructure => {
     }
   };
 
-  return { getAllGames, addGame, deleteGame };
+  const getOneGame = async (gameId: string) => {
+    try {
+      dispatch(setIsLoadingActionCreator());
+
+      const response = await axios.get<GameStrucutre>(
+        `${REACT_APP_URL_API}${games.games}${gameId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const game = response.data;
+
+      dispatch(unsetIsLoadingActionCreator());
+      dispatch(loadOneGameActionCreator(game));
+    } catch {
+      dispatch(unsetIsLoadingActionCreator());
+
+      dispatch(
+        activateModalActionCreator({
+          isError: true,
+          modal: "Something went wrong",
+        })
+      );
+    }
+  };
+
+  return { getAllGames, addGame, deleteGame, getOneGame };
 };
 
 export default useGames;
