@@ -3,7 +3,7 @@ import React from "react";
 import { mockListOfGames } from "../../mocks/gamesMocks";
 import GamesList from "./GamesList";
 import renderWithProviders from "../../utils/renderWithProviders";
-import { mockUiState } from "../../mocks/uiMocks";
+import { mockUiState, mockUiStateNotLoading } from "../../mocks/uiMocks";
 
 beforeEach(() => jest.clearAllMocks());
 
@@ -28,10 +28,22 @@ describe("Given a GamesList component", () => {
     });
   });
 
-  describe("When rendered ant the current page 1 and the total pages of the games is 2", () => {
+  describe("When rendered and the current page 1 and the total pages of the games is 2", () => {
     test("Then it should not show the `Load more` button", async () => {
       renderWithProviders(<GamesList games={mockListOfGames} />, {
         ui: { ...mockUiState, pagination: { current: 1, total: 2 } },
+      });
+
+      const loadmore = screen.queryByText("Load more");
+
+      expect(loadmore).not.toBeOnTheScreen();
+    });
+  });
+
+  describe("When rendered and isLoading is set to false", () => {
+    test("Then it should not show the `Load more` button", async () => {
+      renderWithProviders(<GamesList games={mockListOfGames} />, {
+        ui: { ...mockUiStateNotLoading, pagination: { current: 1, total: 2 } },
       });
 
       const loadmore = screen.queryByText("Load more");

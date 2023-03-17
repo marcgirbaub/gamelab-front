@@ -75,6 +75,7 @@ const BottomTabNavigator = (): JSX.Element => {
           name={Routes.myLibrary}
           component={ExploreScreen}
           options={{
+            tabBarItemStyle: { display: "none" },
             tabBarIcon: ({ color, size }) =>
               renderFontAesomeIcon(faBookmark, size, color),
           }}

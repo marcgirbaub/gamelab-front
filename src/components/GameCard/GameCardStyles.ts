@@ -33,7 +33,7 @@ const gameCardStyles = StyleSheet.create({
   deleteButton: {
     position: "absolute",
     bottom: 30,
-    right: 30,
+    right: 20,
     width: 30,
     height: 30,
     zIndex: 999,
