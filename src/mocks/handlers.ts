@@ -5,6 +5,7 @@ import {
   mockListOfGames,
   mockGameToCreate,
   mockGameToDelete,
+  mockLeagueGame,
 } from "./gamesMocks";
 
 const { games, users } = urlRoutes;
@@ -36,6 +37,12 @@ export const handlers = [
     async (req, res, ctx) =>
       res(ctx.status(200), ctx.json({ ...mockGameToDelete }))
   ),
+
+  rest.get(
+    `${REACT_APP_URL_API}${games.games}${mockLeagueGame.id!}`,
+    async (req, res, ctx) =>
+      res(ctx.status(200), ctx.json({ game: mockLeagueGame }))
+  ),
 ];
 
 export const errorHandlers = [
@@ -57,5 +64,9 @@ export const errorHandlers = [
   rest.delete(
     `${REACT_APP_URL_API}${games.games}${games.delete}${mockGameToDelete.id!}`,
     async (req, res, ctx) => res(ctx.status(500))
+  ),
+  rest.get(
+    `${REACT_APP_URL_API}${games.games}${mockLeagueGame.id!}`,
+    async (req, res, ctx) => res(ctx.status(404))
   ),
 ];

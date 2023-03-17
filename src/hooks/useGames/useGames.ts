@@ -8,7 +8,10 @@ import {
   loadOneGameActionCreator,
 } from "../../redux/features/games/gamesSlice";
 import { useNavigation } from "@react-navigation/native";
-import { type GameStrucutre } from "../../redux/features/games/types";
+import {
+  type GetOneGameResponse,
+  type GameStrucutre,
+} from "../../redux/features/games/types";
 import {
   activateModalActionCreator,
   loadTotalNumberPagesActionCreator,
@@ -143,7 +146,7 @@ const useGames = (): UseGamesStructure => {
     try {
       dispatch(setIsLoadingActionCreator());
 
-      const response = await axios.get<GameStrucutre>(
+      const response = await axios.get<GetOneGameResponse>(
         `${REACT_APP_URL_API}${games.games}${gameId}`,
         {
           headers: {
@@ -152,7 +155,7 @@ const useGames = (): UseGamesStructure => {
         }
       );
 
-      const game = response.data;
+      const { game } = response.data;
 
       dispatch(unsetIsLoadingActionCreator());
       dispatch(loadOneGameActionCreator(game));

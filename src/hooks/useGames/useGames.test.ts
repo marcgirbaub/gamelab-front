@@ -3,6 +3,7 @@ import {
   formDataGameToCreate,
   mockGameToCreate,
   mockGameToDelete,
+  mockLeagueGame,
   mockListOfGames,
 } from "../../mocks/gamesMocks";
 import { server } from "../../mocks/server";
@@ -183,6 +184,51 @@ describe("Given useGames hook", () => {
       };
 
       await deleteGame(gameToDelete.id!);
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        activateModalActionCreator(actionPayload)
+      );
+    });
+  });
+
+  describe("When the getOneGame function is called with a game id", () => {
+    test("Then the dispatch should be called with the action to load that game", async () => {
+      const {
+        result: {
+          current: { getOneGame },
+        },
+      } = renderHook(() => useGames(), { wrapper: Wrapper });
+
+      const gameToFind = mockLeagueGame;
+
+      await getOneGame(gameToFind.id!);
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        loadOneGameActionCreator(gameToFind)
+      );
+    });
+  });
+
+  describe("When the getOneGame function is called with a game id but the requests fails", () => {
+    beforeEach(() => {
+      server.resetHandlers(...errorHandlers);
+    });
+
+    test("Then the dispatch should be called with the action to show an error modal", async () => {
+      const {
+        result: {
+          current: { getOneGame },
+        },
+      } = renderHook(() => useGames(), { wrapper: Wrapper });
+
+      const actionPayload: ModalPayload = {
+        isError: true,
+        modal: "Something went wrong",
+      };
+
+      const gameToFind = mockLeagueGame;
+
+      await getOneGame(gameToFind.id!);
 
       expect(spyDispatch).toHaveBeenCalledWith(
         activateModalActionCreator(actionPayload)
