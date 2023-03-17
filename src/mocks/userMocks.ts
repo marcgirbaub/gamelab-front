@@ -3,6 +3,7 @@ import {
   type UserCredentials,
   type UserRegisterCredentials,
 } from "../hooks/useUser/types";
+import { type UserState } from "../redux/features/user/types";
 
 export const mockUserCredentials: UserCredentials = {
   username: "marc10",
@@ -26,4 +27,11 @@ export const mockUserToLogin = {
   username: mockUserCredentials.username,
   id: mockTokenPayload.id,
   token: mockToken,
+};
+
+export const mockUserState: UserState = {
+  username: "ronnie",
+  token: "dsafgsdfg23453245",
+  id: "123456asda",
+  isLogged: false,
 };

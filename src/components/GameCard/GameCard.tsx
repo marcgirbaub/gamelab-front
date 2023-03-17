@@ -67,6 +67,7 @@ const GameCard = ({
               onPress={async () => {
                 await deleteGame(id!);
               }}
+              accessibilityLabel="delete"
             >
               <FontAwesomeIcon
                 size={34}
