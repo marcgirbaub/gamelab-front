@@ -18,6 +18,7 @@ export type GamesStructure = GameStrucutre[];
 export interface GamesState {
   games: GamesStructure;
   selectedGame: GameStrucutre;
+  createdByUserGames?: GamesStructure;
 }
 
 export interface GetOneGameResponse {

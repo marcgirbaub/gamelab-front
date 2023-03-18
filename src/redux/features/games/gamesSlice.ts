@@ -20,6 +20,7 @@ const initialGamesState: GamesState = {
     platforms: [],
     releaseYear: 0,
   },
+  createdByUserGames: [],
 };
 
 const gamesSlice = createSlice({
@@ -50,6 +51,13 @@ const gamesSlice = createSlice({
         (game) => game.id !== action.payload
       ),
     }),
+    loadPrivateGames: (
+      currentGamesState,
+      action: PayloadAction<GamesStructure>
+    ): GamesState => ({
+      ...currentGamesState,
+      createdByUserGames: [...action.payload],
+    }),
   },
 });
 
@@ -59,4 +67,5 @@ export const {
   loadMoreGames: loadMoreGamesActionCreator,
   loadOneGame: loadOneGameActionCreator,
   deleteGame: deleteGameActionCreator,
+  loadPrivateGames: loadPrivateGamesActionCreator,
 } = gamesSlice.actions;

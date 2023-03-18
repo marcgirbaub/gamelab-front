@@ -21,6 +21,7 @@ import { resetToInitialStateActionCreator } from "../../redux/features/ui/uiSlic
 import BottomSheetModal from "../../components/BottomSheetModal/BottomSheetModal";
 import CreateScreen from "../../views/CreateScreen/CreateScreen";
 import DetailScreen from "../../views/DetailScreen/DetailScreen";
+import MyLibraryScreen from "../../views/MyLibraryScreen/MyLibraryScreen";
 
 const BottomTabNavigator = (): JSX.Element => {
   const Tab = createBottomTabNavigator();
@@ -75,8 +76,9 @@ const BottomTabNavigator = (): JSX.Element => {
         ></Tab.Screen>
         <Tab.Screen
           name={Routes.myLibrary}
-          component={ExploreScreen}
+          component={MyLibraryScreen}
           options={{
+            unmountOnBlur: true,
             tabBarIcon: ({ color, size }) =>
               renderFontAesomeIcon(faBookmark, size, color),
           }}
