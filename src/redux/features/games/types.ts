@@ -23,3 +23,7 @@ export interface GamesState {
 export interface GetOneGameResponse {
   game: GameStrucutre;
 }
+
+export interface UserGamesResponse {
+  games: GamesStructure;
+}
