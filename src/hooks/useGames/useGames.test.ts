@@ -14,6 +14,7 @@ import {
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
   loadOneGameActionCreator,
+  loadPrivateGamesActionCreator,
 } from "../../redux/features/games/gamesSlice";
 import { store } from "../../redux/store";
 import useGames from "./useGames";
@@ -249,7 +250,7 @@ describe("Given useGames hook", () => {
       await getUserGames();
 
       expect(spyDispatch).toHaveBeenCalledWith(
-        loadAllGamesActionCreator(userGames)
+        loadPrivateGamesActionCreator(userGames)
       );
     });
   });
