@@ -9,9 +9,11 @@ import { mockUserState } from "../../mocks/userMocks";
 beforeEach(() => jest.clearAllMocks());
 
 const mockDeleteGame = jest.fn();
+const mockGetOneGame = jest.fn();
 
 jest.mock("../../hooks/useGames/useGames", () => () => ({
   deleteGame: mockDeleteGame,
+  getOneGame: mockGetOneGame,
 }));
 
 describe("Given a GameCard component", () => {
@@ -63,6 +65,20 @@ describe("Given a GameCard component", () => {
       fireEvent.press(deleteButton);
 
       expect(mockDeleteGame).toHaveBeenCalledWith(mockWitcherGame.id);
+    });
+  });
+
+  describe("When the user presses on the card", () => {
+    test("Then the getOneGame function should be called", async () => {
+      const detailButtonLabel = "go to detail";
+
+      renderWithProviders(<GameCard game={mockWitcherGame} />);
+
+      const detailButton = screen.getByLabelText(detailButtonLabel);
+
+      fireEvent.press(detailButton);
+
+      expect(mockGetOneGame).toHaveBeenCalledWith(mockWitcherGame.id);
     });
   });
 });

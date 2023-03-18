@@ -113,6 +113,7 @@ const GameDetail = (): JSX.Element => {
           onPress={async () => {
             await deleteGame(gameId!);
           }}
+          accessibilityLabel="delete"
         >
           <Text style={gameDetailStyles.info}>Delete game</Text>
         </TouchableOpacity>

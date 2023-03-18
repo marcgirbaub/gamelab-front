@@ -1,6 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react-native";
 import React from "react";
 import { gamesMockState } from "../../mocks/gamesMocks";
+import { mockUserState } from "../../mocks/userMocks";
 import renderWithProviders from "../../utils/renderWithProviders";
 import GameDetail from "./GameDetail";
 
@@ -9,6 +10,12 @@ const mockGoBackNavigation = jest.fn();
 jest.mock("@react-navigation/native", () => ({
   ...jest.requireActual("@react-navigation/native"),
   useNavigation: () => ({ goBack: mockGoBackNavigation }),
+}));
+
+const mockDeleteGame = jest.fn();
+
+jest.mock("../../hooks/useGames/useGames", () => () => ({
+  deleteGame: mockDeleteGame,
 }));
 
 describe("Given a GameDetail component", () => {
@@ -40,6 +47,25 @@ describe("Given a GameDetail component", () => {
       fireEvent.press(backButton);
 
       expect(mockGoBackNavigation).toHaveBeenCalled();
+    });
+  });
+
+  describe("When the user presses on the delete game", () => {
+    test("Then it should call the deleteGame funtion in order to delete this game", () => {
+      const deleteButtonLabel = "delete";
+
+      renderWithProviders(<GameDetail />, {
+        games: gamesMockState,
+        user: mockUserState,
+      });
+
+      const deleteButton = screen.getByLabelText(deleteButtonLabel);
+
+      fireEvent.press(deleteButton);
+
+      expect(mockDeleteGame).toHaveBeenCalledWith(
+        gamesMockState.selectedGame.id
+      );
     });
   });
 });
