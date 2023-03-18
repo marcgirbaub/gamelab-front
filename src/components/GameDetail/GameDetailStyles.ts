@@ -29,6 +29,13 @@ const gameDetailStyles = StyleSheet.create({
     flexWrap: "wrap",
     letterSpacing: 1,
   },
+  backButton: {
+    color: colorStyles.secondary,
+    marginHorizontal: 20,
+    marginBottom: 20,
+    width: 40,
+  },
+  backButtonContainer: { width: 60, alignItems: "center" },
 });
 
 export default gameDetailStyles;

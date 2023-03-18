@@ -1,6 +1,11 @@
 import React from "react";
-import { FlatList, Image, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { useNavigation } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { useAppSelector } from "../../redux/hooks";
+import { type LoginScreenNavigationProp } from "../../types/navigation.types";
 import gameDetailStyles from "./GameDetailStyles";
 
 const GameDetail = (): JSX.Element => {
@@ -17,17 +22,35 @@ const GameDetail = (): JSX.Element => {
   } = useAppSelector((state) => state.games.selectedGame);
   const { id } = useAppSelector((state) => state.user);
 
+  const navigation = useNavigation<LoginScreenNavigationProp>();
+
   return (
     <ScrollView
       style={gameDetailStyles.safeArea}
       showsVerticalScrollIndicator={false}
     >
+      <View style={gameDetailStyles.backButtonContainer}>
+        <TouchableOpacity
+          accessibilityLabel="go back"
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            size={34}
+            style={gameDetailStyles.backButton}
+          />
+        </TouchableOpacity>
+      </View>
       <View style={gameDetailStyles.imageContainer}>
         <Image
           source={{
             uri: backupImage,
           }}
           style={gameDetailStyles.image}
+          alt={name}
+          accessibilityLabel={name}
         />
       </View>
       <View style={gameDetailStyles.container}>
