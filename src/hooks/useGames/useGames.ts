@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import {
   type GetOneGameResponse,
   type GameStrucutre,
+  type UserGamesResponse,
 } from "../../redux/features/games/types";
 import {
   activateModalActionCreator,
@@ -31,6 +32,7 @@ interface UseGamesStructure {
   addGame: (game: GameFormData) => Promise<void>;
   deleteGame: (gameId: string) => Promise<void>;
   getOneGame: (gameId: string) => Promise<void>;
+  getUserGames: () => Promise<void>;
 }
 
 const useGames = (): UseGamesStructure => {
@@ -173,7 +175,36 @@ const useGames = (): UseGamesStructure => {
     }
   };
 
-  return { getAllGames, addGame, deleteGame, getOneGame };
+  const getUserGames = useCallback(async () => {
+    try {
+      dispatch(setIsLoadingActionCreator());
+
+      const response = await axios.get<UserGamesResponse>(
+        `${REACT_APP_URL_API}${games.games}${games.mygames}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const { games: userGames } = response.data;
+
+      dispatch(unsetIsLoadingActionCreator());
+      dispatch(loadAllGamesActionCreator(userGames));
+    } catch {
+      dispatch(unsetIsLoadingActionCreator());
+
+      dispatch(
+        activateModalActionCreator({
+          isError: true,
+          modal: "Something went wrong",
+        })
+      );
+    }
+  }, [dispatch]);
+
+  return { getAllGames, addGame, deleteGame, getOneGame, getUserGames };
 };
 
 export default useGames;
