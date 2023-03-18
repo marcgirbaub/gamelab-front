@@ -6,6 +6,7 @@ import {
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
   loadOneGameActionCreator,
+  loadPrivateGamesActionCreator,
 } from "../../redux/features/games/gamesSlice";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -191,7 +192,7 @@ const useGames = (): UseGamesStructure => {
       const { games: userGames } = response.data;
 
       dispatch(unsetIsLoadingActionCreator());
-      dispatch(loadAllGamesActionCreator(userGames));
+      dispatch(loadPrivateGamesActionCreator(userGames));
     } catch {
       dispatch(unsetIsLoadingActionCreator());
 

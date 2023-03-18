@@ -61,6 +61,7 @@ export const mockListOfGames: GamesStructure = [
 export const gamesMockState: GamesState = {
   games: mockListOfGames,
   selectedGame: mockLeagueGame,
+  createdByUserGames: [],
 };
 
 export const mockGamesStore = setupStore({ games: gamesMockState });
@@ -133,3 +134,8 @@ export const mockGameToDelete: GameStrucutre = {
   image: "valorant.jpg",
   createdBy: "123345",
 };
+
+export const privateGamesMock: GamesStructure = [
+  mockWitcherGame,
+  mockLeagueGame,
+];

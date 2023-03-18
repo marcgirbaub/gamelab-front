@@ -5,6 +5,7 @@ import {
   mockListOfGames,
   mockValorantGame,
   mockWitcherGame,
+  privateGamesMock,
 } from "../../../mocks/gamesMocks";
 import {
   deleteGameActionCreator,
@@ -12,6 +13,7 @@ import {
   loadAllGamesActionCreator,
   loadMoreGamesActionCreator,
   loadOneGameActionCreator,
+  loadPrivateGamesActionCreator,
 } from "./gamesSlice";
 import { type GamesState } from "./types";
 
@@ -69,6 +71,22 @@ describe("Given a gamesReducer reducer", () => {
 
       const deleteGameAction = deleteGameActionCreator(mockWitcherGame.id!);
       const newState = gamesReducer(gamesMockState, deleteGameAction);
+
+      expect(newState).toStrictEqual(expectedNewState);
+    });
+  });
+
+  describe("When it receives the action to load private games", () => {
+    test("Then it should return a new state with the private games loaded", () => {
+      const expectedNewState: GamesState = {
+        ...gamesMockState,
+        createdByUserGames: [...privateGamesMock],
+      };
+
+      const loadPrivateGamesAction =
+        loadPrivateGamesActionCreator(privateGamesMock);
+
+      const newState = gamesReducer(gamesMockState, loadPrivateGamesAction);
 
       expect(newState).toStrictEqual(expectedNewState);
     });

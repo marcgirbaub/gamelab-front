@@ -10,8 +10,8 @@ const loadMoreStyles = StyleSheet.create({
     width: 150,
     borderRadius: 10,
     alignSelf: "center",
-    marginBottom: 24,
-    marginTop: 24,
+    marginBottom: 30,
+    marginTop: 10,
   },
   text: { color: colorStyles.secondary, fontSize: 20, fontWeight: "bold" },
 });
