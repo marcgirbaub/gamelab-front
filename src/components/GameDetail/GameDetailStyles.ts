@@ -28,6 +28,13 @@ const gameDetailStyles = StyleSheet.create({
     fontSize: 18,
     flexWrap: "wrap",
     letterSpacing: 1,
+    fontWeight: "bold",
+  },
+  aboutInfo: {
+    color: colorStyles.secondary,
+    fontSize: 18,
+    flexWrap: "wrap",
+    letterSpacing: 1,
   },
   backButton: {
     color: colorStyles.secondary,
@@ -36,6 +43,15 @@ const gameDetailStyles = StyleSheet.create({
     width: 40,
   },
   backButtonContainer: { width: 60, alignItems: "center" },
+  deleteButton: {
+    backgroundColor: colorStyles.primaryLight,
+    alignSelf: "center",
+    height: 50,
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    marginBottom: 20,
+  },
 });
 
 export default gameDetailStyles;

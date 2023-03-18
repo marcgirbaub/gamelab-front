@@ -130,6 +130,7 @@ const useGames = (): UseGamesStructure => {
       );
 
       dispatch(deleteGameActionCreator(gameId));
+      navigation.navigate(Routes.explore);
     } catch (error) {
       dispatch(unsetIsLoadingActionCreator());
 
@@ -159,6 +160,7 @@ const useGames = (): UseGamesStructure => {
 
       dispatch(unsetIsLoadingActionCreator());
       dispatch(loadOneGameActionCreator(game));
+      navigation.navigate(Routes.detail);
     } catch {
       dispatch(unsetIsLoadingActionCreator());
 

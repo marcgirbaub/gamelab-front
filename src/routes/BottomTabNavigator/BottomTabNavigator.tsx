@@ -98,9 +98,13 @@ const BottomTabNavigator = (): JSX.Element => {
         <Tab.Screen
           name={Routes.detail}
           component={DetailScreen}
-          options={{ tabBarItemStyle: { display: "none" } }}
+          options={{
+            unmountOnBlur: true,
+            tabBarItemStyle: { display: "none" },
+          }}
         ></Tab.Screen>
       </Tab.Navigator>
+
       <BottomSheetModal
         buttontext="Log out"
         actionToClose={() => {

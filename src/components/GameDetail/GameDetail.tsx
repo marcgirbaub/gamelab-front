@@ -7,6 +7,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useAppSelector } from "../../redux/hooks";
 import { type LoginScreenNavigationProp } from "../../types/navigation.types";
 import gameDetailStyles from "./GameDetailStyles";
+import useGames from "../../hooks/useGames/useGames";
 
 const GameDetail = (): JSX.Element => {
   const {
@@ -19,8 +20,12 @@ const GameDetail = (): JSX.Element => {
     name,
     platforms,
     releaseYear,
+    createdBy,
+    id: gameId,
   } = useAppSelector((state) => state.games.selectedGame);
   const { id } = useAppSelector((state) => state.user);
+
+  const { deleteGame } = useGames();
 
   const navigation = useNavigation<LoginScreenNavigationProp>();
 
@@ -58,7 +63,7 @@ const GameDetail = (): JSX.Element => {
         <View style={gameDetailStyles.infoContainer}>
           <View style={gameDetailStyles.aboutContainer}>
             <Text style={gameDetailStyles.infoTitle}>About</Text>
-            <Text style={gameDetailStyles.info}>{about}</Text>
+            <Text style={gameDetailStyles.aboutInfo}>{about}</Text>
           </View>
           <View style={gameDetailStyles.rowContainer}>
             <View style={gameDetailStyles.subInfoContainer}>
@@ -70,12 +75,6 @@ const GameDetail = (): JSX.Element => {
               ))}
             </View>
             <View style={gameDetailStyles.subInfoContainer}>
-              <Text style={gameDetailStyles.infoTitle}>Release year</Text>
-              <Text style={gameDetailStyles.info}>{releaseYear}</Text>
-            </View>
-          </View>
-          <View style={gameDetailStyles.rowContainer}>
-            <View style={gameDetailStyles.subInfoContainer}>
               <Text style={gameDetailStyles.infoTitle}>Categories</Text>
               {categories.map((category) => (
                 <Text key={category} style={gameDetailStyles.info}>
@@ -83,6 +82,13 @@ const GameDetail = (): JSX.Element => {
                 </Text>
               ))}
             </View>
+          </View>
+          <View style={gameDetailStyles.rowContainer}>
+            <View style={gameDetailStyles.subInfoContainer}>
+              <Text style={gameDetailStyles.infoTitle}>Release year</Text>
+              <Text style={gameDetailStyles.info}>{releaseYear}</Text>
+            </View>
+
             <View style={gameDetailStyles.subInfoContainer}>
               <Text style={gameDetailStyles.infoTitle}>Gameplay time</Text>
               <Text style={gameDetailStyles.info}>{gameplayTime} hours</Text>
@@ -100,6 +106,17 @@ const GameDetail = (): JSX.Element => {
           </View>
         </View>
       </View>
+      {id === createdBy && (
+        <TouchableOpacity
+          activeOpacity={0.4}
+          style={gameDetailStyles.deleteButton}
+          onPress={async () => {
+            await deleteGame(gameId!);
+          }}
+        >
+          <Text style={gameDetailStyles.info}>Delete game</Text>
+        </TouchableOpacity>
+      )}
     </ScrollView>
   );
 };
