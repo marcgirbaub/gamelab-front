@@ -22,7 +22,7 @@ const GameCard = ({
   game: { backupImage, name, categories, platforms, createdBy, id },
 }: GameCardProps) => {
   const { id: userId } = useAppSelector((state) => state.user);
-  const { deleteGame } = useGames();
+  const { deleteGame, getOneGame } = useGames();
 
   const getIcon = (text: string) => {
     let icon;
@@ -52,53 +52,59 @@ const GameCard = ({
 
   return (
     <View style={gameCardStyles.container}>
-      <View style={gameCardStyles.imageContainer}>
-        <Image
-          source={{ uri: backupImage }}
-          accessibilityLabel={name}
-          style={gameCardStyles.image}
-          resizeMode="cover"
-        />
-      </View>
-      <View style={gameCardStyles.infoContainer}>
-        {createdBy === userId && (
-          <View style={gameCardStyles.deleteButton}>
-            <TouchableOpacity
-              onPress={async () => {
-                await deleteGame(id!);
-              }}
-              accessibilityLabel="delete"
-            >
+      <TouchableOpacity
+        activeOpacity={1}
+        accessibilityLabel="go to detail"
+        onPress={async () => getOneGame(id!)}
+      >
+        <View style={gameCardStyles.imageContainer}>
+          <Image
+            source={{ uri: backupImage }}
+            accessibilityLabel={name}
+            style={gameCardStyles.image}
+            resizeMode="cover"
+          />
+        </View>
+        <View style={gameCardStyles.infoContainer}>
+          {createdBy === userId && (
+            <View style={gameCardStyles.deleteButton}>
+              <TouchableOpacity
+                onPress={async () => {
+                  await deleteGame(id!);
+                }}
+                accessibilityLabel="delete"
+              >
+                <FontAwesomeIcon
+                  size={34}
+                  icon={faTrash}
+                  style={gameCardStyles.deleteIcon}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
+          <View
+            style={gameCardStyles.platforms}
+            accessibilityLabel="platform icon"
+          >
+            {platforms.map((platform) => (
               <FontAwesomeIcon
-                size={34}
-                icon={faTrash}
-                style={gameCardStyles.deleteIcon}
-              />
-            </TouchableOpacity>
+                icon={getIcon(platform)}
+                key={platform}
+                size={22}
+                style={gameCardStyles.platform}
+              ></FontAwesomeIcon>
+            ))}
           </View>
-        )}
-        <View
-          style={gameCardStyles.platforms}
-          accessibilityLabel="platform icon"
-        >
-          {platforms.map((platform) => (
-            <FontAwesomeIcon
-              icon={getIcon(platform)}
-              key={platform}
-              size={22}
-              style={gameCardStyles.platform}
-            ></FontAwesomeIcon>
-          ))}
+          <Text style={gameCardStyles.name}>{name}</Text>
+          <View style={gameCardStyles.categories}>
+            {categories.map((category) => (
+              <Text key={`${name}${category}`} style={gameCardStyles.category}>
+                {category}
+              </Text>
+            ))}
+          </View>
         </View>
-        <Text style={gameCardStyles.name}>{name}</Text>
-        <View style={gameCardStyles.categories}>
-          {categories.map((category) => (
-            <Text key={`${name}${category}`} style={gameCardStyles.category}>
-              {category}
-            </Text>
-          ))}
-        </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

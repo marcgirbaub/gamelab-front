@@ -50,6 +50,7 @@ export const mockLeagueGame: GameStrucutre = {
   platforms: ["Windows"],
   releaseYear: 2010,
   image: "lol.jpg",
+  createdBy: "123456asda",
 };
 
 export const mockListOfGames: GamesStructure = [

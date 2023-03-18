@@ -6,6 +6,7 @@ export interface RootStackParamList {
   [Routes.explore]: undefined;
   [Routes.register]: undefined;
   [Routes.home]: undefined;
+  [Routes.detail]: undefined;
 }
 
 export type LoginScreenNavigationProp = NativeStackNavigationProp<

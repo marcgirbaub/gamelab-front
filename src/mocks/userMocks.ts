@@ -33,5 +33,5 @@ export const mockUserState: UserState = {
   username: "ronnie",
   token: "dsafgsdfg23453245",
   id: "123456asda",
-  isLogged: false,
+  isLogged: true,
 };
