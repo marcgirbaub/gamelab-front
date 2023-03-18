@@ -43,6 +43,12 @@ export const handlers = [
     async (req, res, ctx) =>
       res(ctx.status(200), ctx.json({ game: mockLeagueGame }))
   ),
+
+  rest.get(
+    `${REACT_APP_URL_API}${games.games}${games.mygames}`,
+    async (req, res, ctx) =>
+      res(ctx.status(200), ctx.json({ games: mockListOfGames }))
+  ),
 ];
 
 export const errorHandlers = [
@@ -68,5 +74,9 @@ export const errorHandlers = [
   rest.get(
     `${REACT_APP_URL_API}${games.games}${mockLeagueGame.id!}`,
     async (req, res, ctx) => res(ctx.status(404))
+  ),
+  rest.get(
+    `${REACT_APP_URL_API}${games.games}${games.mygames}`,
+    async (req, res, ctx) => res(ctx.status(400))
   ),
 ];

@@ -235,4 +235,47 @@ describe("Given useGames hook", () => {
       );
     });
   });
+
+  describe("When the getUserGames function is called ", () => {
+    test("Then the dispatch should be called with the action to load the user games", async () => {
+      const {
+        result: {
+          current: { getUserGames },
+        },
+      } = renderHook(() => useGames(), { wrapper: Wrapper });
+
+      const userGames = mockListOfGames;
+
+      await getUserGames();
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        loadAllGamesActionCreator(userGames)
+      );
+    });
+  });
+
+  describe("When the getUserGames function is called but the requests fails", () => {
+    beforeEach(() => {
+      server.resetHandlers(...errorHandlers);
+    });
+
+    test("Then the dispatch should be called with the action to show an error modal", async () => {
+      const {
+        result: {
+          current: { getUserGames },
+        },
+      } = renderHook(() => useGames(), { wrapper: Wrapper });
+
+      const actionPayload: ModalPayload = {
+        isError: true,
+        modal: "Something went wrong",
+      };
+
+      await getUserGames();
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        activateModalActionCreator(actionPayload)
+      );
+    });
+  });
 });
