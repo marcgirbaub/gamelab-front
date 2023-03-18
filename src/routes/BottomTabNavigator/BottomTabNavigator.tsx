@@ -20,6 +20,7 @@ import { type LoginScreenNavigationProp } from "../../types/navigation.types";
 import { resetToInitialStateActionCreator } from "../../redux/features/ui/uiSlice";
 import BottomSheetModal from "../../components/BottomSheetModal/BottomSheetModal";
 import CreateScreen from "../../views/CreateScreen/CreateScreen";
+import DetailScreen from "../../views/DetailScreen/DetailScreen";
 
 const BottomTabNavigator = (): JSX.Element => {
   const Tab = createBottomTabNavigator();
@@ -67,6 +68,7 @@ const BottomTabNavigator = (): JSX.Element => {
           name={Routes.create}
           component={CreateScreen}
           options={{
+            unmountOnBlur: true,
             tabBarIcon: ({ color, size }) =>
               renderFontAesomeIcon(faCirclePlus, size, color),
           }}
@@ -75,7 +77,6 @@ const BottomTabNavigator = (): JSX.Element => {
           name={Routes.myLibrary}
           component={ExploreScreen}
           options={{
-            tabBarItemStyle: { display: "none" },
             tabBarIcon: ({ color, size }) =>
               renderFontAesomeIcon(faBookmark, size, color),
           }}
@@ -93,6 +94,11 @@ const BottomTabNavigator = (): JSX.Element => {
             tabBarIcon: ({ color, size }) =>
               renderFontAesomeIcon(faArrowRightFromBracket, size, color),
           }}
+        ></Tab.Screen>
+        <Tab.Screen
+          name={Routes.detail}
+          component={DetailScreen}
+          options={{ tabBarItemStyle: { display: "none" } }}
         ></Tab.Screen>
       </Tab.Navigator>
       <BottomSheetModal
