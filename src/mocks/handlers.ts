@@ -6,6 +6,7 @@ import {
   mockGameToCreate,
   mockGameToDelete,
   mockLeagueGame,
+  mockGameToUpdate,
 } from "./gamesMocks";
 
 const { games, users } = urlRoutes;
@@ -49,6 +50,12 @@ export const handlers = [
     async (req, res, ctx) =>
       res(ctx.status(200), ctx.json({ games: mockListOfGames }))
   ),
+
+  rest.patch(
+    `${REACT_APP_URL_API}${games.games}${games.update}${mockGameToUpdate.id!}`,
+    async (req, res, ctx) =>
+      res(ctx.status(200), ctx.json({ game: mockGameToUpdate }))
+  ),
 ];
 
 export const errorHandlers = [
@@ -77,6 +84,10 @@ export const errorHandlers = [
   ),
   rest.get(
     `${REACT_APP_URL_API}${games.games}${games.mygames}`,
+    async (req, res, ctx) => res(ctx.status(400))
+  ),
+  rest.patch(
+    `${REACT_APP_URL_API}${games.games}${games.update}${mockGameToUpdate.id!}`,
     async (req, res, ctx) => res(ctx.status(400))
   ),
 ];

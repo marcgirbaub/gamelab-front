@@ -139,3 +139,29 @@ export const privateGamesMock: GamesStructure = [
   mockWitcherGame,
   mockLeagueGame,
 ];
+
+export const formDataGameToUpdate: GameFormData = {
+  name: "Riot Games updated",
+  about: "This is a 5 vs 5 games",
+  ageRating: "17 +",
+  categories: ["RPG", "Action"],
+  developer: "Lol",
+  gameplayTime: 100,
+  platforms: ["Playstation", "Xbox"],
+  releaseYear: 2015,
+  image: "valorant.jpg",
+};
+
+export const mockGameToUpdate: GameStrucutre = {
+  id: "1231sdfsadf23",
+  name: "Riot Games",
+  about: "This is a 5 vs 5 games",
+  ageRating: "17 +",
+  backupImage: "lol.jpg",
+  categories: ["RPG", "Action"],
+  developer: "Lol",
+  gameplayTime: 200,
+  platforms: ["Playstation"],
+  releaseYear: 2015,
+  image: "valorant.jpg",
+};
