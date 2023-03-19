@@ -11,6 +11,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  SafeAreaView,
+  LogBox,
 } from "react-native";
 import useGames from "../../hooks/useGames/useGames";
 import { type GameStrucutre } from "../../redux/features/games/types";
@@ -80,23 +82,23 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
   };
 
   useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  });
+
+  useEffect(() => {
     setButtonDisabled(
       formData.name.length < 1 ||
         formData.developer.length < 1 ||
         formData.gameplayTime.length < 1 ||
         formData.releaseYear.length < 4 ||
-        valueAgeRating.length < 1 ||
-        formData.about.length < 1 ||
-        image.length < 1
+        formData.about.length < 1
     );
   }, [
     formData.name,
     formData.developer,
     formData.gameplayTime,
     formData.releaseYear,
-    valueAgeRating,
     formData.about,
-    image,
   ]);
 
   const chooseFile = async () => {
@@ -461,19 +463,21 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
           </View>
           <View>
             <Text style={createFormStyles.label}>Age rating</Text>
-            <DropDownPicker
-              open={openAgeRating}
-              setOpen={setOpenAgeRating}
-              value={valueAgeRating}
-              setValue={setValueAgeRating}
-              style={createFormStyles.dropdown}
-              textStyle={createFormStyles.dropdownText}
-              arrowIconStyle={createFormStyles.dropdownArrow}
-              placeholder="Select age rating"
-              dropDownDirection="TOP"
-              theme="DARK"
-              items={ageRatingOptions}
-            />
+            <SafeAreaView style={{ flex: 1 }}>
+              <DropDownPicker
+                open={openAgeRating}
+                setOpen={setOpenAgeRating}
+                value={valueAgeRating}
+                setValue={setValueAgeRating}
+                style={createFormStyles.dropdown}
+                textStyle={createFormStyles.dropdownText}
+                arrowIconStyle={createFormStyles.dropdownArrow}
+                placeholder="Select age rating"
+                dropDownDirection="TOP"
+                theme="DARK"
+                items={ageRatingOptions}
+              />
+            </SafeAreaView>
           </View>
           <View style={{ gap: 30 }}>
             <TouchableOpacity

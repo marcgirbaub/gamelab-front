@@ -101,10 +101,28 @@ describe("Given a CreateForm component", () => {
   });
 
   describe("When the user clicks on the send button", () => {
-    test("Then it should call the addGame function", () => {
+    test("Then it should call the addGame function", async () => {
       const sendButtonText = "Send";
 
       renderWithProviders(<CreateForm title={formTitle} />);
+
+      const gameNameInput = await screen.getByLabelText("enter game's name");
+      const developerInput = await screen.getByLabelText(
+        "enter developer's name"
+      );
+      const gameplayTimeInput = await screen.getByLabelText(
+        "enter gameplay time"
+      );
+      const releaseYearInput = await screen.getByLabelText(
+        "select release year"
+      );
+      const aboutInput = await screen.getByLabelText("about the game");
+
+      fireEvent.changeText(gameNameInput, mockGameToCreate.name);
+      fireEvent.changeText(developerInput, mockGameToCreate.developer);
+      fireEvent.changeText(gameplayTimeInput, mockGameToCreate.gameplayTime);
+      fireEvent.changeText(releaseYearInput, mockGameToCreate.releaseYear);
+      fireEvent.changeText(aboutInput, mockGameToCreate.about);
 
       checkboxesIds.forEach((checkboxId) => {
         const checkbox = screen.getByTestId(checkboxId);
@@ -121,10 +139,28 @@ describe("Given a CreateForm component", () => {
   });
 
   describe("When the user checks on all the checkboxes but then unchecks them and onnly checks the `playstation` and the `action` checkbox and presses the send button", () => {
-    test("Then it should only send the playstation platform and action category", () => {
+    test("Then it should only send the playstation platform and action category", async () => {
       const sendButtonText = "Send";
 
       renderWithProviders(<CreateForm title={formTitle} />);
+
+      const gameNameInput = await screen.getByLabelText("enter game's name");
+      const developerInput = await screen.getByLabelText(
+        "enter developer's name"
+      );
+      const gameplayTimeInput = await screen.getByLabelText(
+        "enter gameplay time"
+      );
+      const releaseYearInput = await screen.getByLabelText(
+        "select release year"
+      );
+      const aboutInput = await screen.getByLabelText("about the game");
+
+      fireEvent.changeText(gameNameInput, mockGameToCreate.name);
+      fireEvent.changeText(developerInput, mockGameToCreate.developer);
+      fireEvent.changeText(gameplayTimeInput, mockGameToCreate.gameplayTime);
+      fireEvent.changeText(releaseYearInput, mockGameToCreate.releaseYear);
+      fireEvent.changeText(aboutInput, mockGameToCreate.about);
 
       checkboxesIds.forEach((checkboxId) => {
         const checkbox = screen.getByTestId(checkboxId);

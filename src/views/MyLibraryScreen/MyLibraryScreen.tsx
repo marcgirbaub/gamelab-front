@@ -12,6 +12,8 @@ const MyLibraryScreen = (): JSX.Element => {
   const { createdByUserGames } = useAppSelector((state) => state.games);
   const { isLoading } = useAppSelector((state) => state.ui);
 
+  const gapItem = (): JSX.Element => <View style={{ gap: 20 }}></View>;
+
   useEffect(() => {
     getUserGames();
   }, [getUserGames]);
@@ -29,6 +31,7 @@ const MyLibraryScreen = (): JSX.Element => {
             renderItem={({ item }) => <GameCard game={item} />}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ gap: 20 }}
+            ListFooterComponent={gapItem}
           />
         )}
       </View>
