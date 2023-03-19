@@ -13,6 +13,7 @@ import {
   type GetOneGameResponse,
   type GameStrucutre,
   type UserGamesResponse,
+  type UpdateGameResponse,
 } from "../../redux/features/games/types";
 import {
   activateModalActionCreator,
@@ -34,6 +35,7 @@ interface UseGamesStructure {
   deleteGame: (gameId: string) => Promise<void>;
   getOneGame: (gameId: string) => Promise<void>;
   getUserGames: () => Promise<void>;
+  updateGame: (gameId: string, game: GameFormData) => Promise<void>;
 }
 
 const useGames = (): UseGamesStructure => {
@@ -205,7 +207,53 @@ const useGames = (): UseGamesStructure => {
     }
   }, [dispatch]);
 
-  return { getAllGames, addGame, deleteGame, getOneGame, getUserGames };
+  const updateGame = async (gameId: string, game: GameFormData) => {
+    dispatch(setIsLoadingActionCreator());
+
+    try {
+      const response = await axios.patch<UpdateGameResponse>(
+        `${REACT_APP_URL_API}${games.games}${games.update}${gameId}`,
+        game,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const { game: updatedGame } = response.data;
+
+      dispatch(unsetIsLoadingActionCreator());
+      dispatch(
+        activateModalActionCreator({
+          isError: false,
+          modal: "Your game has been successfully updated",
+        })
+      );
+
+      dispatch(loadOneGameActionCreator(updatedGame));
+      dispatch(unsetIsLoadingActionCreator());
+      navigation.navigate(Routes.detail);
+    } catch {
+      dispatch(unsetIsLoadingActionCreator());
+      dispatch(
+        activateModalActionCreator({
+          isError: true,
+          modal: "There was a problem updating your game",
+        })
+      );
+    }
+  };
+
+  return {
+    getAllGames,
+    addGame,
+    deleteGame,
+    getOneGame,
+    getUserGames,
+    updateGame,
+  };
 };
 
 export default useGames;

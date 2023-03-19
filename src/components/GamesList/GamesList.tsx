@@ -5,6 +5,7 @@ import { useAppSelector } from "../../redux/hooks";
 import isTablet from "../../utils/isTablet";
 import GameCard from "../GameCard/GameCard";
 import LoadMore from "../LoadMore/LoadMore";
+import gamesListStyles from "./GamesListStyles";
 
 interface GamesListProps {
   games: GamesStructure;
@@ -38,7 +39,7 @@ const GamesList = ({ games }: GamesListProps): JSX.Element => {
           showsVerticalScrollIndicator={false}
           ListFooterComponent={renderLoadMore}
           numColumns={getNumberOfColumns()}
-          contentContainerStyle={{ gap: 20 }}
+          contentContainerStyle={gamesListStyles.gap}
           columnWrapperStyle={{ justifyContent: "space-around" }}
         />
       ) : (
@@ -48,7 +49,7 @@ const GamesList = ({ games }: GamesListProps): JSX.Element => {
           showsVerticalScrollIndicator={false}
           ListFooterComponent={renderLoadMore}
           numColumns={getNumberOfColumns()}
-          contentContainerStyle={{ gap: 20 }}
+          contentContainerStyle={gamesListStyles.gap}
         />
       )}
     </View>
