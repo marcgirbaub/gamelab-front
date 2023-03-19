@@ -9,6 +9,7 @@ const urlRoutes = {
     create: "create/",
     delete: "delete/",
     mygames: "mygames/",
+    update: "update/",
   },
 };
 

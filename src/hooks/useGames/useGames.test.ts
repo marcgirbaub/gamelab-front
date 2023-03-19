@@ -1,8 +1,10 @@
 import { renderHook } from "@testing-library/react";
 import {
   formDataGameToCreate,
+  formDataGameToUpdate,
   mockGameToCreate,
   mockGameToDelete,
+  mockGameToUpdate,
   mockLeagueGame,
   mockListOfGames,
 } from "../../mocks/gamesMocks";
@@ -273,6 +275,49 @@ describe("Given useGames hook", () => {
       };
 
       await getUserGames();
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        activateModalActionCreator(actionPayload)
+      );
+    });
+  });
+
+  describe("When the updateGame function is called", () => {
+    test("Then the action to load one game should be called with the updated game", async () => {
+      const gameId = mockGameToUpdate.id!;
+      const {
+        result: {
+          current: { updateGame },
+        },
+      } = renderHook(() => useGames(), { wrapper: Wrapper });
+
+      await updateGame(gameId, formDataGameToUpdate);
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        loadOneGameActionCreator(mockGameToUpdate)
+      );
+    });
+  });
+
+  describe("When the updateGame function is called but the request is failed", () => {
+    beforeEach(() => {
+      server.resetHandlers(...errorHandlers);
+    });
+
+    test("Then the action to activate an error modal should be called", async () => {
+      const gameId = mockGameToUpdate.id!;
+      const {
+        result: {
+          current: { updateGame },
+        },
+      } = renderHook(() => useGames(), { wrapper: Wrapper });
+
+      const actionPayload: ModalPayload = {
+        isError: true,
+        modal: "There was a problem updating your game",
+      };
+
+      await updateGame(gameId, formDataGameToUpdate);
 
       expect(spyDispatch).toHaveBeenCalledWith(
         activateModalActionCreator(actionPayload)
