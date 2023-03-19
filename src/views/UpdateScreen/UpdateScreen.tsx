@@ -5,7 +5,7 @@ import Header from "../../components/Header/Header";
 import { useAppSelector } from "../../redux/hooks";
 import updateScreenStyles from "./UpdateScreenStyles";
 
-const CreateScreen = (): JSX.Element => {
+const UpdateScreen = (): JSX.Element => {
   const { selectedGame } = useAppSelector((state) => state.games);
 
   return (
@@ -18,4 +18,4 @@ const CreateScreen = (): JSX.Element => {
   );
 };
 
-export default CreateScreen;
+export default UpdateScreen;
