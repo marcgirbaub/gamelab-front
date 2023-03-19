@@ -10,7 +10,6 @@ const filterStyles = StyleSheet.create({
     marginBottom: 4,
   },
   filter: { color: colorStyles.secondary, fontSize: 16, fontWeight: "bold" },
-  gap: { width: 20 },
   button: {
     backgroundColor: colorStyles.primaryLight,
     borderRadius: 20,
@@ -29,9 +28,6 @@ const filterStyles = StyleSheet.create({
     color: colorStyles.primaryLight,
     fontSize: 16,
     fontWeight: "bold",
-  },
-  horizontal: {
-    width: 20,
   },
 });
 

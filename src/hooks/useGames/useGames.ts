@@ -100,7 +100,7 @@ const useGames = (): UseGamesStructure => {
       dispatch(loadOneGameActionCreator(response.data));
 
       dispatch(unsetIsLoadingActionCreator());
-      navigation.navigate(Routes.explore);
+      navigation.navigate(Routes.detail);
     } catch {
       dispatch(unsetIsLoadingActionCreator());
 

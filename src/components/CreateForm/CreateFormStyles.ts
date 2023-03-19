@@ -33,6 +33,7 @@ const createFormStyles = StyleSheet.create({
     textDecorationLine: "none",
     letterSpacing: 1,
   },
+  buttonDisabled: { ...formStyles.disabledButton, marginBottom: 20 },
   checkboxInnerIconStyle: { borderRadius: 10 },
   checkboxIconStyle: { borderRadius: 10 },
   imagePicker: {

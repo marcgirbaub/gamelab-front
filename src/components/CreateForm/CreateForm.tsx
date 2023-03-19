@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 import * as ImagePicker from "expo-image-picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
 import {
   Text,
@@ -10,12 +11,13 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  SafeAreaView,
+  LogBox,
 } from "react-native";
 import useGames from "../../hooks/useGames/useGames";
 import { type GameStrucutre } from "../../redux/features/games/types";
 import createFormStyles from "./CreateFormStyles";
 import colorStyles from "../../theme/colors";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 interface CreateFormProps {
   selectedGame?: GameStrucutre;
@@ -49,6 +51,8 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
     ageRating: "",
   };
 
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
   const [formData, setFormData] = useState(initialFormData);
 
   const [openAgeRating, setOpenAgeRating] = useState(false);
@@ -76,6 +80,26 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
   const handleFieldChange = (introducedValue: string, field: string) => {
     setFormData({ ...formData, [field]: introducedValue });
   };
+
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  });
+
+  useEffect(() => {
+    setButtonDisabled(
+      formData.name.length < 1 ||
+        formData.developer.length < 1 ||
+        formData.gameplayTime.length < 1 ||
+        formData.releaseYear.length < 4 ||
+        formData.about.length < 1
+    );
+  }, [
+    formData.name,
+    formData.developer,
+    formData.gameplayTime,
+    formData.releaseYear,
+    formData.about,
+  ]);
 
   const chooseFile = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -140,7 +164,6 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
     });
 
     await addGame(newGame);
-    setFormData(initialFormData);
     newGame = new FormData();
   };
 
@@ -440,19 +463,21 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
           </View>
           <View>
             <Text style={createFormStyles.label}>Age rating</Text>
-            <DropDownPicker
-              open={openAgeRating}
-              setOpen={setOpenAgeRating}
-              value={valueAgeRating}
-              setValue={setValueAgeRating}
-              style={createFormStyles.dropdown}
-              textStyle={createFormStyles.dropdownText}
-              arrowIconStyle={createFormStyles.dropdownArrow}
-              placeholder="Select age rating"
-              dropDownDirection="TOP"
-              theme="DARK"
-              items={ageRatingOptions}
-            />
+            <SafeAreaView style={{ flex: 1 }}>
+              <DropDownPicker
+                open={openAgeRating}
+                setOpen={setOpenAgeRating}
+                value={valueAgeRating}
+                setValue={setValueAgeRating}
+                style={createFormStyles.dropdown}
+                textStyle={createFormStyles.dropdownText}
+                arrowIconStyle={createFormStyles.dropdownArrow}
+                placeholder="Select age rating"
+                dropDownDirection="TOP"
+                theme="DARK"
+                items={ageRatingOptions}
+              />
+            </SafeAreaView>
           </View>
           <View style={{ gap: 30 }}>
             <TouchableOpacity
@@ -498,10 +523,15 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
           </View>
           <TouchableOpacity
             activeOpacity={0.4}
-            style={createFormStyles.button}
+            style={
+              buttonDisabled
+                ? createFormStyles.buttonDisabled
+                : createFormStyles.button
+            }
             onPress={onSubmitHandler}
             accessibilityLabel="press to submit the form"
             accessibilityRole="button"
+            disabled={buttonDisabled}
           >
             <Text style={createFormStyles.buttonText}>Send</Text>
           </TouchableOpacity>

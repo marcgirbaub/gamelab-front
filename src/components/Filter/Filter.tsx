@@ -20,10 +20,7 @@ const Filter = (): JSX.Element => {
     "Board games",
   ];
 
-  const gapItem = (): JSX.Element => <View style={filterStyles.gap} />;
-  const horizontalViews = (): JSX.Element => (
-    <View style={filterStyles.horizontal} />
-  );
+  const horizontalViews = (): JSX.Element => <View />;
 
   const handleOnClickFilter = (filterSelected: string) => {
     if (filterSelected === filter) {
@@ -42,9 +39,9 @@ const Filter = (): JSX.Element => {
         keyExtractor={(item) => item}
         horizontal
         showsHorizontalScrollIndicator={false}
-        ItemSeparatorComponent={gapItem}
         ListFooterComponent={horizontalViews}
         ListHeaderComponent={horizontalViews}
+        contentContainerStyle={{ gap: 20 }}
         renderItem={({ item }) => (
           <TouchableOpacity
             activeOpacity={1}
