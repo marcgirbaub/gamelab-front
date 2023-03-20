@@ -7,6 +7,7 @@ enum Routes {
   create = "Create",
   myLibrary = "My Library",
   detail = "Detail",
+  update = "Update",
 }
 
 export default Routes;

@@ -45,13 +45,14 @@ const gameDetailStyles = StyleSheet.create({
   backButtonContainer: { width: 60, alignItems: "center" },
   deleteButton: {
     backgroundColor: colorStyles.primaryLight,
-    alignSelf: "center",
     height: 50,
+    width: 160,
     justifyContent: "center",
-    paddingHorizontal: 20,
+    alignItems: "center",
     borderRadius: 20,
     marginBottom: 20,
   },
+  buttonsContainer: { flexDirection: "row", justifyContent: "center", gap: 30 },
 });
 
 export default gameDetailStyles;

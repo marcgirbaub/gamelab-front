@@ -6,10 +6,14 @@ import renderWithProviders from "../../utils/renderWithProviders";
 import GameDetail from "./GameDetail";
 
 const mockGoBackNavigation = jest.fn();
+const mockNavigate = jest.fn();
 
 jest.mock("@react-navigation/native", () => ({
   ...jest.requireActual("@react-navigation/native"),
-  useNavigation: () => ({ goBack: mockGoBackNavigation }),
+  useNavigation: () => ({
+    goBack: mockGoBackNavigation,
+    navigate: mockNavigate,
+  }),
 }));
 
 const mockDeleteGame = jest.fn();
@@ -66,6 +70,23 @@ describe("Given a GameDetail component", () => {
       expect(mockDeleteGame).toHaveBeenCalledWith(
         gamesMockState.selectedGame.id
       );
+    });
+  });
+
+  describe("When the user presses on the button to update", () => {
+    test("Then it should call navigate with the Route to go to the update screen", () => {
+      const updateGame = "edit";
+
+      renderWithProviders(<GameDetail />, {
+        games: gamesMockState,
+        user: mockUserState,
+      });
+
+      const modifyButton = screen.getByLabelText(updateGame);
+
+      fireEvent.press(modifyButton);
+
+      expect(mockNavigate).toHaveBeenCalled();
     });
   });
 });

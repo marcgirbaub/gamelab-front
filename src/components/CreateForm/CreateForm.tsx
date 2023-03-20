@@ -24,8 +24,8 @@ interface CreateFormProps {
   title: string;
 }
 
-const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
-  const { addGame } = useGames();
+const CreateForm = ({ title, selectedGame }: CreateFormProps): JSX.Element => {
+  const { addGame, updateGame } = useGames();
 
   const ageRatingOptions = [
     { label: "Everyone", value: "Everyone" },
@@ -35,7 +35,7 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
     { label: "Pending", value: "Pending" },
   ];
 
-  const initialFormData = {
+  let initialFormData = {
     name: "",
     image: {
       uri: "",
@@ -50,6 +50,20 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
     releaseYear: "",
     ageRating: "",
   };
+
+  if (selectedGame) {
+    initialFormData = {
+      name: selectedGame.name,
+      about: selectedGame.about,
+      ageRating: selectedGame.ageRating,
+      categories: selectedGame.categories,
+      developer: selectedGame.developer,
+      gameplayTime: selectedGame.gameplayTime.toString(),
+      platforms: selectedGame.platforms,
+      releaseYear: selectedGame.releaseYear.toString(),
+      image: selectedGame.backupImage,
+    };
+  }
 
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
@@ -162,6 +176,12 @@ const CreateForm = ({ title }: CreateFormProps): JSX.Element => {
         newGame.append("categories", category);
       }
     });
+
+    if (selectedGame) {
+      await updateGame(selectedGame.id!, newGame);
+
+      return;
+    }
 
     await addGame(newGame);
     newGame = new FormData();

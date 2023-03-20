@@ -10,9 +10,11 @@ beforeEach(() => {
 });
 
 const mockAddGame = jest.fn();
+const mockUpdateGame = jest.fn();
 
 jest.mock("../../hooks/useGames/useGames", () => () => ({
   addGame: mockAddGame,
+  updateGame: mockUpdateGame,
 }));
 
 jest.mock("expo-image-picker", () => ({
@@ -224,6 +226,57 @@ describe("Given a CreateForm component", () => {
       fireEvent.press(imagePickerButton);
 
       expect(imagePickerButton).toBeOnTheScreen();
+    });
+  });
+
+  describe("When it receives a game and the user presses on the submit button", () => {
+    test("Then it should call the updateGame function", async () => {
+      const sendButtonText = "Send";
+
+      renderWithProviders(
+        <CreateForm title={formTitle} selectedGame={mockGameToCreate} />
+      );
+
+      const gameNameInput = await screen.getByLabelText("enter game's name");
+      const developerInput = await screen.getByLabelText(
+        "enter developer's name"
+      );
+      const gameplayTimeInput = await screen.getByLabelText(
+        "enter gameplay time"
+      );
+      const releaseYearInput = await screen.getByLabelText(
+        "select release year"
+      );
+      const aboutInput = await screen.getByLabelText("about the game");
+
+      fireEvent.changeText(gameNameInput, mockGameToCreate.name);
+      fireEvent.changeText(developerInput, mockGameToCreate.developer);
+      fireEvent.changeText(gameplayTimeInput, mockGameToCreate.gameplayTime);
+      fireEvent.changeText(releaseYearInput, mockGameToCreate.releaseYear);
+      fireEvent.changeText(aboutInput, mockGameToCreate.about);
+
+      checkboxesIds.forEach((checkboxId) => {
+        const checkbox = screen.getByTestId(checkboxId);
+
+        fireEvent.press(checkbox);
+      });
+
+      checkboxesIds.forEach((checkboxId) => {
+        const checkbox = screen.getByTestId(checkboxId);
+
+        fireEvent.press(checkbox);
+      });
+
+      const actionCheck = screen.getByTestId("action-checkbox");
+      const playstationCheck = screen.getByTestId("playstation-checkbox");
+      fireEvent.press(actionCheck);
+      fireEvent.press(playstationCheck);
+
+      const sendButton = screen.getByText(sendButtonText);
+
+      fireEvent.press(sendButton);
+
+      expect(mockUpdateGame).toHaveBeenCalled();
     });
   });
 });

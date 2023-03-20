@@ -8,6 +8,7 @@ import { useAppSelector } from "../../redux/hooks";
 import { type LoginScreenNavigationProp } from "../../types/navigation.types";
 import gameDetailStyles from "./GameDetailStyles";
 import useGames from "../../hooks/useGames/useGames";
+import Routes from "../../routes/routes";
 
 const GameDetail = (): JSX.Element => {
   const {
@@ -106,18 +107,32 @@ const GameDetail = (): JSX.Element => {
           </View>
         </View>
       </View>
-      {id === createdBy && (
-        <TouchableOpacity
-          activeOpacity={0.4}
-          style={gameDetailStyles.deleteButton}
-          onPress={async () => {
-            await deleteGame(gameId!);
-          }}
-          accessibilityLabel="delete"
-        >
-          <Text style={gameDetailStyles.info}>Delete game</Text>
-        </TouchableOpacity>
-      )}
+      <View style={gameDetailStyles.buttonsContainer}>
+        {id === createdBy && (
+          <TouchableOpacity
+            activeOpacity={0.4}
+            style={gameDetailStyles.deleteButton}
+            onPress={async () => {
+              await deleteGame(gameId!);
+            }}
+            accessibilityLabel="delete"
+          >
+            <Text style={gameDetailStyles.info}>Delete game</Text>
+          </TouchableOpacity>
+        )}
+        {id === createdBy && (
+          <TouchableOpacity
+            activeOpacity={0.4}
+            style={gameDetailStyles.deleteButton}
+            onPress={() => {
+              navigation.navigate(Routes.update);
+            }}
+            accessibilityLabel="edit"
+          >
+            <Text style={gameDetailStyles.info}>Edit game</Text>
+          </TouchableOpacity>
+        )}
+      </View>
     </ScrollView>
   );
 };

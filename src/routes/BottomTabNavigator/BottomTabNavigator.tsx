@@ -22,6 +22,7 @@ import BottomSheetModal from "../../components/BottomSheetModal/BottomSheetModal
 import CreateScreen from "../../views/CreateScreen/CreateScreen";
 import DetailScreen from "../../views/DetailScreen/DetailScreen";
 import MyLibraryScreen from "../../views/MyLibraryScreen/MyLibraryScreen";
+import UpdateScreen from "../../views/UpdateScreen/UpdateScreen";
 
 const BottomTabNavigator = (): JSX.Element => {
   const Tab = createBottomTabNavigator();
@@ -105,8 +106,15 @@ const BottomTabNavigator = (): JSX.Element => {
             tabBarItemStyle: { display: "none" },
           }}
         ></Tab.Screen>
+        <Tab.Screen
+          name={Routes.update}
+          component={UpdateScreen}
+          options={{
+            unmountOnBlur: true,
+            tabBarItemStyle: { display: "none" },
+          }}
+        ></Tab.Screen>
       </Tab.Navigator>
-
       <BottomSheetModal
         buttontext="Log out"
         actionToClose={() => {
