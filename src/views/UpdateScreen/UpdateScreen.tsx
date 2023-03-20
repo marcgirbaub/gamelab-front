@@ -12,7 +12,7 @@ const UpdateScreen = (): JSX.Element => {
     <SafeAreaView>
       <Header />
       <View style={updateScreenStyles.container}>
-        <CreateForm title="Create a game" selectedGame={selectedGame} />
+        <CreateForm title="Modify your game" selectedGame={selectedGame} />
       </View>
     </SafeAreaView>
   );

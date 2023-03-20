@@ -31,11 +31,11 @@ const { games } = urlRoutes;
 
 interface UseGamesStructure {
   getAllGames: (page?: number, filter?: string) => Promise<void>;
-  addGame: (game: GameFormData) => Promise<void>;
+  addGame: (game: GameFormData | FormData) => Promise<void>;
   deleteGame: (gameId: string) => Promise<void>;
   getOneGame: (gameId: string) => Promise<void>;
   getUserGames: () => Promise<void>;
-  updateGame: (gameId: string, game: GameFormData) => Promise<void>;
+  updateGame: (gameId: string, game: GameFormData | FormData) => Promise<void>;
 }
 
 const useGames = (): UseGamesStructure => {
@@ -79,7 +79,7 @@ const useGames = (): UseGamesStructure => {
     [dispatch]
   );
 
-  const addGame = async (game: GameFormData) => {
+  const addGame = async (game: GameFormData | FormData) => {
     dispatch(setIsLoadingActionCreator());
 
     try {
@@ -207,7 +207,7 @@ const useGames = (): UseGamesStructure => {
     }
   }, [dispatch]);
 
-  const updateGame = async (gameId: string, game: GameFormData) => {
+  const updateGame = async (gameId: string, game: GameFormData | FormData) => {
     dispatch(setIsLoadingActionCreator());
 
     try {
