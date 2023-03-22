@@ -7,7 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/Gamelab2.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
