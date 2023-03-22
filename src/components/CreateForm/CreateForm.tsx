@@ -41,7 +41,7 @@ const CreateForm = ({ title, selectedGame }: CreateFormProps): JSX.Element => {
       uri: "",
       name: "",
       type: "",
-    },
+    } as unknown,
     developer: "",
     about: "",
     platforms: [] as string[],
@@ -90,12 +90,6 @@ const CreateForm = ({ title, selectedGame }: CreateFormProps): JSX.Element => {
   const [image, setImage] = useState("");
   const [imageType, setImageType] = useState("");
   const [imageName, setImageName] = useState("");
-
-  if (selectedGame) {
-    useEffect(() => {
-      setValueAgeRating(selectedGame.ageRating);
-    }, []);
-  }
 
   const handleFieldChange = (introducedValue: string, field: string) => {
     setFormData({ ...formData, [field]: introducedValue });
