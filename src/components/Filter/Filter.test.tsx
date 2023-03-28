@@ -2,13 +2,9 @@ import { fireEvent, screen } from "@testing-library/react-native";
 import React from "react";
 import { gamesMockState } from "../../mocks/gamesMocks";
 import { mockUiState } from "../../mocks/uiMocks";
-import { addFilterActionCreator } from "../../redux/features/ui/uiSlice";
-import { store } from "../../redux/store";
 import renderWithProviders from "../../utils/renderWithProviders";
 import ExploreScreen from "../../views/ExploreScreen/ExploreScreen";
 import Filter from "./Filter";
-
-const spyDispatch = jest.spyOn(store, "dispatch");
 
 describe("Given a Filter component", () => {
   describe("When rendered", () => {

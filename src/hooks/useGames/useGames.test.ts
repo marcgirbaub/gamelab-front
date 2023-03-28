@@ -29,7 +29,7 @@ beforeEach(() => {
 
 const spyDispatch = jest.spyOn(store, "dispatch");
 
-describe("Given useGames hook", () => {
+describe("Given a useGames hook", () => {
   describe("When the getAllGames function is called", () => {
     test("Then the dispatch should be called with the action to loadAllGames", async () => {
       const {

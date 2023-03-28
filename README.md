@@ -24,6 +24,10 @@ Gamelab is a mobile app that allows videogames developers to share the games the
 - React Native Testing Library: a library that makes it easier to test React Native components
 - Expo App: a client app that can be used to run and test your Expo app on a physical device without having to go through the process of setting up a development environment
 
+## Screenshots
+
+![Screenshots](assets/screenshoots/gamelab-screenshoots.png)
+
 ## **Getting Started**
 
 To get started using Gamelab, you'll need to have the following tools installed:
@@ -34,9 +38,9 @@ To get started using Gamelab, you'll need to have the following tools installed:
 Once you have these tools installed, you can clone the Gamelab repository and install the dependencies by running the following commands:
 
 ```
-git clone https://github.com/isdi-coders-2023/Marc-Girbau-Final-Project-front-202301-bcn.git
+git clone https://github.com/marcgirbaub/gamelab-front.git
 
-cd Marc-Girbau-Final-Project-front-202301-bcn
+cd gamelab-front
 
 npm install
 ```
