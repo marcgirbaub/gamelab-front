@@ -4,6 +4,7 @@ import renderWithProviders from "../../utils/renderWithProviders";
 import LoadMore from "./LoadMore";
 import { mockUiState, mockUiStore } from "../../mocks/uiMocks";
 import { Provider } from "react-redux";
+import { nextPageActionCreator } from "../../redux/features/ui/uiSlice";
 
 const dispatch = jest.spyOn(mockUiStore, "dispatch");
 
@@ -21,7 +22,7 @@ describe("Given a LoadMore component", () => {
   });
 
   describe("When the user click on the button to load more", () => {
-    test("Then the dispatch should be valled with the action to go to the next page", () => {
+    test("Then the dispatch should be called with the action to go to the next page", () => {
       const accessibilityLabel = "loadmore";
 
       render(
@@ -33,7 +34,7 @@ describe("Given a LoadMore component", () => {
       const loadMoreButton = screen.getByLabelText(accessibilityLabel);
       fireEvent.press(loadMoreButton);
 
-      expect(dispatch).toHaveBeenCalled();
+      expect(dispatch).toHaveBeenCalledWith(nextPageActionCreator());
     });
   });
 });
